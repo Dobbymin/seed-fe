@@ -9,9 +9,9 @@ export const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<RootLayout />}>
-          <Route path={ROUTE_PATHS.NOT_FOUND} element={<ErrorPage />} />
-
           <Route path={ROUTE_PATHS.MAIN} element={<MainPage />} />
+
+          <Route path={ROUTE_PATHS.NOT_FOUND} element={<ErrorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
