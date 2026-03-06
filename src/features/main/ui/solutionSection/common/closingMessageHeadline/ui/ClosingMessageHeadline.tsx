@@ -2,6 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 
 import { CLOSING_MESSAGE_COPY } from "../../closingMessageContent/common/closingMessageContent";
 
+// Highlighted headline used in the final closing statement.
 export const ClosingMessageHeadline = () => {
   return (
     <Text

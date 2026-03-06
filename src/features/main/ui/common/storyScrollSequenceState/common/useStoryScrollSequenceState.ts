@@ -8,6 +8,7 @@ import {
 import { useAnimatedChatMessageIds } from "../../animatedChatMessages/common/useAnimatedChatMessageIds";
 import { useConversationStageScroll } from "../../conversationStageScroll/common/useConversationStageScroll";
 
+// Derives the refs, scroll progress, story state, and chat animation state for the sticky story sequence.
 export const useStoryScrollSequenceState = () => {
   const introRef = useRef<HTMLDivElement | null>(null);
   const chatRef = useRef<HTMLDivElement | null>(null);

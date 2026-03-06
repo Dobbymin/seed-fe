@@ -5,6 +5,7 @@ import { PROMPT_COPY_TEXT } from "../../promptAssemblyContent/common/promptAssem
 import { usePromptCopyState } from "../../promptCopyState/common/usePromptCopyState";
 import { PromptPreviewCard } from "../../promptPreviewCard/ui/PromptPreviewCard";
 
+// Composes the prompt preview and the output explanation for the copy-ready handoff section.
 export const PromptAssemblySection = () => {
   const { handleCopy, isCopied } = usePromptCopyState({
     copyText: PROMPT_COPY_TEXT,

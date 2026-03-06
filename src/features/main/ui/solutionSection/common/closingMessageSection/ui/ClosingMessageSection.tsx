@@ -3,6 +3,7 @@ import { Box, Text, VStack } from "@chakra-ui/react";
 import { CLOSING_MESSAGE_COPY } from "../../closingMessageContent/common/closingMessageContent";
 import { ClosingMessageHeadline } from "../../closingMessageHeadline/ui/ClosingMessageHeadline";
 
+// Final closing block that reframes the user's question from "how" to "what".
 export const ClosingMessageSection = () => {
   return (
     <Box bg="white" py="44px" w="full">

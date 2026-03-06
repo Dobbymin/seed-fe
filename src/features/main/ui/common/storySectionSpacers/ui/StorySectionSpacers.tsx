@@ -10,6 +10,7 @@ type StorySectionSpacersProps = {
   nextRef: RefObject<HTMLDivElement | null>;
 };
 
+// Creates the scrollable spacer blocks that drive the intro, chat, and next sticky scenes.
 export const StorySectionSpacers = ({
   chatRef,
   introRef,

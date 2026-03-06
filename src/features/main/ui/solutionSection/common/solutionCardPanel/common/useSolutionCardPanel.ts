@@ -9,6 +9,7 @@ const fallbackCardId = (cards: SolutionAssignmentCard[]) => {
   return cards[0]?.id ?? "writing";
 };
 
+// Keeps a stable active roadmap card and ignores selection until the roadmap becomes interactive.
 export const useSolutionCardPanel = ({
   cards,
   defaultSelectedId = "writing",

@@ -9,6 +9,7 @@ type TimeLossSectionProps = {
   storyState: MainStoryState;
 };
 
+// Shows the "시간을 버리고 있진 않나요?" bridge scene and activates the floating phrase cloud.
 export const TimeLossSection = ({ storyState }: TimeLossSectionProps) => {
   return (
     <>

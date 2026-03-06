@@ -11,6 +11,7 @@ type UseAnimatedChatMessageIdsParams = {
   messages: PromptMessage[];
 };
 
+// Marks only the newly introduced chat messages so existing bubbles do not re-animate on every stage swap.
 export const useAnimatedChatMessageIds = ({
   chatStageKey,
   messageIds,
@@ -34,7 +35,7 @@ export const useAnimatedChatMessageIds = ({
   return useMemo(() => {
     return new Set(
       messages
-        .filter((message, index) => {
+        .filter((_, index) => {
           const messageId = messageIds[index];
           return messageId ? animatedMessageIds.includes(messageId) : false;
         })

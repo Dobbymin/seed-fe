@@ -67,6 +67,7 @@ export const RoadmapStepCard = ({
   animationDelayMs: number;
   step: RoadmapStep;
 }) => {
+  // Individual roadmap step card with hover emphasis and staggered reveal timing.
   const [reduceMotion] = useMediaQuery(["(prefers-reduced-motion: reduce)"]);
   const [isHovering, setIsHovering] = useState(false);
 

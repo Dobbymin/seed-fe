@@ -1,5 +1,6 @@
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 
+// Visual placeholder for the uploaded assignment references shown before AI analysis.
 export const ReferenceDataPanel = () => {
   return (
     <Box bg="white" p={{ base: 5, lg: 12 }} w={{ base: "full", xl: "520px" }}>

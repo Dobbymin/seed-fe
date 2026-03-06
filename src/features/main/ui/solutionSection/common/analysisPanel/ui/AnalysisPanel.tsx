@@ -7,6 +7,7 @@ type AnalysisPanelProps = {
   timeline: SolutionTimelineState;
 };
 
+// Visual placeholder for the AI analysis card and its staged keyword, summary, and intent blocks.
 export const AnalysisPanel = ({ timeline }: AnalysisPanelProps) => {
   return (
     <Box

@@ -3,6 +3,7 @@ export const INITIAL_TITLE_STAGE_MIN_HEIGHT =
 export const FALLBACK_ANALYSIS_CONTENT_HEIGHT = 940;
 export const FALLBACK_ROADMAP_CONTENT_HEIGHT = 900;
 
+// Shared motion and layout helpers for the staged solution walkthrough.
 export const fadeUpStyle = (progress: number, distance: number) => {
   return {
     opacity: progress,

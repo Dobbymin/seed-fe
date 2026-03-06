@@ -1,5 +1,6 @@
 import type { SolutionAssignmentCard } from "../../types/common/types";
 
+// Static roadmap definitions for each assignment type shown in the solution section.
 const ICON_WRITING = {
   paths: [
     "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z",

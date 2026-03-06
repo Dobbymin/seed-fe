@@ -20,6 +20,7 @@ type SolutionProgressPanelProps = {
   isActivated: boolean;
 };
 
+// Orchestrates the title, analysis reveal, and roadmap reveal for the solution section.
 export const SolutionProgressPanel = ({
   isActivated,
 }: SolutionProgressPanelProps) => {

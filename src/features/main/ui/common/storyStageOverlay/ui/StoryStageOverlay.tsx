@@ -3,8 +3,8 @@ import type { RefObject } from "react";
 import { Box } from "@chakra-ui/react";
 
 import type { MainStoryState } from "../../../../model/deriveMainStoryState";
-import { HelpPromptSection } from "../../../preSolutionSection/HelpPromptSection";
-import { TimeLossSection } from "../../../problemDefinitionNextSection/TimeLossSection";
+import { HelpPromptSection } from "../../../preSolutionSection";
+import { TimeLossSection } from "../../../problemDefinitionNextSection";
 
 type StoryStageOverlayProps = {
   animatedMessageIds: ReadonlySet<string>;
@@ -12,6 +12,7 @@ type StoryStageOverlayProps = {
   storyState: MainStoryState;
 };
 
+// Renders the pre-solution sticky overlays that share the same full-screen stage.
 export const StoryStageOverlay = ({
   animatedMessageIds,
   conversationRef,

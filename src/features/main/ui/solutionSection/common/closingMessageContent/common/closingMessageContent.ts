@@ -1,3 +1,4 @@
+// Shared copy used by the final closing section.
 export const CLOSING_MESSAGE_COPY = {
   description: [
     "留됰쭑?덈뜕 怨쇱젣???쒖옉遺???꾨꼍??留덈Т由ш퉴吏,",

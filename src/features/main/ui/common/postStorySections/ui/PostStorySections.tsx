@@ -1,13 +1,16 @@
 import { Box } from "@chakra-ui/react";
 
-import { ExecutionOnlySection } from "../../../solutionSection/ExecutionOnlySection";
-import { PromptNoHesitationSection } from "../../../solutionSection/PromptNoHesitationSection";
-import { WhatToDoSection } from "../../../solutionSection/WhatToDoSection";
+import {
+  ExecutionOnlySection,
+  PromptNoHesitationSection,
+  WhatToDoSection,
+} from "../../../solutionSection";
 
 type PostStorySectionsProps = {
   isSolutionActivated: boolean;
 };
 
+// Mounts the sections that continue after the sticky story sequence finishes.
 export const PostStorySections = ({
   isSolutionActivated,
 }: PostStorySectionsProps) => {

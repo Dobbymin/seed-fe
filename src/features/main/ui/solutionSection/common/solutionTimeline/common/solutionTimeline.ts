@@ -1,6 +1,7 @@
 export const TOTAL_UNITS = 10;
 export const PHASE_UNIT_PX = 120;
 
+// Timeline math for the solution section's staged analysis and roadmap reveals.
 const clamp = (value: number, min: number, max: number) => {
   return Math.min(max, Math.max(min, value));
 };

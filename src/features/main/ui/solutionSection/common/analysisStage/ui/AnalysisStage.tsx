@@ -18,6 +18,7 @@ type AnalysisStageProps = {
   timeline: SolutionTimelineState;
 };
 
+// Reveals the assignment analysis header and syncs the two-panel analysis composition.
 export const AnalysisStage = ({
   analysisContentRef,
   progressTriggerRef,

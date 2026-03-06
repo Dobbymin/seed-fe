@@ -3,6 +3,7 @@ import { Box, Text, VStack } from "@chakra-ui/react";
 import { ACTIONABLE_OUTPUT_FEATURES } from "../../promptAssemblyContent/common/promptAssemblyContent";
 import { FeatureItem } from "../../promptFeatureItem/ui/FeatureItem";
 
+// Explains why the generated prompt is immediately usable and lists the practical benefits.
 export const ActionableOutputPanel = () => {
   return (
     <VStack

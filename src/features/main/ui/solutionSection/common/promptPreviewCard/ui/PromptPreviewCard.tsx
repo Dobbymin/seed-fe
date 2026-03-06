@@ -21,6 +21,7 @@ type PromptPreviewCardProps = {
   onCopy: () => void | Promise<void>;
 };
 
+// Shows the copy-ready prompt card and its clipboard action.
 export const PromptPreviewCard = ({
   isCopied,
   onCopy,

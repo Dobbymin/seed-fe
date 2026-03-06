@@ -196,6 +196,7 @@ const createRenderBuffer = (count: number): PhraseRender[] => {
   }));
 };
 
+// Drives the phrase cloud's floating motion, pointer torque, and collision separation in a single animation loop.
 export const useProblemDefinitionNextPhraseMotion = ({
   containerRef,
   interactive,

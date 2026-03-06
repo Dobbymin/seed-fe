@@ -21,6 +21,7 @@ type RoadmapStageProps = {
   timeline: SolutionTimelineState;
 };
 
+// Reveals the assignment selector and the active roadmap list after the analysis phase finishes.
 export const RoadmapStage = ({
   activeCard,
   activeId,

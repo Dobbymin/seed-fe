@@ -4,6 +4,7 @@ type UsePromptCopyStateParams = {
   copyText: string;
 };
 
+// Handles clipboard copy state and the short-lived "Copied" feedback label.
 export const usePromptCopyState = ({ copyText }: UsePromptCopyStateParams) => {
   const [isCopied, setIsCopied] = useState(false);
 

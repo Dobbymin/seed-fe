@@ -20,6 +20,7 @@ export const SolutionRoadmapList = ({
 }: {
   card: SolutionAssignmentCard;
 }) => {
+  // Replays the step animation whenever the active roadmap card changes.
   const [reduceMotion] = useMediaQuery(["(prefers-reduced-motion: reduce)"]);
 
   return (

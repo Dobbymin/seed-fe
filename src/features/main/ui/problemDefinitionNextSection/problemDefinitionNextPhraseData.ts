@@ -4,6 +4,7 @@
   y: number;
 };
 
+// Seed positions for the phrase cloud, normalized from the original design layout.
 export const PROBLEM_DEFINITION_NEXT_PHRASE_BASE_TONE = 176;
 export const PROBLEM_DEFINITION_NEXT_PHRASES: ProblemDefinitionNextPhrase[] = [
   { text: "라바돈의 죽음모자", x: 157.5 / 1341, y: 74 / 644 },

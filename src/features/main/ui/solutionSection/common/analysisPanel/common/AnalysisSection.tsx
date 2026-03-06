@@ -10,6 +10,7 @@ type AnalysisSectionProps = {
   revealHeight: number;
 };
 
+// Wraps each analysis subsection with the shared height and fade-up reveal treatment.
 export const AnalysisSection = ({
   children,
   progress,

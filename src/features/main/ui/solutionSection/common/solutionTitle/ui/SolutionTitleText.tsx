@@ -2,6 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 
 import { COPY } from "../../../../../model/promptStoryData";
 
+// Shared title block for the "실행만 하세요" section.
 export const SolutionTitleText = () => {
   return (
     <Text

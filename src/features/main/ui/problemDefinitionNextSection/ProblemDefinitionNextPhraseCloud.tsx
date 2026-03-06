@@ -12,6 +12,7 @@ type ProblemDefinitionNextPhraseCloudProps = {
   interactive: boolean;
 };
 
+// Draws the drifting phrase field that reacts to pointer movement in the time-loss section.
 export const ProblemDefinitionNextPhraseCloud = ({
   interactive,
 }: ProblemDefinitionNextPhraseCloudProps) => {

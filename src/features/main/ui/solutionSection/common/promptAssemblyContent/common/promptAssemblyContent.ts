@@ -1,3 +1,4 @@
+// Shared copy and asset references used by the prompt handoff section.
 export const PROMPT_BADGE_ICON_URL =
   "https://www.figma.com/api/mcp/asset/d4b695c1-8140-444c-9450-2d8f14bee7b3";
 export const COPY_ICON_URL =

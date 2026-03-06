@@ -4,6 +4,7 @@ type ExecutionOnlySectionProps = {
   isActivated: boolean;
 };
 
+// Section entry that mounts the solution walkthrough once the sticky story is complete.
 export const ExecutionOnlySection = ({
   isActivated,
 }: ExecutionOnlySectionProps) => {

@@ -44,6 +44,7 @@ const AssignmentIcon = ({
   );
 };
 
+// Selectable card used to switch between roadmap variants in the solution section.
 export const AssignmentTypeCard = ({
   card,
   isActive,

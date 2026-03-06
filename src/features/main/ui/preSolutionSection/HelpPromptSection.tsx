@@ -186,6 +186,7 @@ type HelpPromptSectionProps = {
   storyState: MainStoryState;
 };
 
+// Renders the opening "과제 도와줘" story with the title, chat transcript, and composer prompt.
 export const HelpPromptSection = ({
   animatedMessageIds,
   conversationRef,

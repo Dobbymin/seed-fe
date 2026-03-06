@@ -6,6 +6,7 @@ type FeatureItemProps = {
   label: string;
 };
 
+// Small checked bullet item used in the actionable output feature list.
 export const FeatureItem = ({ label }: FeatureItemProps) => {
   return (
     <HStack align="center" gap={3} w="full">

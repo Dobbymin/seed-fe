@@ -39,6 +39,7 @@ type UseObservedHeightParams = {
   watchKey: string;
 };
 
+// Measures expandable content and falls back to a safe height before the DOM is ready.
 export const useObservedHeight = <T extends HTMLElement>({
   fallbackHeight,
   watchKey,

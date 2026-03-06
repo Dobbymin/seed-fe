@@ -5,6 +5,7 @@ type UseConversationStageScrollParams = {
   stageKey: string;
 };
 
+// Keeps the chat viewport pinned to the latest visible message whenever the story stage changes.
 export const useConversationStageScroll = ({
   conversationRef,
   stageKey,

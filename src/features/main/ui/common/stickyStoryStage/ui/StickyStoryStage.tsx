@@ -7,6 +7,7 @@ type StickyStoryStageProps = {
   spacers?: ReactNode;
 };
 
+// Provides the sticky full-screen canvas and renders the spacer blocks underneath it.
 export const StickyStoryStage = ({
   children,
   spacers,

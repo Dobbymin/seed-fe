@@ -1,11 +1,14 @@
 import { Box } from "@chakra-ui/react";
 
-import { PostStorySections } from "./common/postStorySections/ui/PostStorySections";
-import { StickyStoryStage } from "./common/stickyStoryStage/ui/StickyStoryStage";
-import { useStoryScrollSequenceState } from "./common/storyScrollSequenceState/common/useStoryScrollSequenceState";
-import { StorySectionSpacers } from "./common/storySectionSpacers/ui/StorySectionSpacers";
-import { StoryStageOverlay } from "./common/storyStageOverlay/ui/StoryStageOverlay";
+import {
+  PostStorySections,
+  StickyStoryStage,
+  StorySectionSpacers,
+  StoryStageOverlay,
+  useStoryScrollSequenceState,
+} from "./common";
 
+// Main landing page orchestrator that stitches the sticky story and post-story sections together.
 export const PromptScrollSequence = () => {
   const {
     animatedMessageIds,
