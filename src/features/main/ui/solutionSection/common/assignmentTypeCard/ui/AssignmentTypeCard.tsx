@@ -2,7 +2,10 @@
 
 import { Flex, Icon, Text, VStack, chakra } from "@chakra-ui/react";
 
-import type { LocalIconDefinition, SolutionAssignmentCard } from "./types";
+import type {
+  LocalIconDefinition,
+  SolutionAssignmentCard,
+} from "../../types/common/types";
 
 type AssignmentTypeCardProps = {
   card: SolutionAssignmentCard;

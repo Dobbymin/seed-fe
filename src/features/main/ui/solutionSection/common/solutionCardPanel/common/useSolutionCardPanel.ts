@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-import type { AssignmentTypeId, SolutionAssignmentCard } from "./types";
+import type {
+  AssignmentTypeId,
+  SolutionAssignmentCard,
+} from "../../types/common/types";
 
 const fallbackCardId = (cards: SolutionAssignmentCard[]) => {
   return cards[0]?.id ?? "writing";

@@ -1,4 +1,4 @@
-﻿import type { SolutionAssignmentCard } from "./types";
+import type { SolutionAssignmentCard } from "../../types/common/types";
 
 const ICON_WRITING = {
   paths: [

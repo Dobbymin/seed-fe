@@ -1,8 +1,8 @@
 ﻿import { Box, Flex, useMediaQuery } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 
-import { RoadmapStepCard } from "./RoadmapStepCard";
-import type { SolutionAssignmentCard } from "./types";
+import { RoadmapStepCard } from "../../roadmapStepCard/ui/RoadmapStepCard";
+import type { SolutionAssignmentCard } from "../../types/common/types";
 
 const roadmapSwapIn = keyframes`
   0% {

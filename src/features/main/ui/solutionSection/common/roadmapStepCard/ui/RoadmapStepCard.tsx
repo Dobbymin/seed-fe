@@ -3,7 +3,10 @@
 import { Box, Flex, Icon, Text, VStack, useMediaQuery } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 
-import type { LocalIconDefinition, RoadmapStep } from "./types";
+import type {
+  LocalIconDefinition,
+  RoadmapStep,
+} from "../../types/common/types";
 
 const stepRiseIn = keyframes`
   0% {
