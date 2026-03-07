@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+// 요소 높이를 읽고, 크기가 바뀌면 다시 알려줌
 const observeHeight = ({
   node,
   onMeasure,
@@ -12,6 +13,7 @@ const observeHeight = ({
     return () => undefined;
   }
 
+  // 현재 요소 높이를 다시 읽어서 넘김
   const updateHeight = () => {
     onMeasure(node.scrollHeight);
   };
@@ -39,8 +41,7 @@ type UseObservedHeightParams = {
   watchKey: string;
 };
 
-// Measures expandable content and falls back to a safe height before the DOM is ready.
-// 접히고 펼쳐지는 콘텐츠 높이를 측정하고 DOM 준비 전에는 fallback 높이를 사용
+// 요소 높이를 재고, 아직 못 쟀으면 기본 높이값을 씀
 export const useObservedHeight = <T extends HTMLElement>({
   fallbackHeight,
   watchKey,
