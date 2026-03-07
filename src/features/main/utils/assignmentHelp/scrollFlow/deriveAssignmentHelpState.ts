@@ -8,6 +8,7 @@ import type {
   AssignmentHelpSectionProgressMap,
   AssignmentHelpState,
 } from "../../../types/";
+import { clamp01 } from "../../common";
 
 type ProgressRange = readonly [number, number];
 
@@ -102,11 +103,6 @@ const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
     subtitleKey: "gaslight",
   },
 ] as const;
-
-// 값을 0과 1 사이로 맞춤
-const clamp01 = (value: number) => {
-  return Math.min(1, Math.max(0, value));
-};
 
 // 시작값과 끝값 사이 값을 진행도에 맞춰 구함
 const lerp = (start: number, end: number, progress: number) => {

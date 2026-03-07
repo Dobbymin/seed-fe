@@ -1,20 +1,14 @@
+import { clamp, clamp01 } from "../../common";
+
 export const TOTAL_UNITS = 10;
 export const PHASE_UNIT_PX = 120;
 
-// Timeline math for the solution section's staged analysis and roadmap reveals.
-// solution 섹션의 분석/로드맵 노출 순서를 계산하는 타임라인 수학 모듈
-const clamp = (value: number, min: number, max: number) => {
-  return Math.min(max, Math.max(min, value));
-};
-
-export const clamp01 = (value: number) => {
-  return clamp(value, 0, 1);
-};
-
+// 시작값과 끝값 사이 값을 진행도에 맞춰 구함
 export const lerp = (start: number, end: number, progress: number) => {
   return start + (end - start) * clamp01(progress);
 };
 
+// 특정 구간 안에서 현재 진행도를 0부터 1 사이 값으로 바꿈
 export const windowedProgress = (value: number, start: number, end: number) => {
   if (start === end) {
     return value >= end ? 1 : 0;
@@ -23,11 +17,13 @@ export const windowedProgress = (value: number, start: number, end: number) => {
   return clamp01((value - start) / (end - start));
 };
 
+// 초반보다 끝부분이 더 부드럽게 느껴지도록 진행도를 바꿈
 export const easeOutCubic = (value: number) => {
   const normalized = clamp01(value);
   return 1 - (1 - normalized) ** 3;
 };
 
+// 실제 스크롤 거리를 타임라인 계산에 쓰는 단위값으로 바꿈
 export const resolveProgressUnits = ({
   isActivated,
   distancePx,
@@ -56,6 +52,7 @@ export type SolutionTimelineState = {
   summaryReveal: number;
 };
 
+// 진행 단위값을 받아서, 실행 섹션 각 부분의 노출 상태값으로 바꿈
 export const deriveSolutionTimelineState = (
   progressUnitsInput: number,
 ): SolutionTimelineState => {
