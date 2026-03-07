@@ -1,7 +1,4 @@
-import {
-  ASSIGNMENT_HELP_COPY,
-  resolveAssignmentHelpMessageIds,
-} from "../constants/assignmentHelpStoryData";
+import { ASSIGNMENT_HELP_COPY } from "../constants/assignmentHelpStoryData";
 import {
   ASSIGNMENT_HELP_STORY_SCENE_PROGRESS,
   type AssignmentHelpStorySceneId,
@@ -10,6 +7,7 @@ import {
 import type { AssignmentHelpState } from "../types/assignmentHelp";
 
 import { resolveAssignmentHelpChatStage } from "./resolveAssignmentHelpChatStage";
+import { resolveAssignmentHelpMessageIds } from "./resolveAssignmentHelpMessageIds";
 
 type ProgressRange = readonly [number, number];
 

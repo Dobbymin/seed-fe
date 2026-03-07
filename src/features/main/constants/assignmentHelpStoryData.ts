@@ -3,34 +3,12 @@ import type {
   AssignmentHelpMessageKey,
   AssignmentHelpRichBlock,
 } from "../types/assignmentHelp";
-
-const paragraph = (text: string): AssignmentHelpRichBlock => ({
-  type: "paragraph",
-  text,
-});
-
-const orderedList = (items: string[]): AssignmentHelpRichBlock => ({
-  type: "ordered-list",
-  items,
-});
-
-const createUserMessage = (
-  id: string,
-  text: string,
-): AssignmentHelpChatMessage => ({
-  id,
-  role: "user",
-  content: text,
-});
-
-const createAiMessage = (
-  id: string,
-  content: AssignmentHelpRichBlock[],
-): AssignmentHelpChatMessage => ({
-  id,
-  role: "ai",
-  content,
-});
+import {
+  createAiMessage,
+  createUserMessage,
+  orderedList,
+  paragraph,
+} from "../utils/assignmentHelpMessageFactory";
 
 export const ASSIGNMENT_HELP_COPY = {
   title: {
@@ -117,10 +95,4 @@ export const ASSIGNMENT_HELP_MESSAGE_BANK: Record<
     "아니 그게 무슨 말이야 제대로 찾은 거 맞아?",
   ),
   aiGaslight: createAiMessage("ai-gaslight", AI_GASLIGHT),
-};
-
-export const resolveAssignmentHelpMessageIds = (
-  ids: readonly AssignmentHelpMessageKey[],
-) => {
-  return ids.map((id) => ASSIGNMENT_HELP_MESSAGE_BANK[id]);
 };
