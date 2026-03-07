@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 
-import { AssignmentHelpSequence } from "../../components/features/assignmentHelp/AssignmentHelpSequence";
+import { Box } from "@chakra-ui/react";
+
+import { HelpPromptSection } from "../../components/features/assignmentHelp/HelpPromptSection";
+import { TimeLossSection } from "../../components/features/assignmentHelp/TimeLossSection";
+import { STORY_SECTION_VH } from "../../constants/storySections";
 import { useAssignmentHelpSectionState } from "../../hooks";
 
 type AssignmentHelpSectionProps = {
@@ -25,13 +29,40 @@ export const AssignmentHelpSection = ({
   }, [isSolutionReady, onSolutionReadyChange]);
 
   return (
-    <AssignmentHelpSequence
-      animatedMessageIds={animatedMessageIds}
-      chatRef={chatRef}
-      conversationRef={conversationRef}
-      introRef={introRef}
-      nextRef={nextRef}
-      storyState={storyState}
-    />
+    <Box position="relative" w="full">
+      <Box position="relative" w="full">
+        <Box
+          h="calc(100dvh - {sizes.headerHeight})"
+          overflow="hidden"
+          position="sticky"
+          top={0}
+        >
+          <Box h="full" position="relative" w="full">
+            <Box
+              inset={0}
+              opacity={storyState.problemDefinitionLayer.opacity}
+              position="absolute"
+              transform={`translateY(${storyState.problemDefinitionLayer.translateY})`}
+              transition="opacity 220ms ease, transform 340ms ease"
+              w="full"
+              zIndex={2}
+            >
+              <HelpPromptSection
+                animatedMessageIds={animatedMessageIds}
+                conversationRef={conversationRef}
+                storyState={storyState}
+              />
+              <TimeLossSection storyState={storyState} />
+            </Box>
+          </Box>
+        </Box>
+
+        <Box>
+          <Box h={`${STORY_SECTION_VH.intro}vh`} ref={introRef} />
+          <Box h={`${STORY_SECTION_VH.chat}vh`} ref={chatRef} />
+          <Box h={`${STORY_SECTION_VH.next}vh`} ref={nextRef} />
+        </Box>
+      </Box>
+    </Box>
   );
 };
