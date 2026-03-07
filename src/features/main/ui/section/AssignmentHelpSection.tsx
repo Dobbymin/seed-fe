@@ -2,9 +2,9 @@ import { useEffect } from "react";
 
 import { Box } from "@chakra-ui/react";
 
+import { ASSIGNMENT_HELP_STORY_SECTION_VH } from "../../components/features/assignmentHelp/assignmentHelpStoryTimeline";
 import { AssignmentHelpPromptScene } from "../../components/features/assignmentHelp/promptScene/AssignmentHelpPromptScene";
 import { TimeLossScene } from "../../components/features/assignmentHelp/timeLossScene/TimeLossScene";
-import { ASSIGNMENT_HELP_STORY_SECTION_VH } from "../../constants/assignmentHelpStoryTimeline";
 import { useAssignmentHelpSectionState } from "../../hooks";
 
 type AssignmentHelpSectionProps = {

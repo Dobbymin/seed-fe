@@ -1,12 +1,12 @@
 import {
-  ASSIGNMENT_HELP_COPY,
-  ASSIGNMENT_HELP_MESSAGE_BANK,
-} from "../constants/assignmentHelpStoryData";
-import {
   ASSIGNMENT_HELP_STORY_SCENE_PROGRESS,
   type AssignmentHelpStorySceneId,
   type AssignmentHelpStorySectionProgressMap,
-} from "../constants/assignmentHelpStoryTimeline";
+} from "../components/features/assignmentHelp/assignmentHelpStoryTimeline";
+import {
+  ASSIGNMENT_HELP_COPY,
+  ASSIGNMENT_HELP_MESSAGE_BANK,
+} from "../constants/assignmentHelpStoryData";
 import type { AssignmentHelpState } from "../types/assignmentHelp";
 
 import { resolveAssignmentHelpChatStage } from "./resolveAssignmentHelpChatStage";

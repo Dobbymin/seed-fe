@@ -4,7 +4,7 @@ import {
   ASSIGNMENT_HELP_STORY_SECTION_ORDER,
   type AssignmentHelpStorySectionId,
   type AssignmentHelpStorySectionProgressMap,
-} from "../constants/assignmentHelpStoryTimeline";
+} from "../components/features/assignmentHelp/assignmentHelpStoryTimeline";
 
 const clamp01 = (value: number) => {
   return Math.min(1, Math.max(0, value));

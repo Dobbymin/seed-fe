@@ -1,8 +1,8 @@
-import { ASSIGNMENT_HELP_COPY } from "../constants/assignmentHelpStoryData";
 import {
   ASSIGNMENT_HELP_STORY_SCENE_PROGRESS,
   type AssignmentHelpStorySceneId,
-} from "../constants/assignmentHelpStoryTimeline";
+} from "../components/features/assignmentHelp/assignmentHelpStoryTimeline";
+import { ASSIGNMENT_HELP_COPY } from "../constants/assignmentHelpStoryData";
 import type {
   AssignmentHelpChatStageId,
   AssignmentHelpMessageKey,
