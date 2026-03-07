@@ -103,14 +103,17 @@ const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
   },
 ] as const;
 
+// 값을 0과 1 사이로 맞춤
 const clamp01 = (value: number) => {
   return Math.min(1, Math.max(0, value));
 };
 
+// 시작값과 끝값 사이 값을 진행도에 맞춰 구함
 const lerp = (start: number, end: number, progress: number) => {
   return start + (end - start) * progress;
 };
 
+// 특정 구간 안에서 현재 진행도를 0부터 1 사이 값으로 바꿈
 const rangeProgress = (value: number, [start, end]: ProgressRange) => {
   if (start === end) {
     return 0;
@@ -119,6 +122,7 @@ const rangeProgress = (value: number, [start, end]: ProgressRange) => {
   return clamp01((value - start) / (end - start));
 };
 
+// chat 구간의 진행도에 맞는 현재 채팅 단계를 찾음
 const resolveChatStage = (chatProgress: number) => {
   let activeStage = ASSIGNMENT_HELP_CHAT_STAGES[0];
 
@@ -131,6 +135,7 @@ const resolveChatStage = (chatProgress: number) => {
   return activeStage;
 };
 
+// 각 구간의 스크롤 진행도를 받아서, 화면에 보여줄 상태값으로 바꿈
 export const deriveAssignmentHelpState = (
   sectionProgresses: AssignmentHelpSectionProgressMap,
 ): AssignmentHelpState => {
