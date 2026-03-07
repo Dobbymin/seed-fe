@@ -110,20 +110,28 @@ export const ExecutionOnlySection = ({
             </Text>
 
             <AnalysisStage
+              analysisPanelReveal={timeline.analysisPanelReveal}
+              analysisStageReveal={timeline.analysisStageReveal}
               analysisContentRef={analysisContentRef}
+              intentReveal={timeline.intentReveal}
+              keywordReveal={timeline.keywordReveal}
               progressTriggerRef={progressTriggerRef}
+              referenceReveal={timeline.referenceReveal}
               resolvedAnalysisHeight={resolvedAnalysisHeight}
-              timeline={timeline}
+              summaryReveal={timeline.summaryReveal}
             />
             <RoadmapStage
               activeCard={activeCard}
               activeId={activeId}
               cards={cards}
               onSelect={handleSelect}
+              roadmapCardsReveal={timeline.roadmapCardsReveal}
+              roadmapContainerReveal={timeline.roadmapContainerReveal}
+              roadmapListReveal={timeline.roadmapListReveal}
+              roadmapTitleReveal={timeline.roadmapTitleReveal}
               resolvedRoadmapHeight={resolvedRoadmapHeight}
               roadmapContentRef={roadmapContentRef}
               roadmapInteractive={roadmapInteractive}
-              timeline={timeline}
             />
           </VStack>
         </Flex>

@@ -1,15 +1,20 @@
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 
-import type { SolutionTimelineState } from "../../../../scrollFlow/solutionTimeline";
 import { AnalysisRevealSection } from "../../analysisRevealSection/ui/AnalysisRevealSection";
+
+type AnalysisPanelProps = {
+  intentReveal: number;
+  keywordReveal: number;
+  summaryReveal: number;
+};
 
 // AI analysis card used only inside the analysis stage.
 // analysis stage 내부에서만 쓰는 AI 분석 카드
 export const AnalysisPanel = ({
-  timeline,
-}: {
-  timeline: SolutionTimelineState;
-}) => {
+  intentReveal,
+  keywordReveal,
+  summaryReveal,
+}: AnalysisPanelProps) => {
   return (
     <Box
       border="1px solid #98C95C"
@@ -23,10 +28,7 @@ export const AnalysisPanel = ({
           AI 분석
         </Text>
 
-        <AnalysisRevealSection
-          progress={timeline.keywordReveal}
-          revealHeight={132}
-        >
+        <AnalysisRevealSection progress={keywordReveal} revealHeight={132}>
           <VStack align="stretch" gap={1}>
             <Text
               color="#191F28"
@@ -46,10 +48,7 @@ export const AnalysisPanel = ({
           </VStack>
         </AnalysisRevealSection>
 
-        <AnalysisRevealSection
-          progress={timeline.summaryReveal}
-          revealHeight={190}
-        >
+        <AnalysisRevealSection progress={summaryReveal} revealHeight={190}>
           <VStack align="stretch" gap={1}>
             <Text
               color="#191F28"
@@ -70,10 +69,7 @@ export const AnalysisPanel = ({
           </VStack>
         </AnalysisRevealSection>
 
-        <AnalysisRevealSection
-          progress={timeline.intentReveal}
-          revealHeight={190}
-        >
+        <AnalysisRevealSection progress={intentReveal} revealHeight={190}>
           <VStack align="stretch" gap={1}>
             <Text
               color="#191F28"

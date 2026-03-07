@@ -2,7 +2,6 @@ import type { RefObject } from "react";
 
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 
-import type { SolutionTimelineState } from "../../scrollFlow/solutionTimeline";
 import { SolutionRoadmapList } from "../../solutionRoadmapList/ui/SolutionRoadmapList";
 import type {
   AssignmentTypeId,
@@ -15,10 +14,13 @@ type RoadmapStageProps = {
   activeId: AssignmentTypeId;
   cards: SolutionAssignmentCard[];
   onSelect: (cardId: AssignmentTypeId) => void;
+  roadmapCardsReveal: number;
+  roadmapContainerReveal: number;
+  roadmapListReveal: number;
+  roadmapTitleReveal: number;
   resolvedRoadmapHeight: number;
   roadmapContentRef: RefObject<HTMLDivElement | null>;
   roadmapInteractive: boolean;
-  timeline: SolutionTimelineState;
 };
 
 // Reveals the assignment selector and the active roadmap list after the analysis phase finishes.
@@ -28,18 +30,21 @@ export const RoadmapStage = ({
   activeId,
   cards,
   onSelect,
+  roadmapCardsReveal,
+  roadmapContainerReveal,
+  roadmapListReveal,
+  roadmapTitleReveal,
   resolvedRoadmapHeight,
   roadmapContentRef,
   roadmapInteractive,
-  timeline,
 }: RoadmapStageProps) => {
   return (
     <Box
-      maxH={`${(resolvedRoadmapHeight * timeline.roadmapContainerReveal).toFixed(2)}px`}
-      opacity={timeline.roadmapContainerReveal}
+      maxH={`${(resolvedRoadmapHeight * roadmapContainerReveal).toFixed(2)}px`}
+      opacity={roadmapContainerReveal}
       overflow="hidden"
-      pointerEvents={timeline.roadmapContainerReveal > 0.16 ? "auto" : "none"}
-      transform={`translateY(${((1 - timeline.roadmapContainerReveal) * 24).toFixed(2)}px)`}
+      pointerEvents={roadmapContainerReveal > 0.16 ? "auto" : "none"}
+      transform={`translateY(${((1 - roadmapContainerReveal) * 24).toFixed(2)}px)`}
       transition={[
         "max-height 240ms cubic-bezier(0.22, 1, 0.36, 1)",
         "opacity 220ms ease",
@@ -60,16 +65,16 @@ export const RoadmapStage = ({
             fontWeight={700}
             letterSpacing="-0.02em"
             lineHeight="1.4"
-            opacity={timeline.roadmapTitleReveal}
+            opacity={roadmapTitleReveal}
             textAlign="center"
-            transform={`translateY(${((1 - timeline.roadmapTitleReveal) * 14).toFixed(2)}px)`}
+            transform={`translateY(${((1 - roadmapTitleReveal) * 14).toFixed(2)}px)`}
           >
             과제물 분석을 통해 최적의 로드맵을 제공합니다.
           </Text>
 
           <Box
-            opacity={timeline.roadmapCardsReveal}
-            transform={`translateY(${((1 - timeline.roadmapCardsReveal) * 12).toFixed(2)}px)`}
+            opacity={roadmapCardsReveal}
+            transform={`translateY(${((1 - roadmapCardsReveal) * 12).toFixed(2)}px)`}
             w="full"
           >
             <Flex
@@ -93,9 +98,9 @@ export const RoadmapStage = ({
 
           {activeCard ? (
             <Box
-              opacity={timeline.roadmapListReveal}
+              opacity={roadmapListReveal}
               pt={{ base: 2, lg: 4 }}
-              transform={`translateY(${((1 - timeline.roadmapListReveal) * 16).toFixed(2)}px)`}
+              transform={`translateY(${((1 - roadmapListReveal) * 16).toFixed(2)}px)`}
               w="full"
             >
               <SolutionRoadmapList card={activeCard} />

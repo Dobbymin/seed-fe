@@ -7,31 +7,40 @@ import {
   fadeUpStyle,
   referencePanelStageStyle,
 } from "../../scrollFlow/solutionProgressLayout";
-import type { SolutionTimelineState } from "../../scrollFlow/solutionTimeline";
 import { AnalysisPanel } from "../common/analysisPanel/ui/AnalysisPanel";
 import { ReferenceDataPanel } from "../common/referenceDataPanel/ui/ReferenceDataPanel";
 
 type AnalysisStageProps = {
+  analysisPanelReveal: number;
+  analysisStageReveal: number;
   analysisContentRef: RefObject<HTMLDivElement | null>;
+  intentReveal: number;
+  keywordReveal: number;
   progressTriggerRef: RefObject<HTMLParagraphElement | null>;
+  referenceReveal: number;
   resolvedAnalysisHeight: number;
-  timeline: SolutionTimelineState;
+  summaryReveal: number;
 };
 
 // Reveals the assignment analysis header and syncs the two-panel analysis composition.
 // 과제 분석 헤더와 좌우 분석 패널 구성을 함께 제어하는 stage 컴포넌트
 export const AnalysisStage = ({
+  analysisPanelReveal,
+  analysisStageReveal,
   analysisContentRef,
+  intentReveal,
+  keywordReveal,
   progressTriggerRef,
+  referenceReveal,
   resolvedAnalysisHeight,
-  timeline,
+  summaryReveal,
 }: AnalysisStageProps) => {
   return (
     <Box
-      maxH={`${(resolvedAnalysisHeight * timeline.analysisStageReveal).toFixed(2)}px`}
-      opacity={timeline.analysisStageReveal}
+      maxH={`${(resolvedAnalysisHeight * analysisStageReveal).toFixed(2)}px`}
+      opacity={analysisStageReveal}
       overflow="hidden"
-      transform={`translateY(${((1 - timeline.analysisStageReveal) * 20).toFixed(2)}px)`}
+      transform={`translateY(${((1 - analysisStageReveal) * 20).toFixed(2)}px)`}
       transition={[
         "max-height 240ms cubic-bezier(0.22, 1, 0.36, 1)",
         "opacity 220ms ease",
@@ -45,7 +54,7 @@ export const AnalysisStage = ({
             align="center"
             gap={{ base: 8, lg: 12 }}
             w="full"
-            {...fadeUpStyle(timeline.referenceReveal, 64)}
+            {...fadeUpStyle(referenceReveal, 64)}
           >
             <Text
               color="#191F28"
@@ -69,8 +78,8 @@ export const AnalysisStage = ({
                   w="520px"
                   zIndex={2}
                   {...referencePanelStageStyle(
-                    timeline.referenceReveal,
-                    timeline.analysisPanelReveal,
+                    referenceReveal,
+                    analysisPanelReveal,
                   )}
                 >
                   <ReferenceDataPanel />
@@ -81,9 +90,13 @@ export const AnalysisStage = ({
                   top="50%"
                   w="616px"
                   zIndex={1}
-                  {...analysisPanelStageStyle(timeline.analysisPanelReveal)}
+                  {...analysisPanelStageStyle(analysisPanelReveal)}
                 >
-                  <AnalysisPanel timeline={timeline} />
+                  <AnalysisPanel
+                    intentReveal={intentReveal}
+                    keywordReveal={keywordReveal}
+                    summaryReveal={summaryReveal}
+                  />
                 </Box>
               </Box>
             </Box>
@@ -97,8 +110,12 @@ export const AnalysisStage = ({
               w="full"
             >
               <ReferenceDataPanel />
-              <Box {...fadeUpStyle(timeline.analysisPanelReveal, 16)} w="full">
-                <AnalysisPanel timeline={timeline} />
+              <Box {...fadeUpStyle(analysisPanelReveal, 16)} w="full">
+                <AnalysisPanel
+                  intentReveal={intentReveal}
+                  keywordReveal={keywordReveal}
+                  summaryReveal={summaryReveal}
+                />
               </Box>
             </Flex>
           </VStack>
