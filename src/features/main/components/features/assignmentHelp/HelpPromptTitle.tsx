@@ -1,11 +1,11 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
 
 import { COPY } from "../../../constants/promptStoryData";
-import type { MainStoryState } from "../../../utils/deriveMainStoryState";
+import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
 import { STORY_STAGE_SWAP_ANIMATION } from "../../../utils/storyStageSwap";
 
 type HelpPromptTitleProps = {
-  title: MainStoryState["title"];
+  title: AssignmentHelpState["title"];
 };
 
 export const HelpPromptTitle = ({ title }: HelpPromptTitleProps) => {

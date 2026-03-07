@@ -3,29 +3,29 @@ import type { RefObject } from "react";
 import { Box } from "@chakra-ui/react";
 
 import { STORY_SECTION_VH } from "../../../constants/storySections";
-import type { MainStoryState } from "../../../utils/deriveMainStoryState";
+import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
 
 import { HelpPromptSection } from "./HelpPromptSection";
 import { TimeLossSection } from "./TimeLossSection";
 
-export type MainStorySequenceProps = {
+export type AssignmentHelpSequenceProps = {
   animatedMessageIds: ReadonlySet<string>;
   chatRef: RefObject<HTMLDivElement | null>;
   conversationRef: RefObject<HTMLDivElement | null>;
   introRef: RefObject<HTMLDivElement | null>;
   nextRef: RefObject<HTMLDivElement | null>;
-  storyState: MainStoryState;
+  storyState: AssignmentHelpState;
 };
 
 // Internal sticky sequence for the first main-page story section.
-export const MainStorySequence = ({
+export const AssignmentHelpSequence = ({
   animatedMessageIds,
   chatRef,
   conversationRef,
   introRef,
   nextRef,
   storyState,
-}: MainStorySequenceProps) => {
+}: AssignmentHelpSequenceProps) => {
   return (
     <Box position="relative" w="full">
       <Box position="relative" w="full">

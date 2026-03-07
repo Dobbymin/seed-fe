@@ -1,12 +1,12 @@
 import { Box, Text } from "@chakra-ui/react";
 
 import { COPY } from "../../../constants/promptStoryData";
-import type { MainStoryState } from "../../../utils/deriveMainStoryState";
+import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
 
 import { ProblemDefinitionNextPhraseCloud } from "./ProblemDefinitionNextPhraseCloud";
 
 type TimeLossSectionProps = {
-  storyState: MainStoryState;
+  storyState: AssignmentHelpState;
 };
 
 export const TimeLossSection = ({ storyState }: TimeLossSectionProps) => {

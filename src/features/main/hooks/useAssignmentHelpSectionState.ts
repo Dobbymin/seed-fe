@@ -1,9 +1,9 @@
 import { type RefObject, useMemo, useRef } from "react";
 
 import {
-  type MainStoryState,
-  deriveMainStoryState,
-} from "../utils/deriveMainStoryState";
+  type AssignmentHelpState,
+  deriveAssignmentHelpState,
+} from "../utils/deriveAssignmentHelpState";
 
 import { useAnimatedChatMessageIds } from "./useAnimatedChatMessageIds";
 import { useConversationStageScroll } from "./useConversationStageScroll";
@@ -12,17 +12,17 @@ import {
   useSectionProgresses,
 } from "./useSectionProgresses";
 
-export type MainStorySectionState = {
+export type AssignmentHelpSectionState = {
   animatedMessageIds: ReadonlySet<string>;
   chatRef: RefObject<HTMLDivElement | null>;
   conversationRef: RefObject<HTMLDivElement | null>;
   introRef: RefObject<HTMLDivElement | null>;
   isSolutionActivated: boolean;
   nextRef: RefObject<HTMLDivElement | null>;
-  storyState: MainStoryState;
+  storyState: AssignmentHelpState;
 };
 
-export const useMainStorySectionState = (): MainStorySectionState => {
+export const useAssignmentHelpSectionState = (): AssignmentHelpSectionState => {
   const introRef = useRef<HTMLDivElement | null>(null);
   const chatRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
@@ -38,7 +38,7 @@ export const useMainStorySectionState = (): MainStorySectionState => {
 
   const sectionProgresses = useSectionProgresses(sectionRefs);
   const storyState = useMemo(() => {
-    return deriveMainStoryState(sectionProgresses);
+    return deriveAssignmentHelpState(sectionProgresses);
   }, [sectionProgresses]);
   const chatStageKey = storyState.chat.stageId;
   const animatedMessageIds = useAnimatedChatMessageIds({

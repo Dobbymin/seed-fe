@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { MainStorySequence } from "../../components/features/mainStory/MainStorySequence";
-import { useMainStorySectionState } from "../../hooks";
+import { AssignmentHelpSequence } from "../../components/features/assignmentHelp/AssignmentHelpSequence";
+import { useAssignmentHelpSectionState } from "../../hooks";
 
 type AssignmentHelpSectionProps = {
   onSolutionReadyChange?: (isReady: boolean) => void;
@@ -18,14 +18,14 @@ export const AssignmentHelpSection = ({
     isSolutionActivated: isSolutionReady,
     nextRef,
     storyState,
-  } = useMainStorySectionState();
+  } = useAssignmentHelpSectionState();
 
   useEffect(() => {
     onSolutionReadyChange?.(isSolutionReady);
   }, [isSolutionReady, onSolutionReadyChange]);
 
   return (
-    <MainStorySequence
+    <AssignmentHelpSequence
       animatedMessageIds={animatedMessageIds}
       chatRef={chatRef}
       conversationRef={conversationRef}

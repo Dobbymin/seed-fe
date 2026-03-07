@@ -2,13 +2,13 @@ import type { RefObject } from "react";
 
 import { Box, VStack } from "@chakra-ui/react";
 
-import type { MainStoryState } from "../../../utils/deriveMainStoryState";
+import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
 
 import { PromptMessage } from "./PromptMessage";
 
 type HelpPromptConversationProps = {
   animatedMessageIds: ReadonlySet<string>;
-  chat: MainStoryState["chat"];
+  chat: AssignmentHelpState["chat"];
   conversationRef: RefObject<HTMLDivElement | null>;
   isChatVisible: boolean;
 };

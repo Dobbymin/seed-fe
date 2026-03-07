@@ -160,7 +160,7 @@ export type ComposerLayoutState = {
   width: string;
 };
 
-export type MainStoryState = {
+export type AssignmentHelpState = {
   chat: {
     messageIds: readonly MessageKey[];
     messages: PromptMessage[];
@@ -193,9 +193,9 @@ export type MainStoryState = {
   };
 };
 
-export const deriveMainStoryState = (
+export const deriveAssignmentHelpState = (
   sectionProgresses: StorySectionProgressMap,
-): MainStoryState => {
+): AssignmentHelpState => {
   const introProgress = clamp01(sectionProgresses.intro);
   const chatProgress = clamp01(sectionProgresses.chat);
   const nextProgress = clamp01(sectionProgresses.next);

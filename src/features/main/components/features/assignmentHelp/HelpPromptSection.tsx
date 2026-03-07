@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 
-import type { MainStoryState } from "../../../utils/deriveMainStoryState";
+import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
 
 import { HelpPromptComposer } from "./HelpPromptComposer";
 import { HelpPromptConversation } from "./HelpPromptConversation";
@@ -9,7 +9,7 @@ import { HelpPromptTitle } from "./HelpPromptTitle";
 type HelpPromptSectionProps = {
   animatedMessageIds: ReadonlySet<string>;
   conversationRef: RefObject<HTMLDivElement | null>;
-  storyState: MainStoryState;
+  storyState: AssignmentHelpState;
 };
 
 export const HelpPromptSection = ({

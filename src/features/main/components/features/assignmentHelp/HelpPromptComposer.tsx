@@ -1,7 +1,7 @@
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 
 import { COPY } from "../../../constants/promptStoryData";
-import type { MainStoryState } from "../../../utils/deriveMainStoryState";
+import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
 
 const sendIconPath =
   "M20.9998 3L10.9998 13M20.9998 3L14.4998 21L10.9998 13M20.9998 3L2.99976 9.5L10.9998 13";
@@ -22,7 +22,7 @@ const SendIcon = () => {
 };
 
 type HelpPromptComposerProps = {
-  composer: MainStoryState["composer"];
+  composer: AssignmentHelpState["composer"];
 };
 
 export const HelpPromptComposer = ({ composer }: HelpPromptComposerProps) => {
