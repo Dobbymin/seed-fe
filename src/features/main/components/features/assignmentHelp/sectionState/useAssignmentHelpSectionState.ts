@@ -1,8 +1,8 @@
 import { type RefObject, useMemo, useRef } from "react";
 
-import type { AssignmentHelpState } from "../types/assignmentHelp";
-import { deriveAssignmentHelpState } from "../utils/deriveAssignmentHelpState";
+import type { AssignmentHelpState } from "../../../../types/assignmentHelp";
 
+import { deriveAssignmentHelpState } from "./deriveAssignmentHelpState";
 import {
   type AssignmentHelpSectionRefs,
   useAssignmentHelpSectionProgresses,

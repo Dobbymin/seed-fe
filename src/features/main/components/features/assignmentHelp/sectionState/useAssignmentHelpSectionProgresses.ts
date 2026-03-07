@@ -3,7 +3,7 @@ import { type RefObject, useEffect, useState } from "react";
 import type {
   AssignmentHelpSectionId,
   AssignmentHelpSectionProgressMap,
-} from "../types/assignmentHelp";
+} from "../../../../types/assignmentHelp";
 
 const ASSIGNMENT_HELP_SECTION_ORDER: AssignmentHelpSectionId[] = [
   "intro",

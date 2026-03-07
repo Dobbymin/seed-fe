@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 
 import { AssignmentHelpPromptScene } from "../../components/features/assignmentHelp/promptScene/AssignmentHelpPromptScene";
+import { useAssignmentHelpSectionState } from "../../components/features/assignmentHelp/sectionState/useAssignmentHelpSectionState";
 import { TimeLossScene } from "../../components/features/assignmentHelp/timeLossScene/TimeLossScene";
-import { useAssignmentHelpSectionState } from "../../hooks";
 
 const ASSIGNMENT_HELP_SECTION_VH = {
   intro: 140,

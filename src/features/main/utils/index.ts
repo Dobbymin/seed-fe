@@ -1,4 +1,3 @@
-export { deriveAssignmentHelpState } from "./deriveAssignmentHelpState";
 export { ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION } from "./assignmentHelpStageSwap";
 export {
   FALLBACK_ANALYSIS_CONTENT_HEIGHT,

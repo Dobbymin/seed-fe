@@ -1,13 +1,13 @@
 import {
   ASSIGNMENT_HELP_COPY,
   ASSIGNMENT_HELP_MESSAGE_BANK,
-} from "../constants/assignmentHelpStoryData";
+} from "../../../../constants/assignmentHelpStoryData";
 import type {
   AssignmentHelpChatStageId,
   AssignmentHelpMessageKey,
   AssignmentHelpSectionProgressMap,
   AssignmentHelpState,
-} from "../types/assignmentHelp";
+} from "../../../../types/assignmentHelp";
 
 type ProgressRange = readonly [number, number];
 
