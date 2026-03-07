@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { resolveProgressUnits } from "../../../utils";
 
-// Converts the trigger element's distance from viewport center into timeline progress units.
-// 트리거 요소와 화면 중앙의 거리를 solution 타임라인 단위로 변환
+// 트리거 요소의 위치를 실행 섹션 진행값으로 바꿈
 export const useSolutionTimelineProgress = (isActivated: boolean) => {
   const progressTriggerRef = useRef<HTMLParagraphElement | null>(null);
   const [progressUnits, setProgressUnits] = useState(0);
@@ -15,6 +14,7 @@ export const useSolutionTimelineProgress = (isActivated: boolean) => {
 
     let frameId: number | null = null;
 
+    // 트리거 요소 위치를 읽어서 현재 진행값을 계산함
     const calculate = () => {
       const triggerNode = progressTriggerRef.current;
       if (!triggerNode) {
@@ -32,6 +32,7 @@ export const useSolutionTimelineProgress = (isActivated: boolean) => {
       setProgressUnits(nextProgressUnits);
     };
 
+    // 스크롤 계산을 다음 프레임으로 모아서 한 번만 실행함
     const schedule = () => {
       if (frameId !== null) {
         return;
