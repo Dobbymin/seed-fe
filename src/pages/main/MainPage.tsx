@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import {
+  AssignmentHelpSection,
   ExecutionOnlySection,
-  MainStorySection,
   PromptNoHesitationSection,
   WhatToDoSection,
 } from "@/features/main";
@@ -12,7 +12,9 @@ export default function MainPage() {
 
   return (
     <>
-      <MainStorySection onSolutionReadyChange={setIsSolutionSectionReady} />
+      <AssignmentHelpSection
+        onSolutionReadyChange={setIsSolutionSectionReady}
+      />
       <ExecutionOnlySection isActivated={isSolutionSectionReady} />
       <PromptNoHesitationSection />
       <WhatToDoSection />

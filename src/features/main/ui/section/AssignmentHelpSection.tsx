@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import { MainStorySequence } from "../../components/features/mainStory/MainStorySequence";
 import { useMainStorySectionState } from "../../hooks";
 
-type MainStorySectionProps = {
+type AssignmentHelpSectionProps = {
   onSolutionReadyChange?: (isReady: boolean) => void;
 };
 
-export const MainStorySection = ({
+export const AssignmentHelpSection = ({
   onSolutionReadyChange,
-}: MainStorySectionProps) => {
+}: AssignmentHelpSectionProps) => {
   const {
     animatedMessageIds,
     chatRef,
