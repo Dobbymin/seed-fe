@@ -95,7 +95,7 @@ function main() {
   fs.writeFileSync(
     ICONS_INDEX,
     `${banner()}
-import { createIcon } from "./create-icon";
+import { createIcon } from "@/shared/components/features/CreateIcon";
 
 ${iconImports}
 
