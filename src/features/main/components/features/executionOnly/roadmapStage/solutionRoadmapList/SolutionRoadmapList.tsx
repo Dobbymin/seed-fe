@@ -1,38 +1,27 @@
-﻿import { Box, Flex, useMediaQuery } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
+import { Box, Flex, useMediaQuery } from "@chakra-ui/react";
 
 import type { SolutionAssignmentCard } from "../../../../../types";
+import { createFadeUpAnimation } from "../../../../../utils";
 
 import { RoadmapStepCard } from "./roadmapStepCard";
 
-const roadmapSwapIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+const roadmapSwapInAnimation = createFadeUpAnimation({
+  distancePx: 16,
+  durationMs: 280,
+});
 
 export const SolutionRoadmapList = ({
   card,
 }: {
   card: SolutionAssignmentCard;
 }) => {
-  // Replays the step animation whenever the active roadmap card changes.
-  // 활성 로드맵 카드가 바뀔 때마다 단계 카드 애니메이션을 다시 재생
+  // 활성 로드맵 카드가 바뀔 때마다 단계 카드 애니메이션을 다시 재생함
   const [reduceMotion] = useMediaQuery(["(prefers-reduced-motion: reduce)"]);
 
   return (
     <Box w="full">
       <Flex
-        animation={
-          reduceMotion
-            ? undefined
-            : `${roadmapSwapIn} 280ms cubic-bezier(0.22, 1, 0.36, 1) both`
-        }
+        animation={reduceMotion ? undefined : roadmapSwapInAnimation}
         direction={{ base: "column", xl: "row" }}
         gap={4}
         justify="center"

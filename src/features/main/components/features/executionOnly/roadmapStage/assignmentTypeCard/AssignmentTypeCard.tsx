@@ -11,8 +11,6 @@ type AssignmentTypeCardProps = {
   onSelect: (cardId: SolutionAssignmentCard["id"]) => void;
 };
 
-// Selectable card used to switch between roadmap variants in the solution section.
-// solution ?뱀뀡?먯꽌 濡쒕뱶留??좏삎???꾪솚?????ъ슜?섎뒗 ?좏깮 移대뱶
 export const AssignmentTypeCard = ({
   card,
   isActive,

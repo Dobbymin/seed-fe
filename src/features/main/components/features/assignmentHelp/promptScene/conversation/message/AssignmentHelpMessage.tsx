@@ -1,10 +1,15 @@
 import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 
-import { ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION } from "../../../../../../constants";
 import type {
   AssignmentHelpChatMessage,
   AssignmentHelpRichBlock,
 } from "../../../../../../types";
+import { createFadeUpAnimation } from "../../../../../../utils";
+
+const assignmentHelpStageSwapAnimation = createFadeUpAnimation({
+  distancePx: 12,
+  durationMs: 240,
+});
 
 type AssignmentHelpMessageProps = {
   message: AssignmentHelpChatMessage;
@@ -70,7 +75,7 @@ export const AssignmentHelpMessage = ({
   shouldAnimateEntry,
 }: AssignmentHelpMessageProps) => {
   const entryAnimation = shouldAnimateEntry
-    ? ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION
+    ? assignmentHelpStageSwapAnimation
     : undefined;
 
   if (message.role === "user") {

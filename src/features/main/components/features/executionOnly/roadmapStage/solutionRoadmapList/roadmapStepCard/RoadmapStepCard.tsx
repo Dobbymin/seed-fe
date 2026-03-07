@@ -1,22 +1,16 @@
 import { useState } from "react";
 
 import { Box, Flex, Text, VStack, useMediaQuery } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
 
 import { SparklesIcon } from "@/shared/_assets/icons";
 
 import type { RoadmapStep } from "../../../../../../types";
+import { createFadeUpAnimation } from "../../../../../../utils";
 
-const stepRiseIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+const stepRiseInAnimation = createFadeUpAnimation({
+  distancePx: 20,
+  durationMs: 360,
+});
 
 export const RoadmapStepCard = ({
   animationDelayMs,
@@ -32,11 +26,7 @@ export const RoadmapStepCard = ({
   return (
     <VStack
       align="stretch"
-      animation={
-        reduceMotion
-          ? undefined
-          : `${stepRiseIn} 360ms cubic-bezier(0.22, 1, 0.36, 1) both`
-      }
+      animation={reduceMotion ? undefined : stepRiseInAnimation}
       animationDelay={`${animationDelayMs}ms`}
       cursor="pointer"
       flex="1 1 0"

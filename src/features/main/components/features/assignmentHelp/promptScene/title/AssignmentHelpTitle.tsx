@@ -1,10 +1,13 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
 
-import {
-  ASSIGNMENT_HELP_COPY,
-  ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION,
-} from "../../../../../constants";
+import { ASSIGNMENT_HELP_COPY } from "../../../../../constants";
 import type { AssignmentHelpState } from "../../../../../types";
+import { createFadeUpAnimation } from "../../../../../utils";
+
+const assignmentHelpStageSwapAnimation = createFadeUpAnimation({
+  distancePx: 12,
+  durationMs: 240,
+});
 
 type AssignmentHelpTitleProps = {
   title: AssignmentHelpState["title"];
@@ -39,7 +42,7 @@ export const AssignmentHelpTitle = ({ title }: AssignmentHelpTitleProps) => {
           {ASSIGNMENT_HELP_COPY.title.suffix}
         </Text>
         <Text
-          animation={ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION}
+          animation={assignmentHelpStageSwapAnimation}
           color="neutral.600"
           fontSize="20px"
           fontWeight={500}

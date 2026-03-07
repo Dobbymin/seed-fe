@@ -41,7 +41,7 @@ type UseObservedHeightParams = {
   watchKey: string;
 };
 
-// 요소 높이를 재고, 아직 못 쟀으면 기본 높이값을 씀
+// 요소 높이를 재고, 못 쟀으면 기본 높이값을 씀
 export const useObservedHeight = <T extends HTMLElement>({
   fallbackHeight,
   watchKey,
