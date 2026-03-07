@@ -3,7 +3,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { ASSIGNMENT_HELP_COPY } from "../data/assignmentHelpStoryData";
 import type { AssignmentHelpState } from "../types/assignmentHelp";
 
-import { TimeLossPhraseCloud } from "./TimeLossPhraseCloud";
+import { TimeLossPhraseCloud } from "./phraseCloud/TimeLossPhraseCloud";
 
 type TimeLossSceneProps = {
   timeLoss: AssignmentHelpState["timeLoss"];

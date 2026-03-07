@@ -11,7 +11,7 @@ import {
   TIME_LOSS_PHRASES,
   mapTimeLossPhraseXToLayout,
   mapTimeLossPhraseYToLayout,
-} from "../../../../constants/timeLossPhraseData";
+} from "../data/timeLossPhraseData";
 
 type UseTimeLossPhraseMotionParams = {
   containerRef: RefObject<HTMLDivElement | null>;
@@ -196,7 +196,6 @@ const createRenderBuffer = (count: number): PhraseRender[] => {
   }));
 };
 
-// Drives the phrase cloud's floating motion, pointer torque, and collision separation in a single animation loop.
 export const useTimeLossPhraseMotion = ({
   containerRef,
   interactive,
