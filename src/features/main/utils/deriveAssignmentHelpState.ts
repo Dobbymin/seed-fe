@@ -111,24 +111,12 @@ const lerp = (start: number, end: number, progress: number) => {
   return start + (end - start) * progress;
 };
 
-const invLerp = (start: number, end: number, value: number) => {
+const rangeProgress = (value: number, [start, end]: ProgressRange) => {
   if (start === end) {
     return 0;
   }
 
-  return (value - start) / (end - start);
-};
-
-const rangeProgress = (value: number, [start, end]: ProgressRange) => {
-  return clamp01(invLerp(start, end, value));
-};
-
-const stepAt = (value: number, threshold: number) => {
-  return value >= threshold ? 1 : 0;
-};
-
-const widthByScale = (scale: number) => {
-  return `min(900px, calc(${scale.toFixed(4)} * (100% - 80px)))`;
+  return clamp01((value - start) / (end - start));
 };
 
 const resolveChatStage = (chatProgress: number) => {
@@ -189,7 +177,10 @@ export const deriveAssignmentHelpState = (
       ? 1
       : clamp01(introComposerRevealProgress);
 
-    composerWidth = widthByScale(Math.max(composerRevealProgress, 0.04));
+    composerWidth = `min(900px, calc(${Math.max(
+      composerRevealProgress,
+      0.04,
+    ).toFixed(4)} * (100% - 80px)))`;
     composerHeight = `${lerp(4, 130, composerRevealProgress).toFixed(2)}px`;
     composerRadius = `${lerp(9999, 32, composerRevealProgress).toFixed(2)}px`;
     composerPadding = `${lerp(0, 24, composerRevealProgress).toFixed(2)}px`;
@@ -227,7 +218,7 @@ export const deriveAssignmentHelpState = (
   const chatMessages = chatStage.messageIds.map((id) => {
     return ASSIGNMENT_HELP_MESSAGE_BANK[id];
   });
-  const chatVisibilityBase = stepAt(chatProgress, CHAT_PROGRESS.userOnly[0]);
+  const chatVisibilityBase = chatProgress >= CHAT_PROGRESS.userOnly[0] ? 1 : 0;
   const chatOpacity =
     chatVisibilityBase *
     chatAppearProgress *
