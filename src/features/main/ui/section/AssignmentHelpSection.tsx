@@ -3,14 +3,9 @@ import { useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 
 import { AssignmentHelpPromptScene } from "../../components/features/assignmentHelp/promptScene/AssignmentHelpPromptScene";
-import { useAssignmentHelpSectionState } from "../../components/features/assignmentHelp/sectionState/useAssignmentHelpSectionState";
+import { ASSIGNMENT_HELP_SECTION_SCROLL_VH } from "../../components/features/assignmentHelp/scrollFlow/constants/sectionScrollConfig";
+import { useAssignmentHelpSectionState } from "../../components/features/assignmentHelp/scrollFlow/hooks/useAssignmentHelpSectionState";
 import { TimeLossScene } from "../../components/features/assignmentHelp/timeLossScene/TimeLossScene";
-
-const ASSIGNMENT_HELP_SECTION_VH = {
-  intro: 140,
-  chat: 520,
-  timeLoss: 130,
-} as const;
 
 type AssignmentHelpSectionProps = {
   onSolutionReadyChange?: (isReady: boolean) => void;
@@ -50,10 +45,16 @@ export const AssignmentHelpSection = ({
         </Box>
 
         <Box>
-          <Box h={`${ASSIGNMENT_HELP_SECTION_VH.intro}vh`} ref={introRef} />
-          <Box h={`${ASSIGNMENT_HELP_SECTION_VH.chat}vh`} ref={chatRef} />
           <Box
-            h={`${ASSIGNMENT_HELP_SECTION_VH.timeLoss}vh`}
+            h={`${ASSIGNMENT_HELP_SECTION_SCROLL_VH.intro}vh`}
+            ref={introRef}
+          />
+          <Box
+            h={`${ASSIGNMENT_HELP_SECTION_SCROLL_VH.chat}vh`}
+            ref={chatRef}
+          />
+          <Box
+            h={`${ASSIGNMENT_HELP_SECTION_SCROLL_VH.timeLoss}vh`}
             ref={timeLossSceneRef}
           />
         </Box>

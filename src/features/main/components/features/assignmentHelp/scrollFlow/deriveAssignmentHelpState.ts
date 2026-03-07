@@ -3,133 +3,17 @@ import {
   ASSIGNMENT_HELP_MESSAGE_BANK,
 } from "../../../../constants/assignmentHelpStoryData";
 import type {
-  AssignmentHelpChatStageId,
-  AssignmentHelpMessageKey,
   AssignmentHelpSectionProgressMap,
   AssignmentHelpState,
 } from "../../../../types/assignmentHelp";
 
-type ProgressRange = readonly [number, number];
-
-type AssignmentHelpChatStage = {
-  id: AssignmentHelpChatStageId;
-  messageIds: readonly AssignmentHelpMessageKey[];
-  startAt: number;
-  subtitle: string;
-  subtitleKey: string;
-};
-
-const INTRO_PROGRESS = {
-  composerReveal: [0.25, 0.5] as ProgressRange,
-  composerRevealEnd: 0.5,
-  dotHoldEnd: 0.25,
-  promptFill: [0.75, 1] as ProgressRange,
-} as const;
-
-const CHAT_PROGRESS = {
-  dock: [0, 0.0238] as ProgressRange,
-  promptExit: [0.0238, 0.1429] as ProgressRange,
-  userOnly: [0.1429, 0.2619] as ProgressRange,
-} as const;
-
-const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
-  {
-    id: "empty",
-    messageIds: [],
-    startAt: 0,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.common,
-    subtitleKey: "empty",
-  },
-  {
-    id: "userOnly",
-    messageIds: ["userHelp"],
-    startAt: 0.1429,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.common,
-    subtitleKey: "userOnly",
-  },
-  {
-    id: "helpAndMethod",
-    messageIds: ["userHelp", "aiMethod"],
-    startAt: 0.2619,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.methodology,
-    subtitleKey: "helpAndMethod",
-  },
-  {
-    id: "needInfo",
-    messageIds: ["userHelp", "aiNeedInfo"],
-    startAt: 0.381,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.tooManyInfo,
-    subtitleKey: "needInfo",
-  },
-  {
-    id: "userCrown",
-    messageIds: ["userCrown"],
-    startAt: 0.5,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
-    subtitleKey: "userCrown",
-  },
-  {
-    id: "hallucination",
-    messageIds: ["userCrown", "aiHallucination"],
-    startAt: 0.619,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
-    subtitleKey: "hallucination",
-  },
-  {
-    id: "correction",
-    messageIds: ["userCrown", "aiHallucination", "userCorrection"],
-    startAt: 0.7381,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
-    subtitleKey: "correction",
-  },
-  {
-    id: "gaslight",
-    messageIds: [
-      "userCrown",
-      "aiHallucination",
-      "userCorrection",
-      "aiGaslight",
-    ],
-    startAt: 0.8571,
-    subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
-    subtitleKey: "gaslight",
-  },
-] as const;
-
-const TIME_LOSS_PROGRESS = {
-  backdropReveal: [0.3333, 0.6667] as ProgressRange,
-  backdropRevealEnd: 0.6667,
-  composerSettle: [0, 0.3333] as ProgressRange,
-  holdEnd: 1,
-} as const;
-
-const clamp01 = (value: number) => {
-  return Math.min(1, Math.max(0, value));
-};
-
-const lerp = (start: number, end: number, progress: number) => {
-  return start + (end - start) * progress;
-};
-
-const rangeProgress = (value: number, [start, end]: ProgressRange) => {
-  if (start === end) {
-    return 0;
-  }
-
-  return clamp01((value - start) / (end - start));
-};
-
-const resolveChatStage = (chatProgress: number) => {
-  let activeStage = ASSIGNMENT_HELP_CHAT_STAGES[0];
-
-  for (const candidate of ASSIGNMENT_HELP_CHAT_STAGES.slice(1)) {
-    if (chatProgress >= candidate.startAt) {
-      activeStage = candidate;
-    }
-  }
-
-  return activeStage;
-};
+import {
+  ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES,
+  ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES,
+  ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES,
+} from "./constants/transitionRanges";
+import { clamp01, lerp, rangeProgress } from "./utils/progressMath";
+import { resolveChatStage } from "./utils/resolveChatStage";
 
 export const deriveAssignmentHelpState = (
   sectionProgresses: AssignmentHelpSectionProgressMap,
@@ -143,27 +27,33 @@ export const deriveAssignmentHelpState = (
 
   const introComposerRevealProgress = hasChatStarted
     ? 1
-    : rangeProgress(introProgress, INTRO_PROGRESS.composerReveal);
+    : rangeProgress(
+        introProgress,
+        ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES.composerReveal,
+      );
   const introPromptFillProgress = rangeProgress(
     introProgress,
-    INTRO_PROGRESS.promptFill,
+    ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES.promptFill,
   );
-  const chatDockProgress = rangeProgress(chatProgress, CHAT_PROGRESS.dock);
+  const chatDockProgress = rangeProgress(
+    chatProgress,
+    ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES.dock,
+  );
   const chatPromptExitProgress = rangeProgress(
     chatProgress,
-    CHAT_PROGRESS.promptExit,
+    ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES.promptExit,
   );
   const chatAppearProgress = rangeProgress(
     chatProgress,
-    CHAT_PROGRESS.userOnly,
+    ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES.userOnly,
   );
   const timeLossComposerSettleProgress = rangeProgress(
     timeLossProgress,
-    TIME_LOSS_PROGRESS.composerSettle,
+    ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES.composerSettle,
   );
   const timeLossBackdropRevealProgress = rangeProgress(
     timeLossProgress,
-    TIME_LOSS_PROGRESS.backdropReveal,
+    ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES.backdropReveal,
   );
 
   let composerWidth = "4px";
@@ -172,7 +62,10 @@ export const deriveAssignmentHelpState = (
   let composerPadding = "0px";
   let composerContentOpacity = 0;
 
-  if (introProgress >= INTRO_PROGRESS.dotHoldEnd || hasChatStarted) {
+  if (
+    introProgress >= ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES.dotHoldEnd ||
+    hasChatStarted
+  ) {
     const composerRevealProgress = hasChatStarted
       ? 1
       : clamp01(introComposerRevealProgress);
@@ -185,7 +78,8 @@ export const deriveAssignmentHelpState = (
     composerRadius = `${lerp(9999, 32, composerRevealProgress).toFixed(2)}px`;
     composerPadding = `${lerp(0, 24, composerRevealProgress).toFixed(2)}px`;
     composerContentOpacity =
-      hasChatStarted || introProgress >= INTRO_PROGRESS.composerRevealEnd
+      hasChatStarted ||
+      introProgress >= ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES.composerRevealEnd
         ? 1
         : 0;
   }
@@ -218,7 +112,8 @@ export const deriveAssignmentHelpState = (
   const chatMessages = chatStage.messageIds.map((id) => {
     return ASSIGNMENT_HELP_MESSAGE_BANK[id];
   });
-  const chatVisibilityBase = chatProgress >= CHAT_PROGRESS.userOnly[0] ? 1 : 0;
+  const chatVisibilityBase =
+    chatProgress >= ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES.userOnly[0] ? 1 : 0;
   const chatOpacity =
     chatVisibilityBase *
     chatAppearProgress *
@@ -255,11 +150,15 @@ export const deriveAssignmentHelpState = (
     },
     flags: {
       isChatVisible: chatOpacity > 0.01,
-      isSolutionReady: timeLossProgress >= TIME_LOSS_PROGRESS.holdEnd - 0.001,
+      isSolutionReady:
+        timeLossProgress >=
+        ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES.holdEnd - 0.001,
     },
     timeLoss: {
       backdropOpacity: timeLossBackdropRevealProgress,
-      interactive: timeLossProgress >= TIME_LOSS_PROGRESS.backdropRevealEnd,
+      interactive:
+        timeLossProgress >=
+        ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES.backdropRevealEnd,
       phraseOpacity: timeLossBackdropRevealProgress,
       titleOpacity: timeLossComposerSettleProgress,
     },
