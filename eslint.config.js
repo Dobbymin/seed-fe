@@ -1,5 +1,4 @@
 import js from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -17,8 +16,10 @@ export default defineConfig([
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
       eslintPluginPrettier,
-      eslintConfigPrettier,
     ],
+    rules: {
+      "prettier/prettier": "warn",
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
