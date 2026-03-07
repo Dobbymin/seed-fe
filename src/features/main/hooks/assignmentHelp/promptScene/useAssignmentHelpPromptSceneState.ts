@@ -24,6 +24,7 @@ type AssignmentHelpPromptSceneState = {
 
 type AnimatedMessageIdsState = readonly AssignmentHelpMessageKey[];
 
+// 이번 단계에서 새로 나온 메시지 id만 따로 찾음
 const useAnimatedMessageIds = ({
   chatStageKey,
   messageIds,
@@ -61,6 +62,7 @@ const useAnimatedMessageIds = ({
   }, [animatedMessageIds, messageIds, messages]);
 };
 
+// 채팅 단계가 바뀌면 대화창을 맨 아래로 내림
 const useConversationScroll = ({
   conversationRef,
   stageKey,
@@ -89,6 +91,7 @@ const useConversationScroll = ({
   }, [conversationRef, stageKey]);
 };
 
+// 프롬프트 장면에 필요한 내부 상태값을 만듦
 export const useAssignmentHelpPromptSceneState = ({
   chat,
 }: UseAssignmentHelpPromptSceneStateParams): AssignmentHelpPromptSceneState => {
