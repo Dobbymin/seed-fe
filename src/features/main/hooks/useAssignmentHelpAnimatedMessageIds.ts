@@ -1,23 +1,26 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 
-import type { MessageKey, PromptMessage } from "../constants/promptStoryData";
+import type {
+  AssignmentHelpChatMessage,
+  AssignmentHelpMessageKey,
+} from "../types/assignmentHelp";
 
-type UseAnimatedChatMessageIdsParams = {
+type UseAssignmentHelpAnimatedMessageIdsParams = {
   chatStageKey: string;
-  messageIds: readonly MessageKey[];
-  messages: PromptMessage[];
+  messageIds: readonly AssignmentHelpMessageKey[];
+  messages: AssignmentHelpChatMessage[];
 };
 
 // Marks only the newly introduced chat messages so existing bubbles do not re-animate on every stage swap.
-// 새로 등장한 메시지만 표시해서 기존 말풍선이 단계 전환마다 다시 애니메이션되지 않게 함
-export const useAnimatedChatMessageIds = ({
+// ?덈줈 ?깆옣??硫붿떆吏留??쒖떆?댁꽌 湲곗〈 留먰뭾?좎씠 ?④퀎 ?꾪솚留덈떎 ?ㅼ떆 ?좊땲硫붿씠?섎릺吏 ?딄쾶 ??
+export const useAssignmentHelpAnimatedMessageIds = ({
   chatStageKey,
   messageIds,
   messages,
-}: UseAnimatedChatMessageIdsParams) => {
-  const previousMessageIdsRef = useRef<readonly MessageKey[]>([]);
+}: UseAssignmentHelpAnimatedMessageIdsParams) => {
+  const previousMessageIdsRef = useRef<readonly AssignmentHelpMessageKey[]>([]);
   const [animatedMessageIds, setAnimatedMessageIds] = useState<
-    readonly MessageKey[]
+    readonly AssignmentHelpMessageKey[]
   >([]);
 
   useLayoutEffect(() => {

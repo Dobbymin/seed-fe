@@ -2,23 +2,23 @@ import type { RefObject } from "react";
 
 import { Box, VStack } from "@chakra-ui/react";
 
-import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
+import type { AssignmentHelpState } from "../../../../types/assignmentHelp";
 
-import { PromptMessage } from "./PromptMessage";
+import { AssignmentHelpMessage } from "./AssignmentHelpMessage";
 
-type HelpPromptConversationProps = {
+type AssignmentHelpConversationProps = {
   animatedMessageIds: ReadonlySet<string>;
   chat: AssignmentHelpState["chat"];
   conversationRef: RefObject<HTMLDivElement | null>;
   isChatVisible: boolean;
 };
 
-export const HelpPromptConversation = ({
+export const AssignmentHelpConversation = ({
   animatedMessageIds,
   chat,
   conversationRef,
   isChatVisible,
-}: HelpPromptConversationProps) => {
+}: AssignmentHelpConversationProps) => {
   return (
     <Box
       inset={0}
@@ -35,7 +35,7 @@ export const HelpPromptConversation = ({
           <VStack align="stretch" gap={10} pb={2}>
             {chat.messages.map((message) => {
               return (
-                <PromptMessage
+                <AssignmentHelpMessage
                   key={message.id}
                   message={message}
                   shouldAnimateEntry={animatedMessageIds.has(message.id)}

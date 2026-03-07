@@ -2,9 +2,9 @@ import { useEffect } from "react";
 
 import { Box } from "@chakra-ui/react";
 
-import { HelpPromptSection } from "../../components/features/assignmentHelp/HelpPromptSection";
-import { TimeLossSection } from "../../components/features/assignmentHelp/TimeLossSection";
-import { STORY_SECTION_VH } from "../../constants/storySections";
+import { AssignmentHelpPromptScene } from "../../components/features/assignmentHelp/promptScene/AssignmentHelpPromptScene";
+import { TimeLossScene } from "../../components/features/assignmentHelp/timeLossScene/TimeLossScene";
+import { ASSIGNMENT_HELP_STORY_SECTION_VH } from "../../constants/assignmentHelpStoryTimeline";
 import { useAssignmentHelpSectionState } from "../../hooks";
 
 type AssignmentHelpSectionProps = {
@@ -15,13 +15,13 @@ export const AssignmentHelpSection = ({
   onSolutionReadyChange,
 }: AssignmentHelpSectionProps) => {
   const {
+    assignmentHelpState,
     animatedMessageIds,
     chatRef,
     conversationRef,
     introRef,
-    isSolutionActivated: isSolutionReady,
-    nextRef,
-    storyState,
+    isSolutionReady,
+    timeLossSceneRef,
   } = useAssignmentHelpSectionState();
 
   useEffect(() => {
@@ -38,29 +38,27 @@ export const AssignmentHelpSection = ({
           top={0}
         >
           <Box h="full" position="relative" w="full">
-            <Box
-              inset={0}
-              opacity={storyState.problemDefinitionLayer.opacity}
-              position="absolute"
-              transform={`translateY(${storyState.problemDefinitionLayer.translateY})`}
-              transition="opacity 220ms ease, transform 340ms ease"
-              w="full"
-              zIndex={2}
-            >
-              <HelpPromptSection
+            <Box inset={0} position="absolute" w="full" zIndex={2}>
+              <AssignmentHelpPromptScene
+                assignmentHelpState={assignmentHelpState}
                 animatedMessageIds={animatedMessageIds}
                 conversationRef={conversationRef}
-                storyState={storyState}
               />
-              <TimeLossSection storyState={storyState} />
+              <TimeLossScene assignmentHelpState={assignmentHelpState} />
             </Box>
           </Box>
         </Box>
 
         <Box>
-          <Box h={`${STORY_SECTION_VH.intro}vh`} ref={introRef} />
-          <Box h={`${STORY_SECTION_VH.chat}vh`} ref={chatRef} />
-          <Box h={`${STORY_SECTION_VH.next}vh`} ref={nextRef} />
+          <Box
+            h={`${ASSIGNMENT_HELP_STORY_SECTION_VH.intro}vh`}
+            ref={introRef}
+          />
+          <Box h={`${ASSIGNMENT_HELP_STORY_SECTION_VH.chat}vh`} ref={chatRef} />
+          <Box
+            h={`${ASSIGNMENT_HELP_STORY_SECTION_VH.timeLoss}vh`}
+            ref={timeLossSceneRef}
+          />
         </Box>
       </Box>
     </Box>

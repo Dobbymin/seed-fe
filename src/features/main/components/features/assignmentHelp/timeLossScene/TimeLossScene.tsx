@@ -1,21 +1,21 @@
 import { Box, Text } from "@chakra-ui/react";
 
-import { COPY } from "../../../constants/promptStoryData";
-import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
+import { ASSIGNMENT_HELP_COPY } from "../../../../constants/assignmentHelpStoryData";
+import type { AssignmentHelpState } from "../../../../types/assignmentHelp";
 
-import { ProblemDefinitionNextPhraseCloud } from "./ProblemDefinitionNextPhraseCloud";
+import { TimeLossPhraseCloud } from "./TimeLossPhraseCloud";
 
-type TimeLossSectionProps = {
-  storyState: AssignmentHelpState;
+type TimeLossSceneProps = {
+  assignmentHelpState: AssignmentHelpState;
 };
 
-export const TimeLossSection = ({ storyState }: TimeLossSectionProps) => {
+export const TimeLossScene = ({ assignmentHelpState }: TimeLossSceneProps) => {
   return (
     <>
       <Box inset={0} pointerEvents="none" position="absolute" zIndex={5}>
         <Box
           left="50%"
-          opacity={storyState.next.titleOpacity}
+          opacity={assignmentHelpState.timeLoss.titleOpacity}
           position="absolute"
           top="50%"
           transform="translate(-50%, -50%)"
@@ -32,12 +32,12 @@ export const TimeLossSection = ({ storyState }: TimeLossSectionProps) => {
             textAlign="center"
             whiteSpace="nowrap"
           >
-            {COPY.problemDefinitionNextTitle.prefix}
+            {ASSIGNMENT_HELP_COPY.timeLossTitle.prefix}
             <Box as="span" color="#75AC36">
-              {COPY.problemDefinitionNextTitle.highlight}
+              {ASSIGNMENT_HELP_COPY.timeLossTitle.highlight}
             </Box>
             <Box as="span" color="#191F28">
-              {COPY.problemDefinitionNextTitle.suffix}
+              {ASSIGNMENT_HELP_COPY.timeLossTitle.suffix}
             </Box>
             ?
           </Text>
@@ -46,14 +46,16 @@ export const TimeLossSection = ({ storyState }: TimeLossSectionProps) => {
 
       <Box
         inset={0}
-        pointerEvents={storyState.next.interactive ? "auto" : "none"}
+        pointerEvents={
+          assignmentHelpState.timeLoss.interactive ? "auto" : "none"
+        }
         position="absolute"
         zIndex={3}
       >
         <Box
           h="full"
           left={0}
-          opacity={storyState.next.backdropOpacity}
+          opacity={assignmentHelpState.timeLoss.backdropOpacity}
           overflow="hidden"
           position="absolute"
           top={0}
@@ -63,12 +65,12 @@ export const TimeLossSection = ({ storyState }: TimeLossSectionProps) => {
         >
           <Box
             h="full"
-            opacity={storyState.next.phraseOpacity}
+            opacity={assignmentHelpState.timeLoss.phraseOpacity}
             transition="opacity 220ms ease"
             w="full"
           >
-            <ProblemDefinitionNextPhraseCloud
-              interactive={storyState.next.interactive}
+            <TimeLossPhraseCloud
+              interactive={assignmentHelpState.timeLoss.interactive}
             />
           </Box>
         </Box>

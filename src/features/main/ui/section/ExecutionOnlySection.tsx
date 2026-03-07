@@ -4,7 +4,10 @@ import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 
 import { AnalysisStage } from "../../components/features/executionOnly/analysisStage/ui/AnalysisStage";
 import { RoadmapStage } from "../../components/features/executionOnly/roadmapStage/ui/RoadmapStage";
-import { COPY, SOLUTION_ASSIGNMENT_CARDS } from "../../constants";
+import {
+  EXECUTION_ONLY_COPY,
+  SOLUTION_ASSIGNMENT_CARDS,
+} from "../../constants";
 import { useObservedHeight, useSolutionTimelineProgress } from "../../hooks";
 import type {
   AssignmentTypeId,
@@ -96,15 +99,15 @@ export const ExecutionOnlySection = ({
               textAlign="center"
               whiteSpace="nowrap"
             >
-              {COPY.solutionTitle.prefix}
+              {EXECUTION_ONLY_COPY.solutionTitle.prefix}
               <Box as="span" color="#75AC36">
-                {COPY.solutionTitle.logo}
+                {EXECUTION_ONLY_COPY.solutionTitle.logo}
               </Box>
-              {COPY.solutionTitle.middle}
+              {EXECUTION_ONLY_COPY.solutionTitle.middle}
               <Box as="span" color="#75AC36">
-                {COPY.solutionTitle.highlight}
+                {EXECUTION_ONLY_COPY.solutionTitle.highlight}
               </Box>
-              {COPY.solutionTitle.suffix}
+              {EXECUTION_ONLY_COPY.solutionTitle.suffix}
             </Text>
 
             <AnalysisStage

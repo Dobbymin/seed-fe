@@ -1,20 +1,20 @@
 import { type RefObject, useEffect, useState } from "react";
 
 import {
-  STORY_SECTION_ORDER,
-  type StorySectionId,
-  type StorySectionProgressMap,
-} from "../constants/storySections";
+  ASSIGNMENT_HELP_STORY_SECTION_ORDER,
+  type AssignmentHelpStorySectionId,
+  type AssignmentHelpStorySectionProgressMap,
+} from "../constants/assignmentHelpStoryTimeline";
 
 const clamp01 = (value: number) => {
   return Math.min(1, Math.max(0, value));
 };
 
-const createZeroProgressMap = (): StorySectionProgressMap => {
+const createZeroProgressMap = (): AssignmentHelpStorySectionProgressMap => {
   return {
     intro: 0,
     chat: 0,
-    next: 0,
+    timeLoss: 0,
   };
 };
 
@@ -34,35 +34,39 @@ const calculateSectionProgress = (section: HTMLElement | null) => {
 };
 
 const isProgressMapEqual = (
-  left: StorySectionProgressMap,
-  right: StorySectionProgressMap,
+  left: AssignmentHelpStorySectionProgressMap,
+  right: AssignmentHelpStorySectionProgressMap,
 ) => {
-  return STORY_SECTION_ORDER.every((id) => {
-    return Math.abs(left[id] - right[id]) < 0.0001;
+  return ASSIGNMENT_HELP_STORY_SECTION_ORDER.every((sectionId) => {
+    return Math.abs(left[sectionId] - right[sectionId]) < 0.0001;
   });
 };
 
-export type StorySectionRefs = Record<
-  StorySectionId,
+export type AssignmentHelpSectionRefs = Record<
+  AssignmentHelpStorySectionId,
   RefObject<HTMLElement | null>
 >;
 
-export const useSectionProgresses = (sectionRefs: StorySectionRefs) => {
-  const [progresses, setProgresses] = useState<StorySectionProgressMap>(
-    createZeroProgressMap,
-  );
+export const useAssignmentHelpSectionProgresses = (
+  sectionRefs: AssignmentHelpSectionRefs,
+) => {
+  const [progresses, setProgresses] =
+    useState<AssignmentHelpStorySectionProgressMap>(createZeroProgressMap);
 
   useEffect(() => {
     let frameId: number | null = null;
 
     const calculate = () => {
-      const nextProgress = STORY_SECTION_ORDER.reduce<StorySectionProgressMap>(
-        (acc, id) => {
-          acc[id] = calculateSectionProgress(sectionRefs[id].current);
-          return acc;
-        },
-        createZeroProgressMap(),
-      );
+      const nextProgress =
+        ASSIGNMENT_HELP_STORY_SECTION_ORDER.reduce<AssignmentHelpStorySectionProgressMap>(
+          (acc, sectionId) => {
+            acc[sectionId] = calculateSectionProgress(
+              sectionRefs[sectionId].current,
+            );
+            return acc;
+          },
+          createZeroProgressMap(),
+        );
 
       setProgresses((current) => {
         if (isProgressMapEqual(current, nextProgress)) {

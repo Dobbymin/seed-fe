@@ -1,4 +1,5 @@
-export * from "./deriveAssignmentHelpState";
+export { deriveAssignmentHelpState } from "./deriveAssignmentHelpState";
+export { ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION } from "./assignmentHelpStageSwap";
 export {
   FALLBACK_ANALYSIS_CONTENT_HEIGHT,
   FALLBACK_ROADMAP_CONTENT_HEIGHT,
@@ -17,4 +18,3 @@ export {
   type SolutionTimelineState,
   windowedProgress,
 } from "./solutionTimeline";
-export * from "./storyStageSwap";

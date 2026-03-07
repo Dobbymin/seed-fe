@@ -1,7 +1,7 @@
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 
-import { COPY } from "../../../constants/promptStoryData";
-import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
+import { ASSIGNMENT_HELP_COPY } from "../../../../constants/assignmentHelpStoryData";
+import type { AssignmentHelpState } from "../../../../types/assignmentHelp";
 
 const sendIconPath =
   "M20.9998 3L10.9998 13M20.9998 3L14.4998 21L10.9998 13M20.9998 3L2.99976 9.5L10.9998 13";
@@ -21,11 +21,13 @@ const SendIcon = () => {
   );
 };
 
-type HelpPromptComposerProps = {
+type AssignmentHelpComposerProps = {
   composer: AssignmentHelpState["composer"];
 };
 
-export const HelpPromptComposer = ({ composer }: HelpPromptComposerProps) => {
+export const AssignmentHelpComposer = ({
+  composer,
+}: AssignmentHelpComposerProps) => {
   return (
     <Box
       left="50%"
@@ -68,7 +70,7 @@ export const HelpPromptComposer = ({ composer }: HelpPromptComposerProps) => {
                 transition="opacity 220ms ease"
                 whiteSpace="nowrap"
               >
-                {COPY.placeholder}
+                {ASSIGNMENT_HELP_COPY.placeholder}
               </Text>
               <Text
                 color="#191F28"

@@ -1,18 +1,22 @@
-﻿export type StorySectionId = "intro" | "chat" | "next";
+export type AssignmentHelpStorySectionId = "intro" | "chat" | "timeLoss";
 
-export type StorySectionProgressMap = Record<StorySectionId, number>;
+export type AssignmentHelpStorySectionProgressMap = Record<
+  AssignmentHelpStorySectionId,
+  number
+>;
 
 type ScrollTerm = "short" | "long";
-type StorySceneKind = "hold" | "transition" | "chatStage";
+type AssignmentHelpStorySceneKind = "hold" | "transition" | "chatStage";
 
-export const STORY_SCROLL_TERM_VH = {
+export const ASSIGNMENT_HELP_STORY_SCROLL_TERM_VH = {
   short: 50,
   long: 10,
 } as const;
 
-export const STORY_SECTION_ORDER: StorySectionId[] = ["intro", "chat", "next"];
+export const ASSIGNMENT_HELP_STORY_SECTION_ORDER: AssignmentHelpStorySectionId[] =
+  ["intro", "chat", "timeLoss"];
 
-export const STORY_SCENE_SEQUENCE = [
+export const ASSIGNMENT_HELP_STORY_SCENE_SEQUENCE = [
   {
     id: "introDotHold",
     kind: "hold",
@@ -98,34 +102,35 @@ export const STORY_SCENE_SEQUENCE = [
     term: "long",
   },
   {
-    id: "nextComposerSettle",
+    id: "timeLossComposerSettle",
     kind: "transition",
-    section: "next",
+    section: "timeLoss",
     term: "long",
   },
   {
-    id: "nextBackdropReveal",
+    id: "timeLossBackdropReveal",
     kind: "transition",
-    section: "next",
+    section: "timeLoss",
     term: "long",
   },
   {
-    id: "nextHold",
+    id: "timeLossHold",
     kind: "hold",
-    section: "next",
+    section: "timeLoss",
     term: "long",
   },
 ] as const satisfies readonly {
   id: string;
-  kind: StorySceneKind;
-  section: StorySectionId;
+  kind: AssignmentHelpStorySceneKind;
+  section: AssignmentHelpStorySectionId;
   term: ScrollTerm;
 }[];
 
-export type StoryScene = (typeof STORY_SCENE_SEQUENCE)[number];
-export type StorySceneId = StoryScene["id"];
+export type AssignmentHelpStoryScene =
+  (typeof ASSIGNMENT_HELP_STORY_SCENE_SEQUENCE)[number];
+export type AssignmentHelpStorySceneId = AssignmentHelpStoryScene["id"];
 
-export type StorySceneProgress = StoryScene & {
+export type AssignmentHelpStorySceneProgress = AssignmentHelpStoryScene & {
   end: number;
   start: number;
 };
@@ -136,48 +141,53 @@ const roundScrollValue = (value: number) => {
 
 const createZeroSectionMap = <Value>(
   value: Value,
-): Record<StorySectionId, Value> => {
+): Record<AssignmentHelpStorySectionId, Value> => {
   return {
     intro: value,
     chat: value,
-    next: value,
+    timeLoss: value,
   };
 };
 
 const resolveTermVh = (term: ScrollTerm) => {
-  return STORY_SCROLL_TERM_VH[term];
+  return ASSIGNMENT_HELP_STORY_SCROLL_TERM_VH[term];
 };
 
 const createProgressSectionHeight = (travelVh: number) => {
   return roundScrollValue(100 + travelVh);
 };
 
-const STORY_SECTION_TRAVEL_VH = STORY_SCENE_SEQUENCE.reduce<
-  Record<StorySectionId, number>
->((travelBySection, scene) => {
-  travelBySection[scene.section] += resolveTermVh(scene.term);
-  return travelBySection;
+const ASSIGNMENT_HELP_STORY_SECTION_TRAVEL_VH =
+  ASSIGNMENT_HELP_STORY_SCENE_SEQUENCE.reduce<
+    Record<AssignmentHelpStorySectionId, number>
+  >((travelBySection, scene) => {
+    travelBySection[scene.section] += resolveTermVh(scene.term);
+    return travelBySection;
+  }, createZeroSectionMap(0));
+
+export const ASSIGNMENT_HELP_STORY_SECTION_VH: Record<
+  AssignmentHelpStorySectionId,
+  number
+> = ASSIGNMENT_HELP_STORY_SECTION_ORDER.reduce<
+  Record<AssignmentHelpStorySectionId, number>
+>((sectionHeights, sectionId) => {
+  sectionHeights[sectionId] = createProgressSectionHeight(
+    ASSIGNMENT_HELP_STORY_SECTION_TRAVEL_VH[sectionId],
+  );
+  return sectionHeights;
 }, createZeroSectionMap(0));
 
-export const STORY_SECTION_VH: Record<StorySectionId, number> =
-  STORY_SECTION_ORDER.reduce<Record<StorySectionId, number>>(
-    (sectionHeights, sectionId) => {
-      sectionHeights[sectionId] = createProgressSectionHeight(
-        STORY_SECTION_TRAVEL_VH[sectionId],
-      );
-      return sectionHeights;
-    },
-    createZeroSectionMap(0),
-  );
-
-export const STORY_SCENE_PROGRESS = (() => {
+export const ASSIGNMENT_HELP_STORY_SCENE_PROGRESS = (() => {
   const sceneCursorBySection = createZeroSectionMap(0);
 
-  return STORY_SCENE_SEQUENCE.reduce<Record<StorySceneId, StorySceneProgress>>(
+  return ASSIGNMENT_HELP_STORY_SCENE_SEQUENCE.reduce<
+    Record<AssignmentHelpStorySceneId, AssignmentHelpStorySceneProgress>
+  >(
     (progressLookup, scene) => {
       const startVh = sceneCursorBySection[scene.section];
       const endVh = startVh + resolveTermVh(scene.term);
-      const sectionTravelVh = STORY_SECTION_TRAVEL_VH[scene.section];
+      const sectionTravelVh =
+        ASSIGNMENT_HELP_STORY_SECTION_TRAVEL_VH[scene.section];
 
       sceneCursorBySection[scene.section] = endVh;
       progressLookup[scene.id] = {
@@ -188,6 +198,6 @@ export const STORY_SCENE_PROGRESS = (() => {
 
       return progressLookup;
     },
-    {} as Record<StorySceneId, StorySceneProgress>,
+    {} as Record<AssignmentHelpStorySceneId, AssignmentHelpStorySceneProgress>,
   );
 })();

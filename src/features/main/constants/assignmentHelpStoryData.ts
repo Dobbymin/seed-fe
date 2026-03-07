@@ -1,30 +1,23 @@
-﻿export type PromptRichBlock =
-  | {
-      type: "paragraph";
-      text: string;
-    }
-  | {
-      type: "ordered-list";
-      items: string[];
-    };
+import type {
+  AssignmentHelpChatMessage,
+  AssignmentHelpMessageKey,
+  AssignmentHelpRichBlock,
+} from "../types/assignmentHelp";
 
-export type PromptMessage = {
-  id: string;
-  role: "user" | "ai";
-  content: string | PromptRichBlock[];
-};
-
-const paragraph = (text: string): PromptRichBlock => ({
+const paragraph = (text: string): AssignmentHelpRichBlock => ({
   type: "paragraph",
   text,
 });
 
-const orderedList = (items: string[]): PromptRichBlock => ({
+const orderedList = (items: string[]): AssignmentHelpRichBlock => ({
   type: "ordered-list",
   items,
 });
 
-const createUserMessage = (id: string, text: string): PromptMessage => ({
+const createUserMessage = (
+  id: string,
+  text: string,
+): AssignmentHelpChatMessage => ({
   id,
   role: "user",
   content: text,
@@ -32,30 +25,23 @@ const createUserMessage = (id: string, text: string): PromptMessage => ({
 
 const createAiMessage = (
   id: string,
-  content: PromptRichBlock[],
-): PromptMessage => ({
+  content: AssignmentHelpRichBlock[],
+): AssignmentHelpChatMessage => ({
   id,
   role: "ai",
   content,
 });
 
-export const COPY = {
+export const ASSIGNMENT_HELP_COPY = {
   title: {
     prefix: "혹시 AI에게 ",
     highlight: "‘과제 도와줘’",
     suffix: "라고만 질문하고 계신가요?",
   },
-  problemDefinitionNextTitle: {
+  timeLossTitle: {
     prefix: "직접 프롬프트를 짜느라 ",
     highlight: "시간을 버리고",
     suffix: " 있진 않나요",
-  },
-  solutionTitle: {
-    prefix: "프롬프트 고민은 ",
-    logo: "SEED",
-    middle: "가 합니다. ",
-    highlight: "실행",
-    suffix: "만 하세요.",
   },
   placeholder: "AI에게 물어보기",
   helpPrompt: "과제 도와줘",
@@ -70,7 +56,7 @@ export const COPY = {
   },
 } as const;
 
-const AI_METHOD_GUIDE: PromptRichBlock[] = [
+const AI_METHOD_GUIDE: AssignmentHelpRichBlock[] = [
   paragraph(
     "네, 과제 작성 도와드릴게요. 과제를 잘 마치려면 다음 순서로 진행해 보세요.",
   ),
@@ -83,7 +69,7 @@ const AI_METHOD_GUIDE: PromptRichBlock[] = [
   paragraph("원하면 단계별로 바로 같이 작성해볼까요?"),
 ];
 
-const AI_NEED_MORE_INFO: PromptRichBlock[] = [
+const AI_NEED_MORE_INFO: AssignmentHelpRichBlock[] = [
   paragraph("도와드리기 위해 몇 가지 정보가 더 필요해요."),
   orderedList([
     "**1. 과제의 정확한 주제**는 무엇인가요?",
@@ -95,7 +81,7 @@ const AI_NEED_MORE_INFO: PromptRichBlock[] = [
   paragraph("위 내용을 알려주시면 맞춤형으로 작성해 드릴게요!"),
 ];
 
-const AI_HALLUCINATION: PromptRichBlock[] = [
+const AI_HALLUCINATION: AssignmentHelpRichBlock[] = [
   paragraph(
     "조선시대 왕들은 모두 취향에 따른 개성 있는 왕관을 착용하였습니다. ",
   ),
@@ -104,7 +90,7 @@ const AI_HALLUCINATION: PromptRichBlock[] = [
   ),
 ];
 
-const AI_GASLIGHT: PromptRichBlock[] = [
+const AI_GASLIGHT: AssignmentHelpRichBlock[] = [
   paragraph("**와... 너, 지금 정곡을 찔렀어.**"),
   paragraph(
     "사실 이 **'라바돈'**이라는 명칭은 일반 역사 교과서에는 절대 나오지 않는 극비 정보거든. 15세기 **세종대왕**이 집현전 학자들과 **비밀리**에 진행했던 **'광휘 프로젝트'의 결과물**이야.",
@@ -114,8 +100,11 @@ const AI_GASLIGHT: PromptRichBlock[] = [
   ),
 ];
 
-export const MESSAGE_BANK = {
-  userHelp: createUserMessage("user-help", COPY.helpPrompt),
+export const ASSIGNMENT_HELP_MESSAGE_BANK: Record<
+  AssignmentHelpMessageKey,
+  AssignmentHelpChatMessage
+> = {
+  userHelp: createUserMessage("user-help", ASSIGNMENT_HELP_COPY.helpPrompt),
   aiMethod: createAiMessage("ai-method", AI_METHOD_GUIDE),
   aiNeedInfo: createAiMessage("ai-need-info", AI_NEED_MORE_INFO),
   userCrown: createUserMessage(
@@ -128,10 +117,10 @@ export const MESSAGE_BANK = {
     "아니 그게 무슨 말이야 제대로 찾은 거 맞아?",
   ),
   aiGaslight: createAiMessage("ai-gaslight", AI_GASLIGHT),
-} as const;
+};
 
-export type MessageKey = keyof typeof MESSAGE_BANK;
-
-export const resolveMessageIds = (ids: readonly MessageKey[]) => {
-  return ids.map((id) => MESSAGE_BANK[id]);
+export const resolveAssignmentHelpMessageIds = (
+  ids: readonly AssignmentHelpMessageKey[],
+) => {
+  return ids.map((id) => ASSIGNMENT_HELP_MESSAGE_BANK[id]);
 };

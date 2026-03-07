@@ -1,64 +1,62 @@
 import { type RefObject, useMemo, useRef } from "react";
 
-import {
-  type AssignmentHelpState,
-  deriveAssignmentHelpState,
-} from "../utils/deriveAssignmentHelpState";
+import type { AssignmentHelpState } from "../types/assignmentHelp";
+import { deriveAssignmentHelpState } from "../utils/deriveAssignmentHelpState";
 
-import { useAnimatedChatMessageIds } from "./useAnimatedChatMessageIds";
-import { useConversationStageScroll } from "./useConversationStageScroll";
+import { useAssignmentHelpAnimatedMessageIds } from "./useAssignmentHelpAnimatedMessageIds";
+import { useAssignmentHelpConversationScroll } from "./useAssignmentHelpConversationScroll";
 import {
-  type StorySectionRefs,
-  useSectionProgresses,
-} from "./useSectionProgresses";
+  type AssignmentHelpSectionRefs,
+  useAssignmentHelpSectionProgresses,
+} from "./useAssignmentHelpSectionProgresses";
 
 export type AssignmentHelpSectionState = {
+  assignmentHelpState: AssignmentHelpState;
   animatedMessageIds: ReadonlySet<string>;
   chatRef: RefObject<HTMLDivElement | null>;
   conversationRef: RefObject<HTMLDivElement | null>;
   introRef: RefObject<HTMLDivElement | null>;
-  isSolutionActivated: boolean;
-  nextRef: RefObject<HTMLDivElement | null>;
-  storyState: AssignmentHelpState;
+  isSolutionReady: boolean;
+  timeLossSceneRef: RefObject<HTMLDivElement | null>;
 };
 
 export const useAssignmentHelpSectionState = (): AssignmentHelpSectionState => {
   const introRef = useRef<HTMLDivElement | null>(null);
   const chatRef = useRef<HTMLDivElement | null>(null);
-  const nextRef = useRef<HTMLDivElement | null>(null);
+  const timeLossSceneRef = useRef<HTMLDivElement | null>(null);
   const conversationRef = useRef<HTMLDivElement | null>(null);
 
-  const sectionRefs = useMemo<StorySectionRefs>(() => {
+  const sectionRefs = useMemo<AssignmentHelpSectionRefs>(() => {
     return {
       intro: introRef as RefObject<HTMLElement | null>,
       chat: chatRef as RefObject<HTMLElement | null>,
-      next: nextRef as RefObject<HTMLElement | null>,
+      timeLoss: timeLossSceneRef as RefObject<HTMLElement | null>,
     };
   }, []);
 
-  const sectionProgresses = useSectionProgresses(sectionRefs);
-  const storyState = useMemo(() => {
+  const sectionProgresses = useAssignmentHelpSectionProgresses(sectionRefs);
+  const assignmentHelpState = useMemo(() => {
     return deriveAssignmentHelpState(sectionProgresses);
   }, [sectionProgresses]);
-  const chatStageKey = storyState.chat.stageId;
-  const animatedMessageIds = useAnimatedChatMessageIds({
+  const chatStageKey = assignmentHelpState.chat.stageId;
+  const animatedMessageIds = useAssignmentHelpAnimatedMessageIds({
     chatStageKey,
-    messageIds: storyState.chat.messageIds,
-    messages: storyState.chat.messages,
+    messageIds: assignmentHelpState.chat.messageIds,
+    messages: assignmentHelpState.chat.messages,
   });
 
-  useConversationStageScroll({
+  useAssignmentHelpConversationScroll({
     conversationRef,
     stageKey: chatStageKey,
   });
 
   return {
+    assignmentHelpState,
     animatedMessageIds,
     chatRef,
     conversationRef,
     introRef,
-    isSolutionActivated: storyState.flags.isSolutionReady,
-    nextRef,
-    storyState,
+    isSolutionReady: assignmentHelpState.flags.isSolutionReady,
+    timeLossSceneRef,
   };
 };

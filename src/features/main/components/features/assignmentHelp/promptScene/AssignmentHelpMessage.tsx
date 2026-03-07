@@ -1,13 +1,13 @@
 import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 
 import type {
-  PromptMessage as PromptMessageType,
-  PromptRichBlock,
-} from "../../../constants/promptStoryData";
-import { STORY_STAGE_SWAP_ANIMATION } from "../../../utils/storyStageSwap";
+  AssignmentHelpChatMessage,
+  AssignmentHelpRichBlock,
+} from "../../../../types/assignmentHelp";
+import { ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION } from "../../../../utils/assignmentHelpStageSwap";
 
-type PromptMessageProps = {
-  message: PromptMessageType;
+type AssignmentHelpMessageProps = {
+  message: AssignmentHelpChatMessage;
   shouldAnimateEntry: boolean;
 };
 
@@ -32,7 +32,7 @@ const renderMarkedText = (text: string) => {
   });
 };
 
-const renderRichBlocks = (blocks: PromptRichBlock[]) => {
+const renderRichBlocks = (blocks: AssignmentHelpRichBlock[]) => {
   return (
     <VStack align="start" gap={3}>
       {blocks.map((block, blockIndex) => {
@@ -65,12 +65,12 @@ const renderRichBlocks = (blocks: PromptRichBlock[]) => {
   );
 };
 
-export const PromptMessage = ({
+export const AssignmentHelpMessage = ({
   message,
   shouldAnimateEntry,
-}: PromptMessageProps) => {
+}: AssignmentHelpMessageProps) => {
   const entryAnimation = shouldAnimateEntry
-    ? STORY_STAGE_SWAP_ANIMATION
+    ? ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION
     : undefined;
 
   if (message.role === "user") {

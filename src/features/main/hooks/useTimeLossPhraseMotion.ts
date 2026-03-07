@@ -8,12 +8,12 @@ import {
 } from "react";
 
 import {
-  PROBLEM_DEFINITION_NEXT_PHRASES,
-  mapPhraseXToLayout,
-  mapPhraseYToLayout,
-} from "../constants/problemDefinitionNextPhraseData";
+  TIME_LOSS_PHRASES,
+  mapTimeLossPhraseXToLayout,
+  mapTimeLossPhraseYToLayout,
+} from "../constants/timeLossPhraseData";
 
-type UseProblemDefinitionNextPhraseMotionParams = {
+type UseTimeLossPhraseMotionParams = {
   containerRef: RefObject<HTMLDivElement | null>;
   interactive: boolean;
 };
@@ -73,10 +73,10 @@ type MotionFieldConfig = {
   maxOpacity: number;
   maxTorque: number;
   maxVel: number;
-  positionDirectionGainX: number;
-  positionDirectionGainY: number;
   pointerGainX: number;
   pointerGainY: number;
+  positionDirectionGainX: number;
+  positionDirectionGainY: number;
   scaleMax: number;
   scaleMin: number;
   spreadX: number;
@@ -105,10 +105,10 @@ const MOTION_FIELD_CONFIG: MotionFieldConfig = {
   maxOpacity: 1,
   maxTorque: 0.05,
   maxVel: 0.055,
-  positionDirectionGainX: 0.012,
-  positionDirectionGainY: 0.009,
   pointerGainX: 0.00008,
   pointerGainY: 0.00008,
+  positionDirectionGainX: 0.012,
+  positionDirectionGainY: 0.009,
   scaleMax: 1.28,
   scaleMin: 0.84,
   spreadX: 1.2,
@@ -135,9 +135,9 @@ const fract = (value: number) => {
 };
 
 const buildPhraseSeeds = (): PhraseSeed[] => {
-  return PROBLEM_DEFINITION_NEXT_PHRASES.map((phrase, index) => {
-    const baseU = mapPhraseXToLayout(phrase.x) - 0.5;
-    const baseV = mapPhraseYToLayout(phrase.y) - 0.5;
+  return TIME_LOSS_PHRASES.map((phrase, index) => {
+    const baseU = mapTimeLossPhraseXToLayout(phrase.x) - 0.5;
+    const baseV = mapTimeLossPhraseYToLayout(phrase.y) - 0.5;
 
     const jitterX =
       (fract(Math.sin((index + 1) * 12.9898) * 43758.5453) - 0.5) * 0.028;
@@ -197,11 +197,11 @@ const createRenderBuffer = (count: number): PhraseRender[] => {
 };
 
 // Drives the phrase cloud's floating motion, pointer torque, and collision separation in a single animation loop.
-// 문구 클라우드의 부유 움직임, 포인터 반응, 충돌 분리를 하나의 애니메이션 루프로 처리
-export const useProblemDefinitionNextPhraseMotion = ({
+// 臾멸뎄 ?대씪?곕뱶??遺???吏곸엫, ?ъ씤??諛섏쓳, 異⑸룎 遺꾨━瑜??섎굹???좊땲硫붿씠??猷⑦봽濡?泥섎━
+export const useTimeLossPhraseMotion = ({
   containerRef,
   interactive,
-}: UseProblemDefinitionNextPhraseMotionParams) => {
+}: UseTimeLossPhraseMotionParams) => {
   const phraseRefs = useRef<Array<HTMLParagraphElement | null>>([]);
   const seeds = useMemo(() => buildPhraseSeeds(), []);
   const metricsRef = useRef<PhraseMetrics[]>(

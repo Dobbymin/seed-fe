@@ -1,14 +1,14 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
 
-import { COPY } from "../../../constants/promptStoryData";
-import type { AssignmentHelpState } from "../../../utils/deriveAssignmentHelpState";
-import { STORY_STAGE_SWAP_ANIMATION } from "../../../utils/storyStageSwap";
+import { ASSIGNMENT_HELP_COPY } from "../../../../constants/assignmentHelpStoryData";
+import type { AssignmentHelpState } from "../../../../types/assignmentHelp";
+import { ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION } from "../../../../utils/assignmentHelpStageSwap";
 
-type HelpPromptTitleProps = {
+type AssignmentHelpTitleProps = {
   title: AssignmentHelpState["title"];
 };
 
-export const HelpPromptTitle = ({ title }: HelpPromptTitleProps) => {
+export const AssignmentHelpTitle = ({ title }: AssignmentHelpTitleProps) => {
   return (
     <Box
       left="50%"
@@ -30,14 +30,14 @@ export const HelpPromptTitle = ({ title }: HelpPromptTitleProps) => {
           textAlign="center"
           whiteSpace="nowrap"
         >
-          {COPY.title.prefix}
+          {ASSIGNMENT_HELP_COPY.title.prefix}
           <Box as="span" color="#75AC36">
-            {COPY.title.highlight}
+            {ASSIGNMENT_HELP_COPY.title.highlight}
           </Box>
-          {COPY.title.suffix}
+          {ASSIGNMENT_HELP_COPY.title.suffix}
         </Text>
         <Text
-          animation={STORY_STAGE_SWAP_ANIMATION}
+          animation={ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION}
           color="neutral.600"
           fontSize="20px"
           fontWeight={500}

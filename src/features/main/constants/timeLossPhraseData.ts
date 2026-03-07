@@ -1,4 +1,4 @@
-export type ProblemDefinitionNextPhrase = {
+export type TimeLossPhrase = {
   text: string;
   x: number;
   y: number;
@@ -6,8 +6,8 @@ export type ProblemDefinitionNextPhrase = {
 
 // Seed positions for the phrase cloud, normalized from the original design layout.
 // 문구 클라우드의 초기 배치 좌표를 원본 디자인 기준으로 정규화해 둔 데이터
-export const PROBLEM_DEFINITION_NEXT_PHRASE_BASE_TONE = 176;
-export const PROBLEM_DEFINITION_NEXT_PHRASES: ProblemDefinitionNextPhrase[] = [
+export const TIME_LOSS_PHRASE_BASE_TONE = 176;
+export const TIME_LOSS_PHRASES: TimeLossPhrase[] = [
   { text: "라바돈의 죽음모자", x: 157.5 / 1341, y: 74 / 644 },
   { text: "관련 근거 검색", x: 427.5 / 1341, y: 74 / 644 },
   { text: "과제물에서만 근거를 찾아", x: 647.5 / 1341, y: 74 / 644 },
@@ -51,55 +51,49 @@ export const PROBLEM_DEFINITION_NEXT_PHRASES: ProblemDefinitionNextPhrase[] = [
   { text: "접속사 자연스럽게", x: 1022 / 1341, y: 570 / 644 },
 ];
 
-const PROBLEM_DEFINITION_NEXT_PHRASE_X_MIN_MARGIN = 0.06;
-const PROBLEM_DEFINITION_NEXT_PHRASE_X_MAX_MARGIN = 0.94;
-const PROBLEM_DEFINITION_NEXT_PHRASE_Y_MIN_MARGIN = 0.08;
-const PROBLEM_DEFINITION_NEXT_PHRASE_Y_MAX_MARGIN = 0.92;
-const PROBLEM_DEFINITION_NEXT_PHRASE_RAW_X_MIN = Math.min(
-  ...PROBLEM_DEFINITION_NEXT_PHRASES.map((phrase) => phrase.x),
+const TIME_LOSS_PHRASE_X_MIN_MARGIN = 0.06;
+const TIME_LOSS_PHRASE_X_MAX_MARGIN = 0.94;
+const TIME_LOSS_PHRASE_Y_MIN_MARGIN = 0.08;
+const TIME_LOSS_PHRASE_Y_MAX_MARGIN = 0.92;
+const TIME_LOSS_PHRASE_RAW_X_MIN = Math.min(
+  ...TIME_LOSS_PHRASES.map((phrase) => phrase.x),
 );
-const PROBLEM_DEFINITION_NEXT_PHRASE_RAW_X_MAX = Math.max(
-  ...PROBLEM_DEFINITION_NEXT_PHRASES.map((phrase) => phrase.x),
+const TIME_LOSS_PHRASE_RAW_X_MAX = Math.max(
+  ...TIME_LOSS_PHRASES.map((phrase) => phrase.x),
 );
-const PROBLEM_DEFINITION_NEXT_PHRASE_RAW_Y_MIN = Math.min(
-  ...PROBLEM_DEFINITION_NEXT_PHRASES.map((phrase) => phrase.y),
+const TIME_LOSS_PHRASE_RAW_Y_MIN = Math.min(
+  ...TIME_LOSS_PHRASES.map((phrase) => phrase.y),
 );
-const PROBLEM_DEFINITION_NEXT_PHRASE_RAW_Y_MAX = Math.max(
-  ...PROBLEM_DEFINITION_NEXT_PHRASES.map((phrase) => phrase.y),
+const TIME_LOSS_PHRASE_RAW_Y_MAX = Math.max(
+  ...TIME_LOSS_PHRASES.map((phrase) => phrase.y),
 );
-const PROBLEM_DEFINITION_NEXT_PHRASE_RAW_X_SPAN = Math.max(
-  PROBLEM_DEFINITION_NEXT_PHRASE_RAW_X_MAX -
-    PROBLEM_DEFINITION_NEXT_PHRASE_RAW_X_MIN,
+const TIME_LOSS_PHRASE_RAW_X_SPAN = Math.max(
+  TIME_LOSS_PHRASE_RAW_X_MAX - TIME_LOSS_PHRASE_RAW_X_MIN,
   0.0001,
 );
-const PROBLEM_DEFINITION_NEXT_PHRASE_RAW_Y_SPAN = Math.max(
-  PROBLEM_DEFINITION_NEXT_PHRASE_RAW_Y_MAX -
-    PROBLEM_DEFINITION_NEXT_PHRASE_RAW_Y_MIN,
+const TIME_LOSS_PHRASE_RAW_Y_SPAN = Math.max(
+  TIME_LOSS_PHRASE_RAW_Y_MAX - TIME_LOSS_PHRASE_RAW_Y_MIN,
   0.0001,
 );
 
-export const mapPhraseXToLayout = (rawX: number) => {
+export const mapTimeLossPhraseXToLayout = (rawX: number) => {
   const normalizedX =
-    (rawX - PROBLEM_DEFINITION_NEXT_PHRASE_RAW_X_MIN) /
-    PROBLEM_DEFINITION_NEXT_PHRASE_RAW_X_SPAN;
+    (rawX - TIME_LOSS_PHRASE_RAW_X_MIN) / TIME_LOSS_PHRASE_RAW_X_SPAN;
 
   return (
-    PROBLEM_DEFINITION_NEXT_PHRASE_X_MIN_MARGIN +
+    TIME_LOSS_PHRASE_X_MIN_MARGIN +
     normalizedX *
-      (PROBLEM_DEFINITION_NEXT_PHRASE_X_MAX_MARGIN -
-        PROBLEM_DEFINITION_NEXT_PHRASE_X_MIN_MARGIN)
+      (TIME_LOSS_PHRASE_X_MAX_MARGIN - TIME_LOSS_PHRASE_X_MIN_MARGIN)
   );
 };
 
-export const mapPhraseYToLayout = (rawY: number) => {
+export const mapTimeLossPhraseYToLayout = (rawY: number) => {
   const normalizedY =
-    (rawY - PROBLEM_DEFINITION_NEXT_PHRASE_RAW_Y_MIN) /
-    PROBLEM_DEFINITION_NEXT_PHRASE_RAW_Y_SPAN;
+    (rawY - TIME_LOSS_PHRASE_RAW_Y_MIN) / TIME_LOSS_PHRASE_RAW_Y_SPAN;
 
   return (
-    PROBLEM_DEFINITION_NEXT_PHRASE_Y_MIN_MARGIN +
+    TIME_LOSS_PHRASE_Y_MIN_MARGIN +
     normalizedY *
-      (PROBLEM_DEFINITION_NEXT_PHRASE_Y_MAX_MARGIN -
-        PROBLEM_DEFINITION_NEXT_PHRASE_Y_MIN_MARGIN)
+      (TIME_LOSS_PHRASE_Y_MAX_MARGIN - TIME_LOSS_PHRASE_Y_MIN_MARGIN)
   );
 };

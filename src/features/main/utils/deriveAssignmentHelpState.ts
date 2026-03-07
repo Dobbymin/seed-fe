@@ -1,26 +1,29 @@
 import {
-  COPY,
-  type MessageKey,
-  type PromptMessage,
-  resolveMessageIds,
-} from "../constants/promptStoryData";
+  ASSIGNMENT_HELP_COPY,
+  resolveAssignmentHelpMessageIds,
+} from "../constants/assignmentHelpStoryData";
 import {
-  STORY_SCENE_PROGRESS,
-  type StorySceneId,
-  type StorySectionProgressMap,
-} from "../constants/storySections";
+  ASSIGNMENT_HELP_STORY_SCENE_PROGRESS,
+  type AssignmentHelpStorySceneId,
+  type AssignmentHelpStorySectionProgressMap,
+} from "../constants/assignmentHelpStoryTimeline";
+import type {
+  AssignmentHelpChatStageId,
+  AssignmentHelpMessageKey,
+  AssignmentHelpState,
+} from "../types/assignmentHelp";
 
 type ProgressRange = readonly [number, number];
 
-export const clamp01 = (value: number) => {
+const clamp01 = (value: number) => {
   return Math.min(1, Math.max(0, value));
 };
 
-export const lerp = (start: number, end: number, progress: number) => {
+const lerp = (start: number, end: number, progress: number) => {
   return start + (end - start) * progress;
 };
 
-export const invLerp = (start: number, end: number, value: number) => {
+const invLerp = (start: number, end: number, value: number) => {
   if (start === end) {
     return 0;
   }
@@ -28,11 +31,11 @@ export const invLerp = (start: number, end: number, value: number) => {
   return (value - start) / (end - start);
 };
 
-export const rangeProgress = (value: number, [start, end]: ProgressRange) => {
+const rangeProgress = (value: number, [start, end]: ProgressRange) => {
   return clamp01(invLerp(start, end, value));
 };
 
-export const stepAt = (value: number, threshold: number) => {
+const stepAt = (value: number, threshold: number) => {
   return value >= threshold ? 1 : 0;
 };
 
@@ -40,33 +43,23 @@ const widthByScale = (scale: number) => {
   return `min(900px, calc(${scale.toFixed(4)} * (100% - 80px)))`;
 };
 
-const sceneRange = (sceneId: StorySceneId): ProgressRange => {
-  const scene = STORY_SCENE_PROGRESS[sceneId];
+const sceneRange = (sceneId: AssignmentHelpStorySceneId): ProgressRange => {
+  const scene = ASSIGNMENT_HELP_STORY_SCENE_PROGRESS[sceneId];
   return [scene.start, scene.end];
 };
 
-const sceneEnd = (sceneId: StorySceneId) => {
-  return STORY_SCENE_PROGRESS[sceneId].end;
+const sceneEnd = (sceneId: AssignmentHelpStorySceneId) => {
+  return ASSIGNMENT_HELP_STORY_SCENE_PROGRESS[sceneId].end;
 };
 
-const sceneStart = (sceneId: StorySceneId) => {
-  return STORY_SCENE_PROGRESS[sceneId].start;
+const sceneStart = (sceneId: AssignmentHelpStorySceneId) => {
+  return ASSIGNMENT_HELP_STORY_SCENE_PROGRESS[sceneId].start;
 };
-
-export type ChatStageId =
-  | "empty"
-  | "userOnly"
-  | "helpAndMethod"
-  | "needInfo"
-  | "userCrown"
-  | "hallucination"
-  | "correction"
-  | "gaslight";
 
 type ChatStage = {
-  id: ChatStageId;
-  messageIds: readonly MessageKey[];
-  sceneId: StorySceneId | null;
+  id: AssignmentHelpChatStageId;
+  messageIds: readonly AssignmentHelpMessageKey[];
+  sceneId: AssignmentHelpStorySceneId | null;
   subtitle: string;
   subtitleKey: string;
 };
@@ -76,49 +69,49 @@ const CHAT_STAGES: readonly ChatStage[] = [
     id: "empty",
     messageIds: [],
     sceneId: null,
-    subtitle: COPY.subtitles.common,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.common,
     subtitleKey: "empty",
   },
   {
     id: "userOnly",
     messageIds: ["userHelp"],
     sceneId: "chatUserOnly",
-    subtitle: COPY.subtitles.common,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.common,
     subtitleKey: "userOnly",
   },
   {
     id: "helpAndMethod",
     messageIds: ["userHelp", "aiMethod"],
     sceneId: "chatHelpAndMethod",
-    subtitle: COPY.subtitles.methodology,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.methodology,
     subtitleKey: "helpAndMethod",
   },
   {
     id: "needInfo",
     messageIds: ["userHelp", "aiNeedInfo"],
     sceneId: "chatNeedInfo",
-    subtitle: COPY.subtitles.tooManyInfo,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.tooManyInfo,
     subtitleKey: "needInfo",
   },
   {
     id: "userCrown",
     messageIds: ["userCrown"],
     sceneId: "chatUserCrown",
-    subtitle: COPY.subtitles.hallucination,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
     subtitleKey: "userCrown",
   },
   {
     id: "hallucination",
     messageIds: ["userCrown", "aiHallucination"],
     sceneId: "chatHallucination",
-    subtitle: COPY.subtitles.hallucination,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
     subtitleKey: "hallucination",
   },
   {
     id: "correction",
     messageIds: ["userCrown", "aiHallucination", "userCorrection"],
     sceneId: "chatCorrection",
-    subtitle: COPY.subtitles.repeatMistake,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
     subtitleKey: "correction",
   },
   {
@@ -130,7 +123,7 @@ const CHAT_STAGES: readonly ChatStage[] = [
       "aiGaslight",
     ],
     sceneId: "chatGaslight",
-    subtitle: COPY.subtitles.repeatMistake,
+    subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
     subtitleKey: "gaslight",
   },
 ] as const;
@@ -147,61 +140,15 @@ const resolveChatStage = (chatProgress: number) => {
   return activeStage;
 };
 
-export type ComposerLayoutState = {
-  contentOpacity: number;
-  height: string;
-  opacity: number;
-  padding: string;
-  radius: string;
-  topOffsetPx: number;
-  topPercent: number;
-  value: string;
-  valueReveal: number;
-  width: string;
-};
-
-export type AssignmentHelpState = {
-  chat: {
-    messageIds: readonly MessageKey[];
-    messages: PromptMessage[];
-    opacity: number;
-    stageId: ChatStageId;
-    subtitle: string;
-    translateY: string;
-  };
-  composer: ComposerLayoutState;
-  flags: {
-    isChatVisible: boolean;
-    isSolutionReady: boolean;
-  };
-  next: {
-    backdropOpacity: number;
-    interactive: boolean;
-    phraseOpacity: number;
-    titleOpacity: number;
-  };
-  problemDefinitionLayer: {
-    opacity: number;
-    translateY: string;
-  };
-  title: {
-    mainOpacity: number;
-    mainTop: string;
-    mainTransform: string;
-    subtitle: string;
-    subtitleKey: string;
-  };
-};
-
 export const deriveAssignmentHelpState = (
-  sectionProgresses: StorySectionProgressMap,
+  sectionProgresses: AssignmentHelpStorySectionProgressMap,
 ): AssignmentHelpState => {
   const introProgress = clamp01(sectionProgresses.intro);
   const chatProgress = clamp01(sectionProgresses.chat);
-  const nextProgress = clamp01(sectionProgresses.next);
+  const timeLossProgress = clamp01(sectionProgresses.timeLoss);
 
-  const hasChatStarted = chatProgress > 0 || nextProgress > 0;
-  const hasNextStarted = nextProgress > 0;
+  const hasChatStarted = chatProgress > 0 || timeLossProgress > 0;
+  const hasTimeLossStarted = timeLossProgress > 0;
 
   const introComposerRevealProgress = hasChatStarted
     ? 1
@@ -219,13 +166,13 @@ export const deriveAssignmentHelpState = (
     chatProgress,
     sceneRange("chatUserOnly"),
   );
-  const nextComposerSettleProgress = rangeProgress(
-    nextProgress,
-    sceneRange("nextComposerSettle"),
+  const timeLossComposerSettleProgress = rangeProgress(
+    timeLossProgress,
+    sceneRange("timeLossComposerSettle"),
   );
-  const nextBackdropRevealProgress = rangeProgress(
-    nextProgress,
-    sceneRange("nextBackdropReveal"),
+  const timeLossBackdropRevealProgress = rangeProgress(
+    timeLossProgress,
+    sceneRange("timeLossBackdropReveal"),
   );
 
   let composerWidth = "4px";
@@ -249,14 +196,14 @@ export const deriveAssignmentHelpState = (
         : 0;
   }
 
-  const composerValue = COPY.helpPrompt;
+  const composerValue = ASSIGNMENT_HELP_COPY.helpPrompt;
   let composerValueReveal = introPromptFillProgress;
 
   if (hasChatStarted) {
     composerValueReveal = 1 - chatPromptExitProgress;
   }
 
-  if (hasNextStarted) {
+  if (hasTimeLossStarted) {
     composerValueReveal = 0;
   }
 
@@ -268,16 +215,18 @@ export const deriveAssignmentHelpState = (
     composerTopOffsetPx = lerp(154, -89, chatDockProgress);
   }
 
-  if (hasNextStarted) {
-    composerTopPercent = lerp(100, 50, nextComposerSettleProgress);
-    composerTopOffsetPx = lerp(-89, 182, nextComposerSettleProgress);
+  if (hasTimeLossStarted) {
+    composerTopPercent = lerp(100, 50, timeLossComposerSettleProgress);
+    composerTopOffsetPx = lerp(-89, 182, timeLossComposerSettleProgress);
   }
 
   const chatStage = resolveChatStage(chatProgress);
-  const chatMessages = resolveMessageIds(chatStage.messageIds);
+  const chatMessages = resolveAssignmentHelpMessageIds(chatStage.messageIds);
   const chatVisibilityBase = stepAt(chatProgress, sceneStart("chatUserOnly"));
   const chatOpacity =
-    chatVisibilityBase * chatAppearProgress * (1 - nextComposerSettleProgress);
+    chatVisibilityBase *
+    chatAppearProgress *
+    (1 - timeLossComposerSettleProgress);
   const chatTranslateY = `${lerp(24, 0, chatAppearProgress).toFixed(2)}px`;
 
   const titleDockProgress = hasChatStarted ? chatDockProgress : 0;
@@ -285,7 +234,7 @@ export const deriveAssignmentHelpState = (
   const titleTopOffsetPx = lerp(0, 136, titleDockProgress);
   const mainTitleTop = `calc(${titleTopPercent.toFixed(2)}% + ${titleTopOffsetPx.toFixed(2)}px)`;
   const mainTitleTransform = "translate(-50%, -50%)";
-  const mainTitleOpacity = 1 - nextComposerSettleProgress;
+  const mainTitleOpacity = 1 - timeLossComposerSettleProgress;
 
   return {
     chat: {
@@ -310,17 +259,13 @@ export const deriveAssignmentHelpState = (
     },
     flags: {
       isChatVisible: chatOpacity > 0.01,
-      isSolutionReady: nextProgress >= sceneEnd("nextHold") - 0.001,
+      isSolutionReady: timeLossProgress >= sceneEnd("timeLossHold") - 0.001,
     },
-    next: {
-      backdropOpacity: nextBackdropRevealProgress,
-      interactive: nextProgress >= sceneEnd("nextBackdropReveal"),
-      phraseOpacity: nextBackdropRevealProgress,
-      titleOpacity: nextComposerSettleProgress,
-    },
-    problemDefinitionLayer: {
-      opacity: 1,
-      translateY: "0%",
+    timeLoss: {
+      backdropOpacity: timeLossBackdropRevealProgress,
+      interactive: timeLossProgress >= sceneEnd("timeLossBackdropReveal"),
+      phraseOpacity: timeLossBackdropRevealProgress,
+      titleOpacity: timeLossComposerSettleProgress,
     },
     title: {
       mainOpacity: mainTitleOpacity,

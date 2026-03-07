@@ -3,22 +3,22 @@ import { useRef } from "react";
 import { Box, Text } from "@chakra-ui/react";
 
 import {
-  PROBLEM_DEFINITION_NEXT_PHRASES,
-  PROBLEM_DEFINITION_NEXT_PHRASE_BASE_TONE,
-} from "../../../constants/problemDefinitionNextPhraseData";
-import { useProblemDefinitionNextPhraseMotion } from "../../../hooks/useProblemDefinitionNextPhraseMotion";
+  TIME_LOSS_PHRASES,
+  TIME_LOSS_PHRASE_BASE_TONE,
+} from "../../../../constants/timeLossPhraseData";
+import { useTimeLossPhraseMotion } from "../../../../hooks/useTimeLossPhraseMotion";
 
-type ProblemDefinitionNextPhraseCloudProps = {
+type TimeLossPhraseCloudProps = {
   interactive: boolean;
 };
 
-export const ProblemDefinitionNextPhraseCloud = ({
+export const TimeLossPhraseCloud = ({
   interactive,
-}: ProblemDefinitionNextPhraseCloudProps) => {
+}: TimeLossPhraseCloudProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const { baseOpacity, handlePointerLeave, handlePointerMove, phraseRefs } =
-    useProblemDefinitionNextPhraseMotion({
+    useTimeLossPhraseMotion({
       containerRef,
       interactive,
     });
@@ -35,10 +35,10 @@ export const ProblemDefinitionNextPhraseCloud = ({
       style={{ contain: "layout paint style" }}
       w="full"
     >
-      {PROBLEM_DEFINITION_NEXT_PHRASES.map((phrase, index) => (
+      {TIME_LOSS_PHRASES.map((phrase, index) => (
         <Text
           as="p"
-          color={`rgb(${PROBLEM_DEFINITION_NEXT_PHRASE_BASE_TONE}, ${PROBLEM_DEFINITION_NEXT_PHRASE_BASE_TONE}, ${PROBLEM_DEFINITION_NEXT_PHRASE_BASE_TONE})`}
+          color={`rgb(${TIME_LOSS_PHRASE_BASE_TONE}, ${TIME_LOSS_PHRASE_BASE_TONE}, ${TIME_LOSS_PHRASE_BASE_TONE})`}
           fontSize={{ base: "18px", md: "22px", lg: "26px", xl: "30px" }}
           fontWeight={700}
           key={`${phrase.text}-${index}`}
