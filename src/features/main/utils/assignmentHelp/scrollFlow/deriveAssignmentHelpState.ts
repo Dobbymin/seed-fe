@@ -20,6 +20,7 @@ type AssignmentHelpChatStage = {
   subtitleKey: string;
 };
 
+// intro 구간 안에서 입력창이 언제 열리고 문구가 채워지는지 정함
 const ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES = {
   composerReveal: [0.25, 0.5] as ProgressRange,
   composerRevealEnd: 0.5,
@@ -27,12 +28,14 @@ const ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES = {
   promptFill: [0.75, 1] as ProgressRange,
 } as const;
 
+// chat 구간 안에서 입력창이 내려가고 채팅이 보이는 시점을 정함
 const ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES = {
   dock: [0, 0.02] as ProgressRange,
   promptExit: [0.02, 0.15] as ProgressRange,
   userOnly: [0.15, 0.165] as ProgressRange,
 } as const;
 
+// time loss 구간 안에서 다음 장면이 열리는 시점을 정함
 const ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES = {
   backdropReveal: [0, 0.02] as ProgressRange,
   backdropRevealEnd: 0.02,
@@ -40,6 +43,7 @@ const ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES = {
   holdEnd: 0.5,
 } as const;
 
+// chat 구간에서 어떤 메시지와 문구를 보여줄지 단계별로 정함
 const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
   {
     id: "empty",
