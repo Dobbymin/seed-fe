@@ -1,10 +1,10 @@
 import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 
-import { ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION } from "../../../../utils/assignmentHelpStageSwap";
 import type {
   AssignmentHelpChatMessage,
   AssignmentHelpRichBlock,
-} from "../types/assignmentHelp";
+} from "../../types/assignmentHelp";
+import { ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION } from "../assignmentHelpStageSwap";
 
 type AssignmentHelpMessageProps = {
   message: AssignmentHelpChatMessage;
