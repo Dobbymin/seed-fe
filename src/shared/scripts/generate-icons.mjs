@@ -44,18 +44,17 @@ function optimizeSvg(filePath) {
   const result = optimize(svgContent, {
     path: filePath,
     plugins: [
-      "preset-default",
       {
-        name: "removeViewBox",
-        active: false, // React에서 사용할 때 필요한 속성 보존
-      },
-      "removeDimensions", // width, height 제거 (viewBox만 사용)
-      {
-        name: "convertColors",
+        name: "preset-default",
         params: {
-          currentColor: true, // fill/stroke 색상을 currentColor로 변환 → color prop으로 색상 제어 가능
+          overrides: {
+            convertColors: {
+              currentColor: true, // fill/stroke 색상을 currentColor로 변환 → color prop으로 색상 제어 가능
+            },
+          },
         },
       },
+      "removeDimensions", // width, height 제거 (viewBox만 사용)
     ],
   });
 
