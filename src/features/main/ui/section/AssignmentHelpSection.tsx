@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/react";
 import { AssignmentHelpPromptScene } from "../../components/features/assignmentHelp/promptScene/ui/AssignmentHelpPromptScene";
 import { ASSIGNMENT_HELP_SECTION_SCROLL_VH } from "../../components/features/assignmentHelp/scrollFlow/constants/sectionScrollConfig";
 import { useAssignmentHelpSectionState } from "../../components/features/assignmentHelp/scrollFlow/hooks/useAssignmentHelpSectionState";
-import { TimeLossScene } from "../../components/features/assignmentHelp/timeLossScene/TimeLossScene";
+import { TimeLossScene } from "../../components/features/assignmentHelp/timeLossScene/ui/TimeLossScene";
 
 type AssignmentHelpSectionProps = {
   onSolutionReadyChange?: (isReady: boolean) => void;

@@ -5,8 +5,8 @@ import { Box, Text } from "@chakra-ui/react";
 import {
   TIME_LOSS_PHRASES,
   TIME_LOSS_PHRASE_BASE_TONE,
-} from "./data/timeLossPhraseData";
-import { useTimeLossPhraseMotion } from "./hooks/useTimeLossPhraseMotion";
+} from "../data/timeLossPhraseData";
+import { useTimeLossPhraseMotion } from "../hooks/useTimeLossPhraseMotion";
 
 type TimeLossPhraseCloudProps = {
   interactive: boolean;
