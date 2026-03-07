@@ -3,12 +3,34 @@ import type {
   AssignmentHelpMessageKey,
   AssignmentHelpRichBlock,
 } from "../types/assignmentHelp";
-import {
-  createAiMessage,
-  createUserMessage,
-  orderedList,
-  paragraph,
-} from "../utils/assignmentHelpMessageFactory";
+
+const paragraph = (text: string): AssignmentHelpRichBlock => ({
+  type: "paragraph",
+  text,
+});
+
+const orderedList = (items: string[]): AssignmentHelpRichBlock => ({
+  type: "ordered-list",
+  items,
+});
+
+const createUserMessage = (
+  id: string,
+  text: string,
+): AssignmentHelpChatMessage => ({
+  id,
+  role: "user",
+  content: text,
+});
+
+const createAiMessage = (
+  id: string,
+  content: AssignmentHelpRichBlock[],
+): AssignmentHelpChatMessage => ({
+  id,
+  role: "ai",
+  content,
+});
 
 export const ASSIGNMENT_HELP_COPY = {
   title: {

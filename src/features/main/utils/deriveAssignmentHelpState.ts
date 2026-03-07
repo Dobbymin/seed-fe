@@ -1,4 +1,7 @@
-import { ASSIGNMENT_HELP_COPY } from "../constants/assignmentHelpStoryData";
+import {
+  ASSIGNMENT_HELP_COPY,
+  ASSIGNMENT_HELP_MESSAGE_BANK,
+} from "../constants/assignmentHelpStoryData";
 import {
   ASSIGNMENT_HELP_STORY_SCENE_PROGRESS,
   type AssignmentHelpStorySceneId,
@@ -7,7 +10,6 @@ import {
 import type { AssignmentHelpState } from "../types/assignmentHelp";
 
 import { resolveAssignmentHelpChatStage } from "./resolveAssignmentHelpChatStage";
-import { resolveAssignmentHelpMessageIds } from "./resolveAssignmentHelpMessageIds";
 
 type ProgressRange = readonly [number, number];
 
@@ -129,7 +131,9 @@ export const deriveAssignmentHelpState = (
   }
 
   const chatStage = resolveAssignmentHelpChatStage(chatProgress);
-  const chatMessages = resolveAssignmentHelpMessageIds(chatStage.messageIds);
+  const chatMessages = chatStage.messageIds.map((id) => {
+    return ASSIGNMENT_HELP_MESSAGE_BANK[id];
+  });
   const chatVisibilityBase = stepAt(
     chatProgress,
     ASSIGNMENT_HELP_STORY_SCENE_PROGRESS.chatUserOnly.start,
