@@ -1,18 +1,20 @@
 import { useState } from "react";
 
+import { Flex } from "@chakra-ui/react";
+
 import {
   AssignmentHelpSection,
   ExecutionOnlySection,
   MainHeroCaptureSection,
   PromptNoHesitationSection,
   WhatToDoSection,
-} from "@/features/main";
+} from "@/features";
 
 export default function MainPage() {
   const [isSolutionSectionReady, setIsSolutionSectionReady] = useState(false);
 
   return (
-    <>
+    <Flex>
       <MainHeroCaptureSection />
       <AssignmentHelpSection
         onSolutionReadyChange={setIsSolutionSectionReady}
@@ -20,6 +22,6 @@ export default function MainPage() {
       <ExecutionOnlySection isActivated={isSolutionSectionReady} />
       <PromptNoHesitationSection />
       <WhatToDoSection />
-    </>
+    </Flex>
   );
 }
