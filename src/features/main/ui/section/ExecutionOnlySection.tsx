@@ -22,14 +22,6 @@ type ExecutionOnlySectionProps = {
   isActivated: boolean;
 };
 
-const EXECUTION_ONLY_TITLE_COPY = {
-  highlight: "실행",
-  logo: "SEED",
-  middle: "가 합니다. ",
-  prefix: "프롬프트 고민은 ",
-  suffix: "만 하세요.",
-} as const;
-
 const fallbackCardId = (cards: SolutionAssignmentCard[]) => {
   return cards[0]?.id ?? "writing";
 };
@@ -105,15 +97,15 @@ export const ExecutionOnlySection = ({
               textAlign="center"
               whiteSpace="nowrap"
             >
-              {EXECUTION_ONLY_TITLE_COPY.prefix}
+              프롬프트 고민은{" "}
               <Box as="span" color="#75AC36">
-                {EXECUTION_ONLY_TITLE_COPY.logo}
+                SEED
               </Box>
-              {EXECUTION_ONLY_TITLE_COPY.middle}
+              가 합니다.{" "}
               <Box as="span" color="#75AC36">
-                {EXECUTION_ONLY_TITLE_COPY.highlight}
+                실행
               </Box>
-              {EXECUTION_ONLY_TITLE_COPY.suffix}
+              만 하세요.
             </Text>
 
             <AnalysisStage
