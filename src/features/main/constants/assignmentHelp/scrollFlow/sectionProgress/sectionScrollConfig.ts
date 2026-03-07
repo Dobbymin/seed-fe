@@ -7,7 +7,7 @@ export const ASSIGNMENT_HELP_SECTION_SCROLL_VH: Record<
   AssignmentHelpSectionId,
   number
 > = {
-  intro: 140,
-  chat: 520,
-  timeLoss: 130,
+  intro: 50,
+  chat: 300,
+  timeLoss: 160,
 };

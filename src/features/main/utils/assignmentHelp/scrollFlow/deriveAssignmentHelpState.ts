@@ -27,16 +27,16 @@ const ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES = {
 } as const;
 
 const ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES = {
-  dock: [0, 0.0238] as ProgressRange,
-  promptExit: [0.0238, 0.1429] as ProgressRange,
-  userOnly: [0.1429, 0.2619] as ProgressRange,
+  dock: [0, 0.02] as ProgressRange,
+  promptExit: [0.02, 0.15] as ProgressRange,
+  userOnly: [0.15, 0.165] as ProgressRange,
 } as const;
 
 const ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES = {
-  backdropReveal: [0.3333, 0.6667] as ProgressRange,
-  backdropRevealEnd: 0.6667,
-  composerSettle: [0, 0.3333] as ProgressRange,
-  holdEnd: 1,
+  backdropReveal: [0, 0.02] as ProgressRange,
+  backdropRevealEnd: 0.02,
+  composerSettle: [0, 0.01] as ProgressRange,
+  holdEnd: 0.5,
 } as const;
 
 const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
@@ -50,42 +50,42 @@ const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
   {
     id: "userOnly",
     messageIds: ["userHelp"],
-    startAt: 0.1429,
+    startAt: 0.25,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.common,
     subtitleKey: "userOnly",
   },
   {
     id: "helpAndMethod",
     messageIds: ["userHelp", "aiMethod"],
-    startAt: 0.2619,
+    startAt: 0.375,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.methodology,
     subtitleKey: "helpAndMethod",
   },
   {
     id: "needInfo",
     messageIds: ["userHelp", "aiNeedInfo"],
-    startAt: 0.381,
+    startAt: 0.5,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.tooManyInfo,
     subtitleKey: "needInfo",
   },
   {
     id: "userCrown",
     messageIds: ["userCrown"],
-    startAt: 0.5,
+    startAt: 0.625,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
     subtitleKey: "userCrown",
   },
   {
     id: "hallucination",
     messageIds: ["userCrown", "aiHallucination"],
-    startAt: 0.619,
+    startAt: 0.75,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
     subtitleKey: "hallucination",
   },
   {
     id: "correction",
     messageIds: ["userCrown", "aiHallucination", "userCorrection"],
-    startAt: 0.7381,
+    startAt: 0.875,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
     subtitleKey: "correction",
   },
@@ -97,7 +97,7 @@ const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
       "userCorrection",
       "aiGaslight",
     ],
-    startAt: 0.8571,
+    startAt: 1,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
     subtitleKey: "gaslight",
   },

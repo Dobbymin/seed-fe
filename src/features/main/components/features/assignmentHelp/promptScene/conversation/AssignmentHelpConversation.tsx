@@ -26,6 +26,7 @@ export const AssignmentHelpConversation = ({
       pointerEvents={isChatVisible ? "auto" : "none"}
       position="absolute"
       pt={{ base: "240px", lg: "240px" }}
+      px={10}
       transform={`translateY(${chat.translateY})`}
       transition="opacity 220ms ease, transform 220ms ease"
       zIndex={1}
