@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Flex, Text, VStack } from "@chakra-ui/react";
 
@@ -9,9 +9,9 @@ import { ProjectListToolbar } from "../../components";
 
 type Props = {
   filterActive: boolean;
-  setFilterActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setFilterActive: () => void;
   manageActive: boolean;
-  setManageActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setManageActive: () => void;
 };
 
 export const ProjectListSection = ({
