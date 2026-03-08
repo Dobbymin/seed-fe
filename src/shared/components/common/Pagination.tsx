@@ -51,6 +51,7 @@ export const Pagination = ({
           justify="center"
           boxSize={8}
           borderRadius="lg"
+          aria-label={`Page ${page}`}
           bg={currentPage === page ? "seed" : "transparent"}
           boxShadow={
             currentPage === page
@@ -77,6 +78,7 @@ export const Pagination = ({
         justify="center"
         boxSize={8}
         borderRadius="lg"
+        aria-label="Next Page"
         opacity={currentPage === totalPages ? 0.5 : 1}
         cursor={currentPage === totalPages ? "default" : "pointer"}
         _hover={currentPage < totalPages ? { opacity: 0.7 } : undefined}
