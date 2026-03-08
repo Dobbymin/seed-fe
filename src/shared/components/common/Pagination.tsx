@@ -1,4 +1,4 @@
-import { Flex, HStack, Text } from "@chakra-ui/react";
+import { Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@/shared/_assets/icons";
 
@@ -30,19 +30,17 @@ export const Pagination = ({
 
   return (
     <HStack gap={2} justify="center" w="full" pt={4}>
-      <Flex
-        align="center"
-        justify="center"
-        boxSize={8}
+      <IconButton
+        aria-label="이전 페이지"
+        variant="ghost"
+        disabled={currentPage === 1}
         borderRadius="lg"
-        opacity={currentPage === 1 ? 0.5 : 1}
-        cursor={currentPage === 1 ? "default" : "pointer"}
-        _hover={currentPage > 1 ? { opacity: 0.7 } : undefined}
-        transition="opacity 0.15s"
-        onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+        boxSize={8}
+        minW={8}
+        onClick={() => onPageChange(currentPage - 1)}
       >
         <ArrowLeftIcon boxSize={2.5} color="neutral.900" />
-      </Flex>
+      </IconButton>
 
       {visiblePages.map((page) => (
         <Flex
@@ -73,22 +71,17 @@ export const Pagination = ({
         </Flex>
       ))}
 
-      <Flex
-        align="center"
-        justify="center"
-        boxSize={8}
+      <IconButton
+        aria-label="다음 페이지"
+        variant="ghost"
+        disabled={currentPage === totalPages}
         borderRadius="lg"
-        aria-label="Next Page"
-        opacity={currentPage === totalPages ? 0.5 : 1}
-        cursor={currentPage === totalPages ? "default" : "pointer"}
-        _hover={currentPage < totalPages ? { opacity: 0.7 } : undefined}
-        transition="opacity 0.15s"
-        onClick={() =>
-          currentPage < totalPages && onPageChange(currentPage + 1)
-        }
+        boxSize={8}
+        minW={8}
+        onClick={() => onPageChange(currentPage + 1)}
       >
         <ArrowRightIcon boxSize={2.5} color="neutral.900" />
-      </Flex>
+      </IconButton>
     </HStack>
   );
 };
