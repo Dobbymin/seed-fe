@@ -15,6 +15,8 @@ export const Pagination = ({
   totalPages,
   onPageChange,
 }: Props) => {
+  if (totalPages <= 0) return null;
+
   const half = Math.floor(WINDOW_SIZE / 2);
   const start = Math.max(
     1,
