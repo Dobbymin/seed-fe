@@ -4,7 +4,7 @@ import { ChevronRightIcon, DocumentTextIcon } from "@/shared";
 
 type Props = {
   name: string;
-  updatedAt: string;
+  updatedAt: Date;
   onClick?: () => void;
 };
 
@@ -41,7 +41,7 @@ export const ProjectListItem = ({ name, updatedAt, onClick }: Props) => {
             {name}
           </Text>
           <Text color="neutral.600" fontSize="xs">
-            {updatedAt}
+            {updatedAt.toLocaleDateString()}
           </Text>
         </Flex>
       </Flex>
