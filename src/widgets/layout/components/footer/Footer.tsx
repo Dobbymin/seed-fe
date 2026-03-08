@@ -7,7 +7,7 @@ import { ROUTE_PATHS } from "@/shared";
 
 export const Footer = () => {
   return (
-    <Box as="footer" bg="gray.100" w="100vw">
+    <Box as="footer" bg="gray.100" w="100dvw">
       <Box maxW={{ base: "100vw", lg: "1280px" }} mx="auto" h="120px">
         <Flex
           h="full"
@@ -18,21 +18,16 @@ export const Footer = () => {
           position="relative"
         >
           <Link to={ROUTE_PATHS.ROOT}>
-            <HStack>
-              <Box bg="neutral.900" p={2} rounded="lg">
-                <Image
-                  src={Logo}
-                  alt="Seed Logo"
-                  boxSize={4}
-                  objectFit="contain"
-                />
-              </Box>
-              <Text fontWeight="extrabold" fontSize="lg">
-                SEED
-              </Text>
-            </HStack>
+            <Image
+              src={Logo}
+              alt="Seed Logo"
+              h={6}
+              w="auto"
+              objectFit="contain"
+            />
           </Link>
           <HStack
+            display={{ base: "none", md: "flex" }}
             gap={10}
             position="absolute"
             left="50%"
