@@ -7,19 +7,10 @@ import { Pagination, PlusIcon } from "@/shared";
 
 import { ProjectListToolbar } from "../../components";
 
-type Props = {
-  filterActive: boolean;
-  setFilterActive: () => void;
-  manageActive: boolean;
-  setManageActive: () => void;
-};
+export const ProjectListSection = () => {
+  const [filterActive, setFilterActive] = useState(false);
+  const [manageActive, setManageActive] = useState(false);
 
-export const ProjectListSection = ({
-  filterActive,
-  setFilterActive,
-  manageActive,
-  setManageActive,
-}: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 8;
 
