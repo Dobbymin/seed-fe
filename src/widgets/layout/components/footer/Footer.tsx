@@ -18,19 +18,12 @@ export const Footer = () => {
           position="relative"
         >
           <Link to={ROUTE_PATHS.ROOT}>
-            <HStack>
-              <Box bg="neutral.900" p={2} rounded="lg">
-                <Image
-                  src={Logo}
-                  alt="Seed Logo"
-                  boxSize={4}
-                  objectFit="contain"
-                />
-              </Box>
-              <Text fontWeight="extrabold" fontSize="lg">
-                SEED
-              </Text>
-            </HStack>
+            <Image
+              src={Logo}
+              alt="Seed Logo"
+              boxSize={20}
+              objectFit="contain"
+            />
           </Link>
           <HStack
             gap={10}

@@ -19,19 +19,7 @@ export const Header = () => {
         position="relative"
       >
         <Link to={ROUTE_PATHS.ROOT}>
-          <HStack>
-            <Box bg="neutral.900" p={2} rounded="xl">
-              <Image
-                src={Logo}
-                alt="Seed Logo"
-                boxSize={8}
-                objectFit="contain"
-              />
-            </Box>
-            <Text fontWeight="extrabold" fontSize="xl">
-              SEED
-            </Text>
-          </HStack>
+          <Image src={Logo} alt="Seed Logo" boxSize={20} objectFit="contain" />
         </Link>
         <HStack
           gap={10}
