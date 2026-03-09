@@ -28,16 +28,12 @@ export const AnalysisPanel = ({
           AI 분석
         </Text>
 
-        <AnalysisPanelReveal progress={keywordReveal} revealHeight={132}>
+        <AnalysisPanelReveal
+          title="키워드 추출"
+          progress={keywordReveal}
+          revealHeight={132}
+        >
           <VStack align="stretch" gap={1}>
-            <Text
-              color="text"
-              fontSize="md"
-              fontWeight="medium"
-              lineHeight="1.4"
-            >
-              키워드 추출
-            </Text>
             <Flex gap={2.5} px={2.5} py={2.5} w="full">
               <Box bg="seed.900" h="30px" w="60px" />
               <Box bg="seed.500" h="30px" w="60px" />
@@ -48,16 +44,12 @@ export const AnalysisPanel = ({
           </VStack>
         </AnalysisPanelReveal>
 
-        <AnalysisPanelReveal progress={summaryReveal} revealHeight={190}>
+        <AnalysisPanelReveal
+          title="문단 요약"
+          progress={summaryReveal}
+          revealHeight={190}
+        >
           <VStack align="stretch" gap={1}>
-            <Text
-              color="text"
-              fontSize="md"
-              fontWeight="medium"
-              lineHeight="1.4"
-            >
-              문단 요약
-            </Text>
             <VStack align="stretch" gap={2.5} px={2.5} py={2.5}>
               <Box bg="seed.900" h="30px" w="full" />
               <Box bg="seed.500" h="60px" w="full" />
@@ -69,16 +61,12 @@ export const AnalysisPanel = ({
           </VStack>
         </AnalysisPanelReveal>
 
-        <AnalysisPanelReveal progress={intentReveal} revealHeight={190}>
+        <AnalysisPanelReveal
+          title="과제 의도 파악"
+          progress={intentReveal}
+          revealHeight={190}
+        >
           <VStack align="stretch" gap={1}>
-            <Text
-              color="text"
-              fontSize="md"
-              fontWeight="medium"
-              lineHeight="1.4"
-            >
-              과제 의도 파악
-            </Text>
             <VStack align="stretch" gap={2.5} px={2.5} py={2.5}>
               <Box bg="seed.900" h="30px" w="full" />
               <Flex gap={2.5} w="full">
