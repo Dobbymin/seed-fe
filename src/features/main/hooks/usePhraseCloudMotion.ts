@@ -10,13 +10,13 @@ import {
 import {
   PHRASE_CLOUD_FONT_SIZE,
   PHRASE_CLOUD_MOTION_CONFIG,
-} from "../../constants";
+} from "../constants";
 import type {
   LayoutState,
   MotionState,
   PhraseMetrics,
   PhraseRender,
-} from "../../types";
+} from "../types";
 import {
   buildPhraseCloudSeeds,
   computeNextPhraseCloudFrame,
@@ -28,7 +28,7 @@ import {
   createPhraseCloudLayoutState,
   resetPhraseCloudMotionPointerTarget,
   updatePhraseCloudMotionFromPointer,
-} from "../../utils";
+} from "../utils";
 
 type UsePhraseCloudMotionParams = {
   containerRef: RefObject<HTMLDivElement | null>;

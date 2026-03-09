@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { resolveSceneProgressUnits } from "../../utils/solutionTimeline";
+import { resolveSceneProgressUnits } from "../utils";
 
 // 실행 섹션 루트의 위치를 sticky 구간 진행값으로 바꿈
 export const useSolutionTimelineProgress = (isActivated: boolean) => {

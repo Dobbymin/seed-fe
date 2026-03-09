@@ -3,8 +3,8 @@ import { type RefObject, useEffect, useState } from "react";
 import type {
   AssignmentHelpSectionId,
   AssignmentHelpSectionProgressMap,
-} from "../../types";
-import { calculateAssignmentHelpSectionProgress } from "../../utils";
+} from "../types";
+import { calculateAssignmentHelpSectionProgress } from "../utils";
 
 export type AssignmentHelpSectionRefs = Record<
   AssignmentHelpSectionId,

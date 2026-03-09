@@ -3,7 +3,7 @@ import { type RefObject, useEffect, useMemo, useRef } from "react";
 import {
   deriveAssignmentHelpMotionState,
   getAssignmentHelpChatViewState,
-} from "../../utils";
+} from "../utils";
 
 import type { AssignmentHelpSectionRefs } from "./useAssignmentHelpSectionProgresses";
 import { useAssignmentHelpSectionProgresses } from "./useAssignmentHelpSectionProgresses";
