@@ -11,11 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 import { AssignmentHelpSection, ExecutionOnlySection } from "@/features";
-import {
-  ActionableOutputPanel,
-  PromptPreviewCard,
-} from "@/features/main/components";
-import { SparklesIcon } from "@/shared";
+import { CheckIcon, CopyIcon, SparklesIcon } from "@/shared";
 
 export default function MainPage() {
   const [isSolutionSectionReady, setIsSolutionSectionReady] = useState(false);
@@ -191,9 +187,198 @@ export default function MainPage() {
             w="full"
           >
             <Box flex="1 1 0" minW={0}>
-              <PromptPreviewCard />
+              <Box
+                bg="container.bg"
+                border="1px solid #FAFAFA"
+                borderRadius="4xl"
+                boxShadow="0px 20px 40px 0px rgba(0, 0, 0, 0.08)"
+                px={{ base: 6, lg: 8 }}
+                py={{ base: 6, lg: 8 }}
+                w="full"
+              >
+                <VStack align="stretch" gap={6} w="full">
+                  <Flex align="center" justify="space-between" w="full">
+                    <HStack align="center" gap={3}>
+                      <Flex
+                        align="center"
+                        bg="container.bg.card"
+                        borderRadius="full"
+                        h="40px"
+                        justify="center"
+                        w="40px"
+                      >
+                        <SparklesIcon color="seed" boxSize="18px" />
+                      </Flex>
+
+                      <VStack align="start" gap={0} minW={0}>
+                        <Text
+                          color="#191F28"
+                          fontSize="14px"
+                          fontWeight={700}
+                          letterSpacing="-0.02em"
+                          lineHeight="20px"
+                        >
+                          Step 3 최적화 프롬프트
+                        </Text>
+                        <Text
+                          color="text.secondary"
+                          fontSize="xs"
+                          fontWeight="regular"
+                          letterSpacing="-0.02em"
+                          lineHeight="16px"
+                        >
+                          Professional Mode
+                        </Text>
+                      </VStack>
+                    </HStack>
+
+                    <Button
+                      bg="neutral.900"
+                      borderRadius="md"
+                      color="white"
+                      fontSize="xs"
+                      fontWeight="bold"
+                      h="32px"
+                      minW="auto"
+                      px={3}
+                      py={2}
+                      type="button"
+                      _hover={{ bg: "#2A3038" }}
+                    >
+                      <HStack gap={1.5}>
+                        <CopyIcon color="white" boxSize="18px" />
+                        <Text color="inherit" fontSize="xs" fontWeight="bold">
+                          Copy
+                        </Text>
+                      </HStack>
+                    </Button>
+                  </Flex>
+
+                  <Box
+                    bg="container.bg"
+                    border="1px solid #FAFAFA"
+                    borderRadius="12px"
+                    px={5}
+                    py={4}
+                  >
+                    <Text
+                      color="text"
+                      fontFamily="'Courier New', monospace"
+                      fontSize="sm"
+                      gap={0}
+                      lineHeight="22.75px"
+                      w="full"
+                    >
+                      # Role: Academic Writer
+                      <br />
+                      # Task: Draft an assignment based on roadmap
+                      <br />
+                      <br />
+                      [Context]
+                      <br />
+                      Based on the previously summarized materials
+                      <br />
+                      regarding 'Inflation Impact', please draft a<br />
+                      comprehensive introduction. Include the
+                      <br />
+                      following key arguments: ...
+                      <br />
+                      <br />
+                      [Constraints]
+                      <br />
+                      - Use formal academic tone.
+                      <br />- Cite sources in APA format.
+                    </Text>
+                  </Box>
+
+                  <Box
+                    borderTop="1px solid #FAFAFA"
+                    minH="16px"
+                    pt={5}
+                    w="full"
+                  />
+                </VStack>
+              </Box>
             </Box>
-            <ActionableOutputPanel />
+            <VStack
+              align="start"
+              flex="1 1 0"
+              gap={4}
+              maxW={{ base: "full", xl: "480px" }}
+              minW={0}
+              pt={{ base: 2, xl: 0 }}
+              w="full"
+            >
+              <Box bg="#FAFAFA" borderRadius="8px" color="seed" px={3} py={1}>
+                <Text
+                  fontSize="sm"
+                  fontWeight="bold"
+                  letterSpacing="-0.02em"
+                  lineHeight="20px"
+                >
+                  Actionable Output
+                </Text>
+              </Box>
+
+              <Text
+                color="text"
+                fontSize={{ base: "3xl", lg: "4xl" }}
+                fontWeight="bold"
+                letterSpacing="-0.02em"
+                lineHeight="1.25"
+              >
+                바로 복사해서
+                <br />
+                결과를 만들어보세요.
+              </Text>
+
+              <Text
+                color="text.secondary"
+                fontSize={{ base: "md", lg: "lg" }}
+                fontWeight="regular"
+                letterSpacing="-0.02em"
+                lineHeight="1.625"
+                maxW="420px"
+              >
+                로드맵 각 단계에 꼭 맞는 최적의 프롬프트가 생성됩니다.
+                <br />
+                고민 없이 '복사' 버튼 하나면
+                <br />
+                전문적인 결과물로 이어질 수 있습니다.
+              </Text>
+
+              <VStack align="start" gap={4} pt={4} w="full">
+                {[
+                  "단계별 맞춤형 프롬프트 제공",
+                  "원클릭 복사 및 재생성",
+                  "검증된 학술적 구조 적용",
+                ].map((feature) => {
+                  return (
+                    <HStack align="center" gap={3} key={feature} w="full">
+                      <Flex
+                        align="center"
+                        bg="seed.subtle"
+                        borderRadius="full"
+                        h="24px"
+                        justify="center"
+                        w="24px"
+                      >
+                        <CheckIcon color="seed" boxSize={"10px"} />
+                      </Flex>
+                      <Text
+                        color="text"
+                        fontSize="md"
+                        fontWeight="medium"
+                        letterSpacing="-0.02em"
+                        lineHeight="24px"
+                      >
+                        {feature}
+                      </Text>
+                    </HStack>
+                  );
+                })}
+              </VStack>
+            </VStack>
           </Flex>
         </VStack>
       </Box>
