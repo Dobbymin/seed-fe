@@ -1,22 +1,12 @@
 import { type RefObject, useEffect, useState } from "react";
 
-import { ASSIGNMENT_HELP_SECTION_ORDER } from "../../../../constants";
 import type {
   AssignmentHelpSectionId,
   AssignmentHelpSectionProgressMap,
 } from "../../../../types";
 import { clamp01 } from "../../../../utils";
 
-// 모든 구간의 시작 진행도를 0으로 만든 상태값을 만듦
-const createZeroProgressMap = (): AssignmentHelpSectionProgressMap => {
-  return {
-    intro: 0,
-    chat: 0,
-    timeLoss: 0,
-  };
-};
-
-// 한 구간의 스크롤 진행도를 0부터 1 사이 값으로 계산함
+// 각 섹션의 진행도를 계산하는 로직
 const calculateSectionProgress = (section: HTMLElement | null) => {
   if (!section) {
     return 0;
@@ -32,45 +22,38 @@ const calculateSectionProgress = (section: HTMLElement | null) => {
   return clamp01(-rect.top / travel);
 };
 
-// 이전 진행도와 새 진행도가 같은지 확인함
-const isProgressMapEqual = (
-  left: AssignmentHelpSectionProgressMap,
-  right: AssignmentHelpSectionProgressMap,
-) => {
-  return ASSIGNMENT_HELP_SECTION_ORDER.every((sectionId) => {
-    return Math.abs(left[sectionId] - right[sectionId]) < 0.0001;
-  });
-};
-
 export type AssignmentHelpSectionRefs = Record<
   AssignmentHelpSectionId,
   RefObject<HTMLElement | null>
 >;
 
-// 각 구간 ref를 기준으로 현재 스크롤 진행도를 구함
 export const useAssignmentHelpSectionProgresses = (
   sectionRefs: AssignmentHelpSectionRefs,
 ) => {
   const [progresses, setProgresses] =
-    useState<AssignmentHelpSectionProgressMap>(createZeroProgressMap);
+    useState<AssignmentHelpSectionProgressMap>({
+      intro: 0,
+      chat: 0,
+      timeLoss: 0,
+    });
 
   useEffect(() => {
     let frameId: number | null = null;
 
     const calculate = () => {
-      const nextProgress =
-        ASSIGNMENT_HELP_SECTION_ORDER.reduce<AssignmentHelpSectionProgressMap>(
-          (acc, sectionId) => {
-            acc[sectionId] = calculateSectionProgress(
-              sectionRefs[sectionId].current,
-            );
-            return acc;
-          },
-          createZeroProgressMap(),
-        );
+      const nextProgress: AssignmentHelpSectionProgressMap = {
+        intro: calculateSectionProgress(sectionRefs.intro.current),
+        chat: calculateSectionProgress(sectionRefs.chat.current),
+        timeLoss: calculateSectionProgress(sectionRefs.timeLoss.current),
+      };
 
       setProgresses((current) => {
-        if (isProgressMapEqual(current, nextProgress)) {
+        const isSame =
+          Math.abs(current.intro - nextProgress.intro) < 0.0001 &&
+          Math.abs(current.chat - nextProgress.chat) < 0.0001 &&
+          Math.abs(current.timeLoss - nextProgress.timeLoss) < 0.0001;
+
+        if (isSame) {
           return current;
         }
 

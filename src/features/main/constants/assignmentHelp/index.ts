@@ -12,9 +12,6 @@ export {
   type TimeLossPhrase,
 } from "./timeLossScene";
 
-export const ASSIGNMENT_HELP_SECTION_ORDER: readonly AssignmentHelpSectionId[] =
-  ["intro", "chat", "timeLoss"];
-
 export const ASSIGNMENT_HELP_SECTION_SCROLL_VH: Record<
   AssignmentHelpSectionId,
   number
