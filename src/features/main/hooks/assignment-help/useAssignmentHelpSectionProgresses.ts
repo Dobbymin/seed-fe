@@ -10,7 +10,7 @@ export type AssignmentHelpSectionRefs = Record<
   AssignmentHelpSectionId,
   RefObject<HTMLElement | null>
 >;
-
+// 과제 도와줘 섹션 스크롤 진행도 측정
 export const useAssignmentHelpSectionProgresses = (
   sectionRefs: AssignmentHelpSectionRefs,
 ) => {

@@ -1,4 +1,4 @@
-export type TimeLossPhrase = {
+export type PhraseCloudPhrase = {
   text: string;
   x: number;
   y: number;
@@ -6,8 +6,8 @@ export type TimeLossPhrase = {
 
 // Seed positions for the phrase cloud, normalized from the original design layout.
 // 문구 클라우드의 초기 배치 좌표를 원본 디자인 기준으로 정규화해 둔 데이터
-export const TIME_LOSS_PHRASE_BASE_TONE = 176;
-export const TIME_LOSS_PHRASES: TimeLossPhrase[] = [
+export const PHRASE_CLOUD_BASE_TONE = 176;
+export const PHRASE_CLOUD_PHRASES: PhraseCloudPhrase[] = [
   { text: "라바돈의 죽음모자", x: 157.5 / 1341, y: 74 / 644 },
   { text: "관련 근거 검색", x: 427.5 / 1341, y: 74 / 644 },
   { text: "과제물에서만 근거를 찾아", x: 647.5 / 1341, y: 74 / 644 },

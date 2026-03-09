@@ -19,6 +19,8 @@ const fallbackCardId = (cards: SolutionAssignmentCard[]) => {
   return cards[0]?.id ?? "writing";
 };
 
+// 실행만 하세요 섹션 화면 상태 관리
+// 섹션 안에 분석 단계랑 로드맵 단계 상태를 조립해서 넘겨줌
 export const useExecutionOnlySectionState = ({
   isActivated,
 }: UseExecutionOnlySectionStateParams) => {

@@ -12,6 +12,7 @@ type UseAssignmentHelpSectionViewModelParams = {
   onSolutionReadyChange?: (isReady: boolean) => void;
 };
 
+// 과제 도와줘 섹션 화면 상태 관리
 export const useAssignmentHelpSectionViewModel = ({
   onSolutionReadyChange,
 }: UseAssignmentHelpSectionViewModelParams) => {

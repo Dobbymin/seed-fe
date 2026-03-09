@@ -3,12 +3,12 @@ import { useRef } from "react";
 import { Box, Text } from "@chakra-ui/react";
 
 import {
-  TIME_LOSS_PHRASES,
-  TIME_LOSS_PHRASE_BASE_TONE,
+  PHRASE_CLOUD_BASE_TONE,
+  PHRASE_CLOUD_PHRASES,
 } from "../../../constants";
 import { usePhraseCloudMotion } from "../../../hooks";
 
-type PhraseCloudCloudProps = {
+type PhraseCloudProps = {
   backdropOpacity: number;
   interactive: boolean;
   phraseOpacity: number;
@@ -18,11 +18,11 @@ export const PhraseCloud = ({
   backdropOpacity,
   interactive,
   phraseOpacity,
-}: PhraseCloudCloudProps) => {
-  const PhraseCloudContainerRef = useRef<HTMLDivElement | null>(null);
+}: PhraseCloudProps) => {
+  const phraseCloudContainerRef = useRef<HTMLDivElement | null>(null);
   const { baseOpacity, handlePointerLeave, handlePointerMove, phraseRefs } =
     usePhraseCloudMotion({
-      containerRef: PhraseCloudContainerRef,
+      containerRef: phraseCloudContainerRef,
       interactive,
     });
 
@@ -57,14 +57,14 @@ export const PhraseCloud = ({
             overflow="hidden"
             pointerEvents={interactive ? "auto" : "none"}
             position="relative"
-            ref={PhraseCloudContainerRef}
+            ref={phraseCloudContainerRef}
             style={{ contain: "layout paint style" }}
             w="full"
           >
-            {TIME_LOSS_PHRASES.map((phrase, index) => (
+            {PHRASE_CLOUD_PHRASES.map((phrase, index) => (
               <Text
                 as="p"
-                color={`rgb(${TIME_LOSS_PHRASE_BASE_TONE}, ${TIME_LOSS_PHRASE_BASE_TONE}, ${TIME_LOSS_PHRASE_BASE_TONE})`}
+                color={`rgb(${PHRASE_CLOUD_BASE_TONE}, ${PHRASE_CLOUD_BASE_TONE}, ${PHRASE_CLOUD_BASE_TONE})`}
                 fontSize={{
                   base: "lg",
                   md: "2xl",

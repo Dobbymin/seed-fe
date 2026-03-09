@@ -1,7 +1,7 @@
 import {
   PHRASE_CLOUD_FONT_SIZE,
   PHRASE_CLOUD_MOTION_CONFIG,
-  TIME_LOSS_PHRASES,
+  PHRASE_CLOUD_PHRASES,
 } from "../constants";
 import type {
   ComputeNextPhraseCloudFrameParams,
@@ -17,28 +17,28 @@ import { clamp } from "./clamp";
 
 const TWO_PI = Math.PI * 2;
 
-const TIME_LOSS_PHRASE_X_MIN_MARGIN = 0.06;
-const TIME_LOSS_PHRASE_X_MAX_MARGIN = 0.94;
-const TIME_LOSS_PHRASE_Y_MIN_MARGIN = 0.08;
-const TIME_LOSS_PHRASE_Y_MAX_MARGIN = 0.92;
-const TIME_LOSS_PHRASE_RAW_X_MIN = Math.min(
-  ...TIME_LOSS_PHRASES.map((phrase) => phrase.x),
+const PHRASE_CLOUD_X_MIN_MARGIN = 0.06;
+const PHRASE_CLOUD_X_MAX_MARGIN = 0.94;
+const PHRASE_CLOUD_Y_MIN_MARGIN = 0.08;
+const PHRASE_CLOUD_Y_MAX_MARGIN = 0.92;
+const PHRASE_CLOUD_RAW_X_MIN = Math.min(
+  ...PHRASE_CLOUD_PHRASES.map((phrase) => phrase.x),
 );
-const TIME_LOSS_PHRASE_RAW_X_MAX = Math.max(
-  ...TIME_LOSS_PHRASES.map((phrase) => phrase.x),
+const PHRASE_CLOUD_RAW_X_MAX = Math.max(
+  ...PHRASE_CLOUD_PHRASES.map((phrase) => phrase.x),
 );
-const TIME_LOSS_PHRASE_RAW_Y_MIN = Math.min(
-  ...TIME_LOSS_PHRASES.map((phrase) => phrase.y),
+const PHRASE_CLOUD_RAW_Y_MIN = Math.min(
+  ...PHRASE_CLOUD_PHRASES.map((phrase) => phrase.y),
 );
-const TIME_LOSS_PHRASE_RAW_Y_MAX = Math.max(
-  ...TIME_LOSS_PHRASES.map((phrase) => phrase.y),
+const PHRASE_CLOUD_RAW_Y_MAX = Math.max(
+  ...PHRASE_CLOUD_PHRASES.map((phrase) => phrase.y),
 );
-const TIME_LOSS_PHRASE_RAW_X_SPAN = Math.max(
-  TIME_LOSS_PHRASE_RAW_X_MAX - TIME_LOSS_PHRASE_RAW_X_MIN,
+const PHRASE_CLOUD_RAW_X_SPAN = Math.max(
+  PHRASE_CLOUD_RAW_X_MAX - PHRASE_CLOUD_RAW_X_MIN,
   0.0001,
 );
-const TIME_LOSS_PHRASE_RAW_Y_SPAN = Math.max(
-  TIME_LOSS_PHRASE_RAW_Y_MAX - TIME_LOSS_PHRASE_RAW_Y_MIN,
+const PHRASE_CLOUD_RAW_Y_SPAN = Math.max(
+  PHRASE_CLOUD_RAW_Y_MAX - PHRASE_CLOUD_RAW_Y_MIN,
   0.0001,
 );
 
@@ -52,24 +52,20 @@ const fract = (value: number) => {
 };
 
 const mapPhraseCloudXToLayout = (rawX: number) => {
-  const normalizedX =
-    (rawX - TIME_LOSS_PHRASE_RAW_X_MIN) / TIME_LOSS_PHRASE_RAW_X_SPAN;
+  const normalizedX = (rawX - PHRASE_CLOUD_RAW_X_MIN) / PHRASE_CLOUD_RAW_X_SPAN;
 
   return (
-    TIME_LOSS_PHRASE_X_MIN_MARGIN +
-    normalizedX *
-      (TIME_LOSS_PHRASE_X_MAX_MARGIN - TIME_LOSS_PHRASE_X_MIN_MARGIN)
+    PHRASE_CLOUD_X_MIN_MARGIN +
+    normalizedX * (PHRASE_CLOUD_X_MAX_MARGIN - PHRASE_CLOUD_X_MIN_MARGIN)
   );
 };
 
 const mapPhraseCloudYToLayout = (rawY: number) => {
-  const normalizedY =
-    (rawY - TIME_LOSS_PHRASE_RAW_Y_MIN) / TIME_LOSS_PHRASE_RAW_Y_SPAN;
+  const normalizedY = (rawY - PHRASE_CLOUD_RAW_Y_MIN) / PHRASE_CLOUD_RAW_Y_SPAN;
 
   return (
-    TIME_LOSS_PHRASE_Y_MIN_MARGIN +
-    normalizedY *
-      (TIME_LOSS_PHRASE_Y_MAX_MARGIN - TIME_LOSS_PHRASE_Y_MIN_MARGIN)
+    PHRASE_CLOUD_Y_MIN_MARGIN +
+    normalizedY * (PHRASE_CLOUD_Y_MAX_MARGIN - PHRASE_CLOUD_Y_MIN_MARGIN)
   );
 };
 
@@ -132,7 +128,7 @@ const resolvePhraseCloudCollisions = (
 };
 
 export const buildPhraseCloudSeeds = (): PhraseSeed[] => {
-  return TIME_LOSS_PHRASES.map((phrase, index) => {
+  return PHRASE_CLOUD_PHRASES.map((phrase, index) => {
     const baseU = mapPhraseCloudXToLayout(phrase.x) - 0.5;
     const baseV = mapPhraseCloudYToLayout(phrase.y) - 0.5;
     const jitterX =
@@ -149,7 +145,7 @@ export const buildPhraseCloudSeeds = (): PhraseSeed[] => {
   });
 };
 
-export const createInitialTimeLossMotionState = (): MotionState => {
+export const createInitialPhraseCloudMotionState = (): MotionState => {
   return {
     lastPointer: null,
     lastTimestamp: 0,
@@ -166,7 +162,7 @@ export const createInitialTimeLossMotionState = (): MotionState => {
   };
 };
 
-export const createEmptyTimeLossLayoutState = (): LayoutState => {
+export const createEmptyPhraseCloudLayoutState = (): LayoutState => {
   return {
     centerX: 0,
     centerY: 0,
@@ -175,7 +171,7 @@ export const createEmptyTimeLossLayoutState = (): LayoutState => {
   };
 };
 
-export const createTimeLossLayoutState = (
+export const createPhraseCloudLayoutState = (
   width: number,
   height: number,
 ): LayoutState => {
@@ -340,7 +336,7 @@ export const computeNextPhraseCloudFrame = ({
   };
 };
 
-export const resetTimeLossMotionPointerTarget = (motion: MotionState) => {
+export const resetPhraseCloudMotionPointerTarget = (motion: MotionState) => {
   return {
     ...motion,
     lastPointer: null,
@@ -349,7 +345,7 @@ export const resetTimeLossMotionPointerTarget = (motion: MotionState) => {
   };
 };
 
-export const updateTimeLossMotionFromPointer = ({
+export const updatePhraseCloudMotionFromPointer = ({
   height,
   motion,
   pointerX,

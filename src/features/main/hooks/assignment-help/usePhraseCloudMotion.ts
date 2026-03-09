@@ -22,12 +22,12 @@ import {
   computeNextPhraseCloudFrame,
   computeStaticPhraseCloudRenderBuffer,
   createDefaultPhraseCloudMetrics,
-  createEmptyTimeLossLayoutState,
+  createEmptyPhraseCloudLayoutState,
+  createInitialPhraseCloudMotionState,
   createInitialPhraseCloudRenderBuffer,
-  createInitialTimeLossMotionState,
-  createTimeLossLayoutState,
-  resetTimeLossMotionPointerTarget,
-  updateTimeLossMotionFromPointer,
+  createPhraseCloudLayoutState,
+  resetPhraseCloudMotionPointerTarget,
+  updatePhraseCloudMotionFromPointer,
 } from "../../utils";
 
 type UsePhraseCloudMotionParams = {
@@ -35,6 +35,7 @@ type UsePhraseCloudMotionParams = {
   interactive: boolean;
 };
 
+// 문장 구름 모션 담당
 export const usePhraseCloudMotion = ({
   containerRef,
   interactive,
@@ -44,8 +45,8 @@ export const usePhraseCloudMotion = ({
   const metricsRef = useRef<PhraseMetrics[]>(
     createDefaultPhraseCloudMetrics(seeds.length),
   );
-  const layoutRef = useRef<LayoutState>(createEmptyTimeLossLayoutState());
-  const motionRef = useRef<MotionState>(createInitialTimeLossMotionState());
+  const layoutRef = useRef<LayoutState>(createEmptyPhraseCloudLayoutState());
+  const motionRef = useRef<MotionState>(createInitialPhraseCloudMotionState());
   const renderBufferRef = useRef<PhraseRender[]>(
     createInitialPhraseCloudRenderBuffer(seeds.length),
   );
@@ -63,7 +64,7 @@ export const usePhraseCloudMotion = ({
       return false;
     }
 
-    layoutRef.current = createTimeLossLayoutState(rect.width, rect.height);
+    layoutRef.current = createPhraseCloudLayoutState(rect.width, rect.height);
     return true;
   }, [containerRef]);
 
@@ -124,7 +125,7 @@ export const usePhraseCloudMotion = ({
         return;
       }
 
-      motionRef.current = updateTimeLossMotionFromPointer({
+      motionRef.current = updatePhraseCloudMotionFromPointer({
         height: layoutRef.current.height,
         motion: motionRef.current,
         pointerX: event.nativeEvent.offsetX,
@@ -136,7 +137,7 @@ export const usePhraseCloudMotion = ({
   );
 
   const handlePointerLeave = useCallback(() => {
-    motionRef.current = resetTimeLossMotionPointerTarget(motionRef.current);
+    motionRef.current = resetPhraseCloudMotionPointerTarget(motionRef.current);
   }, []);
 
   useEffect(() => {
@@ -179,7 +180,9 @@ export const usePhraseCloudMotion = ({
     measurePhraseMetrics();
 
     if (!interactive) {
-      motionRef.current = resetTimeLossMotionPointerTarget(motionRef.current);
+      motionRef.current = resetPhraseCloudMotionPointerTarget(
+        motionRef.current,
+      );
     }
 
     const animate = (timestamp: number) => {
