@@ -1,4 +1,4 @@
-import { clamp01 } from "./clamp";
+import { scrollTravelProgress } from "./progressMath";
 
 type CalculateAssignmentHelpSectionProgressParams = {
   height: number;
@@ -11,11 +11,9 @@ export const calculateAssignmentHelpSectionProgress = ({
   top,
   viewportHeight,
 }: CalculateAssignmentHelpSectionProgressParams) => {
-  const travel = height - viewportHeight;
-
-  if (travel <= 1) {
-    return top <= 0 ? 1 : 0;
-  }
-
-  return clamp01(-top / travel);
+  return scrollTravelProgress({
+    height,
+    top,
+    viewportHeight,
+  });
 };

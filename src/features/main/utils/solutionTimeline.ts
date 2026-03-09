@@ -4,28 +4,19 @@ import {
 } from "../constants/execution-only/solutionProgressLayout";
 
 import { clamp, clamp01 } from "./clamp";
+import {
+  clampedLerp as lerp,
+  scrollTravelProgress,
+  windowedProgress,
+} from "./progressMath";
 
-// 시작값과 끝값 사이 값을 진행도에 맞춰 구함
-export const lerp = (start: number, end: number, progress: number) => {
-  return start + (end - start) * clamp01(progress);
-};
+export { lerp, windowedProgress };
 
-// 특정 구간 안에서 현재 진행도를 0부터 1 사이 값으로 바꿈
-export const windowedProgress = (value: number, start: number, end: number) => {
-  if (start === end) {
-    return value >= end ? 1 : 0;
-  }
-
-  return clamp01((value - start) / (end - start));
-};
-
-// 초반보다 끝부분이 더 부드럽게 느껴지도록 진행도를 바꿈
 export const easeOutCubic = (value: number) => {
   const normalized = clamp01(value);
   return 1 - (1 - normalized) ** 3;
 };
 
-// 실제 스크롤 거리를 실행 섹션 계산에 쓰는 단계값으로 바꿈
 export const resolveProgressUnits = ({
   isActivated,
   distancePx,
@@ -55,13 +46,13 @@ export const resolveSceneProgressUnits = ({
     return 0;
   }
 
-  const travel = sceneHeight - viewportHeight;
-
-  if (travel <= 1) {
-    return sceneTop <= 0 ? TOTAL_UNITS : 0;
-  }
-
-  return clamp01(-sceneTop / travel) * TOTAL_UNITS;
+  return (
+    scrollTravelProgress({
+      height: sceneHeight,
+      top: sceneTop,
+      viewportHeight,
+    }) * TOTAL_UNITS
+  );
 };
 
 export type SolutionTimelineState = {
@@ -78,13 +69,11 @@ export type SolutionTimelineState = {
   summaryReveal: number;
 };
 
-// 진행 단계값을 받아서, 실행 섹션 각 부분의 노출 상태값으로 바꿈
 export const deriveSolutionTimelineState = (
   progressUnitsInput: number,
 ): SolutionTimelineState => {
   const progressUnits = clamp(progressUnitsInput, 0, TOTAL_UNITS);
 
-  // 분석 단계가 순서대로 열리는 구간
   const analysisStageReveal = easeOutCubic(
     windowedProgress(progressUnits, 0, 1.4),
   );
@@ -98,7 +87,6 @@ export const deriveSolutionTimelineState = (
   const summaryReveal = easeOutCubic(windowedProgress(progressUnits, 3.1, 4.1));
   const intentReveal = easeOutCubic(windowedProgress(progressUnits, 4.1, 5.1));
 
-  // 로드맵 단계가 순서대로 열리는 구간
   const roadmapContainerReveal = easeOutCubic(
     windowedProgress(progressUnits, 6.2, 7.2),
   );

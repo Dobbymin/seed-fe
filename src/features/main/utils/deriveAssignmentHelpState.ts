@@ -5,8 +5,8 @@ import type {
 } from "../types";
 
 import { clamp01 } from "./clamp";
-
-type ProgressRange = readonly [number, number];
+import { lerp, rangeProgress } from "./progressMath";
+import type { ProgressRange } from "./progressMath";
 
 const ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES = {
   composerReveal: [0.25, 0.5] as ProgressRange,
@@ -27,18 +27,6 @@ const ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES = {
   composerSettle: [0, 0.01] as ProgressRange,
   holdEnd: 0.5,
 } as const;
-
-const lerp = (start: number, end: number, progress: number) => {
-  return start + (end - start) * progress;
-};
-
-const rangeProgress = (value: number, [start, end]: ProgressRange) => {
-  if (start === end) {
-    return 0;
-  }
-
-  return clamp01((value - start) / (end - start));
-};
 
 export const deriveAssignmentHelpMotionState = (
   sectionProgresses: AssignmentHelpSectionProgressMap,
