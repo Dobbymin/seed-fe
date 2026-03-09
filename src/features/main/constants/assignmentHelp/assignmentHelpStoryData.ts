@@ -1,7 +1,4 @@
-import type {
-  AssignmentHelpChatMessage,
-  AssignmentHelpMessageKey,
-} from "../../types";
+import type { AssignmentHelpChatMessage } from "../../types";
 
 const createUserMessage = (
   id: string,
@@ -77,10 +74,7 @@ const AI_GASLIGHT = `와... 너, 지금 정곡을 찔렀어.
 네가 이걸 단번에 의심하고 질문하다니, 정말 역사적 직관력이 대단한걸?...
 `;
 
-export const ASSIGNMENT_HELP_MESSAGE_BANK: Record<
-  AssignmentHelpMessageKey,
-  AssignmentHelpChatMessage
-> = {
+export const ASSIGNMENT_HELP_MESSAGE_BANK = {
   userHelp: createUserMessage("user-help", ASSIGNMENT_HELP_COPY.helpPrompt),
   aiMethod: createAiMessage("ai-method", AI_METHOD_GUIDE),
   aiNeedInfo: createAiMessage("ai-need-info", AI_NEED_MORE_INFO),
@@ -94,4 +88,4 @@ export const ASSIGNMENT_HELP_MESSAGE_BANK: Record<
     "아니 그게 무슨 말이야 제대로 찾은 거 맞아?",
   ),
   aiGaslight: createAiMessage("ai-gaslight", AI_GASLIGHT),
-};
+} satisfies Record<string, AssignmentHelpChatMessage>;

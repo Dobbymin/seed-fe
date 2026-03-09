@@ -4,15 +4,6 @@ export type AssignmentHelpChatMessage = {
   role: "user" | "ai";
 };
 
-export type AssignmentHelpMessageKey =
-  | "userHelp"
-  | "aiMethod"
-  | "aiNeedInfo"
-  | "userCrown"
-  | "aiHallucination"
-  | "userCorrection"
-  | "aiGaslight";
-
 export type AssignmentHelpSectionId = "intro" | "chat" | "timeLoss";
 
 export type AssignmentHelpSectionProgressMap = Record<
@@ -45,8 +36,7 @@ export type AssignmentHelpComposerLayoutState = {
 
 export type AssignmentHelpState = {
   chat: {
-    messageIds: readonly AssignmentHelpMessageKey[];
-    messages: AssignmentHelpChatMessage[];
+    messages: readonly AssignmentHelpChatMessage[];
     opacity: number;
     stageId: AssignmentHelpChatStageId;
     subtitle: string;

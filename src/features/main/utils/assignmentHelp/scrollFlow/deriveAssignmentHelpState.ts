@@ -3,8 +3,8 @@ import {
   ASSIGNMENT_HELP_MESSAGE_BANK,
 } from "../../../constants/";
 import type {
+  AssignmentHelpChatMessage,
   AssignmentHelpChatStageId,
-  AssignmentHelpMessageKey,
   AssignmentHelpSectionProgressMap,
   AssignmentHelpState,
 } from "../../../types/";
@@ -14,13 +14,12 @@ type ProgressRange = readonly [number, number];
 
 type AssignmentHelpChatStage = {
   id: AssignmentHelpChatStageId;
-  messageIds: readonly AssignmentHelpMessageKey[];
+  messages: readonly AssignmentHelpChatMessage[];
   startAt: number;
   subtitle: string;
   subtitleKey: string;
 };
 
-// intro 구간 안에서 입력창이 언제 열리고 문구가 채워지는지 정함
 const ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES = {
   composerReveal: [0.25, 0.5] as ProgressRange,
   composerRevealEnd: 0.5,
@@ -28,14 +27,12 @@ const ASSIGNMENT_HELP_INTRO_PROGRESS_RANGES = {
   promptFill: [0.75, 1] as ProgressRange,
 } as const;
 
-// chat 구간 안에서 입력창이 내려가고 채팅이 보이는 시점을 정함
 const ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES = {
   dock: [0, 0.02] as ProgressRange,
   promptExit: [0.02, 0.15] as ProgressRange,
   userOnly: [0.15, 0.165] as ProgressRange,
 } as const;
 
-// time loss 구간 안에서 다음 장면이 열리는 시점을 정함
 const ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES = {
   backdropReveal: [0, 0.02] as ProgressRange,
   backdropRevealEnd: 0.02,
@@ -43,64 +40,76 @@ const ASSIGNMENT_HELP_TIME_LOSS_PROGRESS_RANGES = {
   holdEnd: 0.5,
 } as const;
 
-// chat 구간에서 어떤 메시지와 문구를 보여줄지 단계별로 정함
 const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
   {
     id: "empty",
-    messageIds: [],
+    messages: [],
     startAt: 0,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.common,
     subtitleKey: "empty",
   },
   {
     id: "userOnly",
-    messageIds: ["userHelp"],
+    messages: [ASSIGNMENT_HELP_MESSAGE_BANK.userHelp],
     startAt: 0.25,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.common,
     subtitleKey: "userOnly",
   },
   {
     id: "helpAndMethod",
-    messageIds: ["userHelp", "aiMethod"],
+    messages: [
+      ASSIGNMENT_HELP_MESSAGE_BANK.userHelp,
+      ASSIGNMENT_HELP_MESSAGE_BANK.aiMethod,
+    ],
     startAt: 0.375,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.methodology,
     subtitleKey: "helpAndMethod",
   },
   {
     id: "needInfo",
-    messageIds: ["userHelp", "aiNeedInfo"],
+    messages: [
+      ASSIGNMENT_HELP_MESSAGE_BANK.userHelp,
+      ASSIGNMENT_HELP_MESSAGE_BANK.aiNeedInfo,
+    ],
     startAt: 0.5,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.tooManyInfo,
     subtitleKey: "needInfo",
   },
   {
     id: "userCrown",
-    messageIds: ["userCrown"],
+    messages: [ASSIGNMENT_HELP_MESSAGE_BANK.userCrown],
     startAt: 0.625,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
     subtitleKey: "userCrown",
   },
   {
     id: "hallucination",
-    messageIds: ["userCrown", "aiHallucination"],
+    messages: [
+      ASSIGNMENT_HELP_MESSAGE_BANK.userCrown,
+      ASSIGNMENT_HELP_MESSAGE_BANK.aiHallucination,
+    ],
     startAt: 0.75,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.hallucination,
     subtitleKey: "hallucination",
   },
   {
     id: "correction",
-    messageIds: ["userCrown", "aiHallucination", "userCorrection"],
+    messages: [
+      ASSIGNMENT_HELP_MESSAGE_BANK.userCrown,
+      ASSIGNMENT_HELP_MESSAGE_BANK.aiHallucination,
+      ASSIGNMENT_HELP_MESSAGE_BANK.userCorrection,
+    ],
     startAt: 0.875,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
     subtitleKey: "correction",
   },
   {
     id: "gaslight",
-    messageIds: [
-      "userCrown",
-      "aiHallucination",
-      "userCorrection",
-      "aiGaslight",
+    messages: [
+      ASSIGNMENT_HELP_MESSAGE_BANK.userCrown,
+      ASSIGNMENT_HELP_MESSAGE_BANK.aiHallucination,
+      ASSIGNMENT_HELP_MESSAGE_BANK.userCorrection,
+      ASSIGNMENT_HELP_MESSAGE_BANK.aiGaslight,
     ],
     startAt: 1,
     subtitle: ASSIGNMENT_HELP_COPY.subtitles.repeatMistake,
@@ -108,12 +117,10 @@ const ASSIGNMENT_HELP_CHAT_STAGES: readonly AssignmentHelpChatStage[] = [
   },
 ] as const;
 
-// 시작값과 끝값 사이 값을 진행도에 맞춰 구함
 const lerp = (start: number, end: number, progress: number) => {
   return start + (end - start) * progress;
 };
 
-// 특정 구간 안에서 현재 진행도를 0부터 1 사이 값으로 바꿈
 const rangeProgress = (value: number, [start, end]: ProgressRange) => {
   if (start === end) {
     return 0;
@@ -122,7 +129,6 @@ const rangeProgress = (value: number, [start, end]: ProgressRange) => {
   return clamp01((value - start) / (end - start));
 };
 
-// chat 구간의 진행도에 맞는 현재 채팅 단계를 찾음
 const resolveChatStage = (chatProgress: number) => {
   let activeStage = ASSIGNMENT_HELP_CHAT_STAGES[0];
 
@@ -135,7 +141,6 @@ const resolveChatStage = (chatProgress: number) => {
   return activeStage;
 };
 
-// 각 구간의 스크롤 진행도를 받아서, 화면에 보여줄 상태값으로 바꿈
 export const deriveAssignmentHelpState = (
   sectionProgresses: AssignmentHelpSectionProgressMap,
 ): AssignmentHelpState => {
@@ -230,9 +235,7 @@ export const deriveAssignmentHelpState = (
   }
 
   const chatStage = resolveChatStage(chatProgress);
-  const chatMessages = chatStage.messageIds.map((id) => {
-    return ASSIGNMENT_HELP_MESSAGE_BANK[id];
-  });
+  const chatMessages = chatStage.messages;
   const chatVisibilityBase =
     chatProgress >= ASSIGNMENT_HELP_CHAT_PROGRESS_RANGES.userOnly[0] ? 1 : 0;
   const chatOpacity =
@@ -250,7 +253,6 @@ export const deriveAssignmentHelpState = (
 
   return {
     chat: {
-      messageIds: chatStage.messageIds,
       messages: chatMessages,
       opacity: chatOpacity,
       stageId: chatStage.id,

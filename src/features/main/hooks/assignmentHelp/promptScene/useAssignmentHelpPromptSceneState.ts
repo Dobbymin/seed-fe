@@ -9,7 +9,6 @@ import {
 
 import type {
   AssignmentHelpChatMessage,
-  AssignmentHelpMessageKey,
   AssignmentHelpState,
 } from "../../../types";
 
@@ -22,47 +21,45 @@ type AssignmentHelpPromptSceneState = {
   conversationRef: RefObject<HTMLDivElement | null>;
 };
 
-type AnimatedMessageIdsState = readonly AssignmentHelpMessageKey[];
+type AnimatedMessageIdsState = readonly string[];
 
-// 이번 단계에서 새로 나온 메시지 id만 따로 찾음
 const useAnimatedMessageIds = ({
   chatStageKey,
-  messageIds,
   messages,
 }: {
   chatStageKey: string;
-  messageIds: readonly AssignmentHelpMessageKey[];
-  messages: AssignmentHelpChatMessage[];
+  messages: readonly AssignmentHelpChatMessage[];
 }) => {
-  const previousMessageIdsRef = useRef<readonly AssignmentHelpMessageKey[]>([]);
+  const previousMessageIdsRef = useRef<readonly string[]>([]);
   const [animatedMessageIds, setAnimatedMessageIds] =
     useState<AnimatedMessageIdsState>([]);
 
   useLayoutEffect(() => {
+    const nextMessageIds = messages.map((message) => {
+      return message.id;
+    });
     const previousMessageIds = previousMessageIdsRef.current;
-    const nextAnimatedMessageIds = messageIds.filter((messageId) => {
+    const nextAnimatedMessageIds = nextMessageIds.filter((messageId) => {
       return !previousMessageIds.includes(messageId);
     });
 
     setAnimatedMessageIds(nextAnimatedMessageIds);
-    previousMessageIdsRef.current = messageIds;
-  }, [chatStageKey, messageIds]);
+    previousMessageIdsRef.current = nextMessageIds;
+  }, [chatStageKey, messages]);
 
   return useMemo(() => {
     return new Set(
       messages
-        .filter((_, index) => {
-          const messageId = messageIds[index];
-          return messageId ? animatedMessageIds.includes(messageId) : false;
+        .filter((message) => {
+          return animatedMessageIds.includes(message.id);
         })
         .map((message) => {
           return message.id;
         }),
     );
-  }, [animatedMessageIds, messageIds, messages]);
+  }, [animatedMessageIds, messages]);
 };
 
-// 채팅 단계가 바뀌면 대화창을 맨 아래로 내림
 const useConversationScroll = ({
   conversationRef,
   stageKey,
@@ -91,7 +88,6 @@ const useConversationScroll = ({
   }, [conversationRef, stageKey]);
 };
 
-// 프롬프트 장면에 필요한 내부 상태값을 만듦
 export const useAssignmentHelpPromptSceneState = ({
   chat,
 }: UseAssignmentHelpPromptSceneStateParams): AssignmentHelpPromptSceneState => {
@@ -99,7 +95,6 @@ export const useAssignmentHelpPromptSceneState = ({
 
   const animatedMessageIds = useAnimatedMessageIds({
     chatStageKey: chat.stageId,
-    messageIds: chat.messageIds,
     messages: chat.messages,
   });
 
