@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router";
 
 import { Box, Flex } from "@chakra-ui/react";
 
-import { ROUTE_PATHS } from "@/shared";
+import { ROUTE_PATHS, ScrollToTop } from "@/shared";
 
 import { Footer, Header } from "../components";
 
@@ -84,6 +84,7 @@ export const RootLayout = () => {
               "transform 260ms cubic-bezier(0.22, 1, 0.36, 1)",
             ].join(", ")}
           >
+            <ScrollToTop />
             <Header />
           </Box>
         </Box>
