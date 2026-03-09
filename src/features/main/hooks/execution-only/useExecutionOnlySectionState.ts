@@ -25,8 +25,7 @@ export const useExecutionOnlySectionState = ({
   isActivated,
 }: UseExecutionOnlySectionStateParams) => {
   const cards = SOLUTION_ASSIGNMENT_CARDS;
-  const { progressUnits, progressTriggerRef } =
-    useSolutionTimelineProgress(isActivated);
+  const { progressUnits, sceneRef } = useSolutionTimelineProgress(isActivated);
   const timeline = useMemo(() => {
     return deriveSolutionTimelineState(progressUnits);
   }, [progressUnits]);
@@ -71,7 +70,6 @@ export const useExecutionOnlySectionState = ({
       analysisContentRef,
       intentReveal: timeline.intentReveal,
       keywordReveal: timeline.keywordReveal,
-      progressTriggerRef,
       referenceReveal: timeline.referenceReveal,
       resolvedAnalysisHeight,
       summaryReveal: timeline.summaryReveal,
@@ -89,5 +87,6 @@ export const useExecutionOnlySectionState = ({
       roadmapTitleReveal: timeline.roadmapTitleReveal,
       resolvedRoadmapHeight,
     },
+    sceneRef,
   };
 };

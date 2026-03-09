@@ -16,7 +16,6 @@ type AnalysisStageProps = {
   analysisContentRef: RefObject<HTMLDivElement | null>;
   intentReveal: number;
   keywordReveal: number;
-  progressTriggerRef: RefObject<HTMLParagraphElement | null>;
   referenceReveal: number;
   resolvedAnalysisHeight: number;
   summaryReveal: number;
@@ -28,7 +27,6 @@ export const AnalysisStage = ({
   analysisContentRef,
   intentReveal,
   keywordReveal,
-  progressTriggerRef,
   referenceReveal,
   resolvedAnalysisHeight,
   summaryReveal,
@@ -60,7 +58,6 @@ export const AnalysisStage = ({
               fontWeight="bold"
               letterSpacing="-0.02em"
               lineHeight="1.4"
-              ref={progressTriggerRef}
               textAlign="center"
               whiteSpace="nowrap"
             >

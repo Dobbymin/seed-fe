@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-import { resolveProgressUnits } from "../../utils/solutionTimeline";
+import { resolveSceneProgressUnits } from "../../utils/solutionTimeline";
 
-// 트리거 요소의 위치를 실행 섹션 진행값으로 바꿈
+// 실행 섹션 루트의 위치를 sticky 구간 진행값으로 바꿈
 export const useSolutionTimelineProgress = (isActivated: boolean) => {
-  const progressTriggerRef = useRef<HTMLParagraphElement | null>(null);
+  const sceneRef = useRef<HTMLDivElement | null>(null);
   const [progressUnits, setProgressUnits] = useState(0);
 
   useEffect(() => {
@@ -14,20 +14,21 @@ export const useSolutionTimelineProgress = (isActivated: boolean) => {
 
     let frameId: number | null = null;
 
-    // 트리거 요소 위치를 읽어서 현재 진행값을 계산함
+    // 섹션 루트의 위치를 읽어서 sticky 구간 진행값을 계산함
     const calculate = () => {
-      const triggerNode = progressTriggerRef.current;
-      if (!triggerNode) {
+      const sceneNode = sceneRef.current;
+
+      if (!sceneNode) {
         setProgressUnits(0);
         return;
       }
 
-      const rect = triggerNode.getBoundingClientRect();
-      const triggerCenterY = rect.top + rect.height * 0.5;
-      const viewportCenterY = window.innerHeight * 0.5;
-      const nextProgressUnits = resolveProgressUnits({
+      const rect = sceneNode.getBoundingClientRect();
+      const nextProgressUnits = resolveSceneProgressUnits({
         isActivated,
-        distancePx: viewportCenterY - triggerCenterY,
+        sceneHeight: rect.height,
+        sceneTop: rect.top,
+        viewportHeight: window.innerHeight,
       });
       setProgressUnits(nextProgressUnits);
     };
@@ -59,7 +60,7 @@ export const useSolutionTimelineProgress = (isActivated: boolean) => {
   }, [isActivated]);
 
   return {
-    progressTriggerRef,
+    sceneRef,
     progressUnits: isActivated ? progressUnits : 0,
   };
 };

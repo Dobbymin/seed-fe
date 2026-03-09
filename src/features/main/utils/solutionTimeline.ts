@@ -1,10 +1,9 @@
+import {
+  PHASE_UNIT_PX,
+  TOTAL_UNITS,
+} from "../constants/execution-only/solutionProgressLayout";
+
 import { clamp, clamp01 } from "./clamp";
-
-// 실행 섹션 전체 진행값을 몇 단계로 나눠서 볼지 정함
-export const TOTAL_UNITS = 10;
-
-// 스크롤 몇 px를 1단계로 볼지 정함
-export const PHASE_UNIT_PX = 120;
 
 // 시작값과 끝값 사이 값을 진행도에 맞춰 구함
 export const lerp = (start: number, end: number, progress: number) => {
@@ -39,6 +38,30 @@ export const resolveProgressUnits = ({
   }
 
   return clamp(distancePx / PHASE_UNIT_PX, 0, TOTAL_UNITS);
+};
+
+export const resolveSceneProgressUnits = ({
+  isActivated,
+  sceneHeight,
+  sceneTop,
+  viewportHeight,
+}: {
+  isActivated: boolean;
+  sceneHeight: number;
+  sceneTop: number;
+  viewportHeight: number;
+}) => {
+  if (!isActivated) {
+    return 0;
+  }
+
+  const travel = sceneHeight - viewportHeight;
+
+  if (travel <= 1) {
+    return sceneTop <= 0 ? TOTAL_UNITS : 0;
+  }
+
+  return clamp01(-sceneTop / travel) * TOTAL_UNITS;
 };
 
 export type SolutionTimelineState = {
