@@ -1,4 +1,11 @@
-import { type RefObject, useEffect, useMemo, useRef } from "react";
+import {
+  type RefObject,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 
@@ -12,7 +19,6 @@ import {
 } from "../constants";
 import {
   type AssignmentHelpSectionRefs,
-  useAssignmentHelpPromptSceneState,
   useAssignmentHelpSectionProgresses,
   useTimeLossPhraseMotion,
 } from "../hooks";
@@ -46,10 +52,23 @@ export const AssignmentHelpSection = ({
   }, [sectionProgresses]);
   const isSolutionReady = assignmentHelpState.flags.isSolutionReady;
   const timeLossPhraseContainerRef = useRef<HTMLDivElement | null>(null);
-  const { animatedMessageIds, conversationRef } =
-    useAssignmentHelpPromptSceneState({
-      chat: assignmentHelpState.chat,
-    });
+  const conversationRef = useRef<HTMLDivElement | null>(null);
+  const previousAnimatedMessageIdsRef = useRef<readonly string[]>([]);
+  const previousChatStageIdRef = useRef("");
+  const [animatedMessageIdsState, setAnimatedMessageIdsState] = useState<
+    readonly string[]
+  >([]);
+  const animatedMessageIds = useMemo(() => {
+    return new Set(
+      assignmentHelpState.chat.messages
+        .filter((message) => {
+          return animatedMessageIdsState.includes(message.id);
+        })
+        .map((message) => {
+          return message.id;
+        }),
+    );
+  }, [animatedMessageIdsState, assignmentHelpState.chat.messages]);
   const {
     baseOpacity: timeLossPhraseBaseOpacity,
     handlePointerLeave: handleTimeLossPhrasePointerLeave,
@@ -59,6 +78,37 @@ export const AssignmentHelpSection = ({
     containerRef: timeLossPhraseContainerRef,
     interactive: assignmentHelpState.timeLoss.interactive,
   });
+
+  useLayoutEffect(() => {
+    const nextMessageIds = assignmentHelpState.chat.messages.map((message) => {
+      return message.id;
+    });
+    const previousMessageIds = previousAnimatedMessageIdsRef.current;
+    const nextAnimatedMessageIds = nextMessageIds.filter((messageId) => {
+      return !previousMessageIds.includes(messageId);
+    });
+
+    setAnimatedMessageIdsState(nextAnimatedMessageIds);
+    previousAnimatedMessageIdsRef.current = nextMessageIds;
+  }, [assignmentHelpState.chat.messages, assignmentHelpState.chat.stageId]);
+
+  useEffect(() => {
+    const conversation = conversationRef.current;
+
+    if (!conversation) {
+      previousChatStageIdRef.current = assignmentHelpState.chat.stageId;
+      return;
+    }
+
+    if (assignmentHelpState.chat.stageId !== previousChatStageIdRef.current) {
+      conversation.scrollTo({
+        behavior: previousChatStageIdRef.current ? "smooth" : "auto",
+        top: conversation.scrollHeight,
+      });
+    }
+
+    previousChatStageIdRef.current = assignmentHelpState.chat.stageId;
+  }, [assignmentHelpState.chat.stageId]);
 
   useEffect(() => {
     onSolutionReadyChange?.(isSolutionReady);

@@ -39,7 +39,6 @@ export type AssignmentHelpState = {
     messages: readonly AssignmentHelpChatMessage[];
     opacity: number;
     stageId: AssignmentHelpChatStageId;
-    subtitle: string;
     translateY: string;
   };
   composer: AssignmentHelpComposerLayoutState;

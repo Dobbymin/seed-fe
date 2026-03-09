@@ -247,7 +247,6 @@ export const deriveAssignmentHelpState = (
       messages: chatMessages,
       opacity: chatOpacity,
       stageId: chatStage.id,
-      subtitle: chatStage.subtitle,
       translateY: chatTranslateY,
     },
     composer: {
