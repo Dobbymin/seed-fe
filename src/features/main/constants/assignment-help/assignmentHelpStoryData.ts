@@ -1,5 +1,8 @@
 import type { AssignmentHelpChatMessage } from "../../types";
 
+// 채팅이 올라오는 시작 시점
+export const ASSIGNMENT_HELP_CHAT_PHASE_START_PROGRESS = 0.1;
+
 type AssignmentHelpChatPhase = {
   messages: readonly AssignmentHelpChatMessage[];
   subtitle: string;
