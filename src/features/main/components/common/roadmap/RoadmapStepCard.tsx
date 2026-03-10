@@ -45,7 +45,7 @@ export const RoadmapStepCard = ({
       }}
     >
       <Flex justify="center" pb={6} w="full">
-        <Box h="112px" position="relative" w="112px">
+        <Box boxSize={28} position="relative">
           <Flex
             align="center"
             bg="white"
@@ -114,7 +114,7 @@ export const RoadmapStepCard = ({
         }
         gap={0}
         h="full"
-        minH="200px"
+        minH={50}
         overflow="hidden"
         position="relative"
         p={6}

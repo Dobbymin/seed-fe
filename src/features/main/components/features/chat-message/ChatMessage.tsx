@@ -60,7 +60,7 @@ export const ChatMessage = ({
         fontWeight="medium"
         letterSpacing="-0.02em"
         lineHeight="1.4"
-        maxW="575px"
+        maxW={144}
         pt={3}
         whiteSpace="pre-line"
       >

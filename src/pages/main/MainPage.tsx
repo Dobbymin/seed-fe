@@ -110,7 +110,8 @@ export default function MainPage() {
                 px={4}
                 _focusVisible={{
                   borderColor: "transparent",
-                  outline: "2px solid #98C95C",
+                  outline: "2px solid",
+                  outlineColor: "seed",
                   outlineOffset: "2px",
                 }}
                 _hover={{ borderColor: "transparent" }}
@@ -144,14 +145,7 @@ export default function MainPage() {
       />
       <ExecutionOnlySection isActivated={isSolutionSectionReady} />
       <Box bg="white" py={{ base: 16, md: 20, lg: 24 }} w="full">
-        <VStack
-          align="stretch"
-          gap={12}
-          maxW="1200px"
-          mx="auto"
-          px={10}
-          w="full"
-        >
+        <VStack align="stretch" gap={12} maxW={300} mx="auto" px={10} w="full">
           <VStack align="start" gap={3} maxW="780px" w="full">
             <Box
               as="h2"
@@ -204,11 +198,10 @@ export default function MainPage() {
                         align="center"
                         bg="container.bg.card"
                         borderRadius="full"
-                        h="40px"
+                        boxSize={10}
                         justify="center"
-                        w="40px"
                       >
-                        <SparklesIcon color="seed" boxSize="18px" />
+                        <SparklesIcon color="seed" boxSize={4.5} />
                       </Flex>
 
                       <VStack align="start" gap={0} minW={0}>

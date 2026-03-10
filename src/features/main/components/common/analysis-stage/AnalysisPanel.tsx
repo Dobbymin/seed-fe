@@ -36,11 +36,11 @@ export const AnalysisPanel = ({
         >
           <VStack align="stretch" gap={1}>
             <Flex gap={2.5} px={2.5} py={2.5} w="full">
-              <Box bg="seed.900" h="30px" w="60px" />
-              <Box bg="seed.500" h="30px" w="60px" />
-              <Box bg="seed.500" h="30px" w="60px" />
-              <Box bg="seed.600" h="30px" w="60px" />
-              <Box bg="seed.400" h="30px" w="80px" />
+              <Box bg="seed.900" h={7} w={15} />
+              <Box bg="seed.500" h={7} w={15} />
+              <Box bg="seed.500" h={7} w={15} />
+              <Box bg="seed.600" h={7} w={15} />
+              <Box bg="seed.400" h={7} w={20} />
             </Flex>
           </VStack>
         </AnalysisPanelReveal>
@@ -52,11 +52,11 @@ export const AnalysisPanel = ({
         >
           <VStack align="stretch" gap={1}>
             <VStack align="stretch" gap={2.5} px={2.5} py={2.5}>
-              <Box bg="seed.900" h="30px" w="full" />
-              <Box bg="seed.500" h="60px" w="full" />
+              <Box bg="seed.900" h={7} w="full" />
+              <Box bg="seed.500" h={7} w="full" />
               <Flex gap={2.5} w="full">
-                <Box bg="seed.600" flex={1} h="30px" />
-                <Box bg="seed.400" flex={1} h="30px" />
+                <Box bg="seed.600" flex={1} h={7} />
+                <Box bg="seed.400" flex={1} h={7} />
               </Flex>
             </VStack>
           </VStack>
@@ -69,12 +69,12 @@ export const AnalysisPanel = ({
         >
           <VStack align="stretch" gap={1}>
             <VStack align="stretch" gap={2.5} px={2.5} py={2.5}>
-              <Box bg="seed.900" h="30px" w="full" />
+              <Box bg="seed.900" h={7} w="full" />
               <Flex gap={2.5} w="full">
-                <Box bg="seed.600" flex={1} h="30px" />
-                <Box bg="seed.400" flex={1} h="30px" />
+                <Box bg="seed.600" flex={1} h={7} />
+                <Box bg="seed.400" flex={1} h={7} />
               </Flex>
-              <Box bg="seed.300" h="60px" w="full" />
+              <Box bg="seed.300" h={15} w="full" />
             </VStack>
           </VStack>
         </AnalysisPanelReveal>

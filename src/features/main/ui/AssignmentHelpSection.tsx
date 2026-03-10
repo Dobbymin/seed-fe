@@ -81,7 +81,7 @@ export const AssignmentHelpSection = ({
                 assignmentHelpMotionState.flags.isChatVisible ? "auto" : "none"
               }
               position="absolute"
-              pt="240px"
+              pt={60}
               px={10}
               transform={`translateY(${assignmentHelpMotionState.chat.translateY})`}
               transition="opacity 220ms ease, transform 220ms ease"

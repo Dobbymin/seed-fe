@@ -65,7 +65,7 @@ export const AnalysisStage = ({
             </Text>
 
             <Box display={{ base: "none", xl: "block" }} w="full">
-              <Box h="600px" position="relative" w="full">
+              <Box h={150} position="relative" w="full">
                 <Box
                   left="50%"
                   position="absolute"
