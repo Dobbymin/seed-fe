@@ -1,60 +1,16 @@
 import { useState } from "react";
 
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Input,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 
-import { AssignmentHelpSection, ExecutionOnlySection } from "@/features";
-import { CheckIcon, CopyIcon, SparklesIcon, supabase } from "@/shared";
+import {
+  AssignmentHelpSection,
+  ExecutionOnlySection,
+  SendEmailSection,
+} from "@/features";
+import { CheckIcon, CopyIcon, SparklesIcon } from "@/shared";
 
 export default function MainPage() {
   const [isSolutionSectionReady, setIsSolutionSectionReady] = useState(false);
-  const [email, setEmail] = useState("");
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const submitWaitlistEmail = async () => {
-    const trimmedEmail = email.trim();
-    if (!trimmedEmail) return;
-
-    setSubmitStatus("loading");
-    setErrorMessage("");
-
-    try {
-      const { error } = await supabase.functions.invoke("notify-waitlist", {
-        body: { email: trimmedEmail },
-      });
-
-      if (error) {
-        let message = "오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
-        try {
-          const body = await (
-            error as { context?: { json: () => Promise<{ error?: string }> } }
-          ).context?.json();
-          if (body?.error) message = body.error;
-        } catch (e) {
-          // 에러 메시지 파싱 실패 시 기본 메시지 사용
-          console.error("Error parsing error message:", e);
-        }
-        setErrorMessage(message);
-        setSubmitStatus("error");
-        return;
-      }
-
-      setSubmitStatus("success");
-    } catch {
-      setErrorMessage("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-      setSubmitStatus("error");
-    }
-  };
 
   return (
     <Flex flexDir="column" align="center" bg="white">
@@ -71,6 +27,7 @@ export default function MainPage() {
           justify="space-between"
           maxW="1200px"
           mx="auto"
+          px={{ base: 4, lg: 10 }}
           py={{ base: 16, md: 22, lg: 10 }}
           w="full"
         >
@@ -83,13 +40,7 @@ export default function MainPage() {
               py={2}
             >
               <SparklesIcon boxSize={5} color="seed" />
-              <Text
-                color="text.secondary"
-                fontSize="lg"
-                fontWeight="medium"
-                letterSpacing="-0.02em"
-                lineHeight="1.4"
-              >
+              <Text color="text.secondary" fontSize="lg" fontWeight="medium">
                 생산성 +50% 로켓 탑승하기
               </Text>
             </HStack>
@@ -98,7 +49,6 @@ export default function MainPage() {
               color="text"
               fontSize={{ base: "4xl", md: "5xl", lg: "7xl" }}
               fontWeight="bold"
-              letterSpacing="-0.02em"
               lineHeight="1.2"
               textAlign="left"
             >
@@ -113,105 +63,13 @@ export default function MainPage() {
               color="text.secondary"
               fontSize="xl"
               fontWeight="medium"
-              letterSpacing="-0.02em"
-              lineHeight="1.4"
               textAlign="left"
             >
               PDF 업로드 한 번으로 과제 로드맵부터 최적화 프롬프트까지.
             </Text>
           </VStack>
 
-          <VStack
-            align="stretch"
-            flexShrink={0}
-            gap={6}
-            justify="center"
-            maxW="486px"
-            w="full"
-          >
-            {submitStatus === "success" ? (
-              <Flex
-                align="center"
-                bg="seed.subtle"
-                borderRadius="xl"
-                gap={3}
-                justify="center"
-                p={5}
-              >
-                <CheckIcon boxSize={5} color="seed" />
-                <Text color="seed" fontWeight="semibold">
-                  알림 신청이 완료되었습니다!
-                </Text>
-              </Flex>
-            ) : (
-              <>
-                <VStack align="stretch" gap={3}>
-                  <Text
-                    color="text"
-                    fontSize="xl"
-                    fontWeight="bold"
-                    letterSpacing="-0.02em"
-                    lineHeight="1.4"
-                  >
-                    이메일 / 전화번호
-                  </Text>
-                  <Input
-                    aria-label="이메일 또는 전화번호"
-                    bg="container.bg.card"
-                    border="none"
-                    borderRadius="0"
-                    boxShadow="none"
-                    h={12}
-                    placeholder="이메일 주소를 입력하세요"
-                    px={4}
-                    type="email"
-                    value={email}
-                    _focusVisible={{
-                      borderColor: "transparent",
-                      outline: "2px solid",
-                      outlineColor: "seed",
-                      outlineOffset: "2px",
-                    }}
-                    _hover={{ borderColor: "transparent" }}
-                    _placeholder={{ color: "text.placeholder" }}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") submitWaitlistEmail();
-                    }}
-                  />
-                  {submitStatus === "error" && (
-                    <Text color="red.500" fontSize="sm">
-                      {errorMessage}
-                    </Text>
-                  )}
-                </VStack>
-
-                <Flex justify={{ base: "stretch", lg: "flex-end" }}>
-                  <Button
-                    bg="button.bg"
-                    borderRadius={20}
-                    color="button.foreground"
-                    disabled={submitStatus === "loading"}
-                    fontSize="xl"
-                    fontWeight={700}
-                    letterSpacing="-0.02em"
-                    lineHeight="1.4"
-                    opacity={submitStatus === "loading" ? 0.7 : 1}
-                    p={6}
-                    type="button"
-                    w={{ base: "full", lg: "auto" }}
-                    _active={{ bg: "seed.active" }}
-                    _hover={{ bg: "seed.hover" }}
-                    onClick={submitWaitlistEmail}
-                  >
-                    {submitStatus === "loading"
-                      ? "신청 중..."
-                      : "알림 받아보기"}
-                  </Button>
-                </Flex>
-              </>
-            )}
-          </VStack>
+          <SendEmailSection />
         </Flex>
       </Box>
       <AssignmentHelpSection
@@ -226,7 +84,6 @@ export default function MainPage() {
               color="text"
               fontSize={{ base: "4xl", lg: "5xl" }}
               fontWeight="bold"
-              letterSpacing="-0.02em"
               lineHeight="1.4"
             >
               프롬프트 창 앞에서 망설이지 마세요.
@@ -238,7 +95,6 @@ export default function MainPage() {
               color="text.secondary"
               fontSize={{ base: "md", lg: "xl" }}
               fontWeight="medium"
-              letterSpacing="-0.02em"
               lineHeight="1.4"
             >
               수만 개의 성공적인 프롬프트 데이터와 당신의 과제물의 분석을 통해
@@ -279,21 +135,13 @@ export default function MainPage() {
                       </Flex>
 
                       <VStack align="start" gap={0} minW={0}>
-                        <Text
-                          color="text"
-                          fontSize="sm"
-                          fontWeight="bold"
-                          letterSpacing="-0.02em"
-                          lineHeight="20px"
-                        >
+                        <Text color="text" fontSize="sm" fontWeight="bold">
                           Step 3 최적화 프롬프트
                         </Text>
                         <Text
                           color="text.secondary"
                           fontSize="xs"
                           fontWeight="regular"
-                          letterSpacing="-0.02em"
-                          lineHeight="16px"
                         >
                           Professional Mode
                         </Text>
@@ -386,12 +234,7 @@ export default function MainPage() {
                 px={3}
                 py={1}
               >
-                <Text
-                  fontSize="sm"
-                  fontWeight="bold"
-                  letterSpacing="-0.02em"
-                  lineHeight="20px"
-                >
+                <Text fontSize="sm" fontWeight="bold" lineHeight="20px">
                   Actionable Output
                 </Text>
               </Box>
@@ -400,7 +243,6 @@ export default function MainPage() {
                 color="text"
                 fontSize={{ base: "3xl", lg: "4xl" }}
                 fontWeight="bold"
-                letterSpacing="-0.02em"
                 lineHeight="1.25"
               >
                 바로 복사해서
@@ -412,7 +254,6 @@ export default function MainPage() {
                 color="text.secondary"
                 fontSize={{ base: "md", lg: "lg" }}
                 fontWeight="regular"
-                letterSpacing="-0.02em"
                 lineHeight="1.625"
                 maxW={105}
               >
@@ -444,7 +285,6 @@ export default function MainPage() {
                         color="text"
                         fontSize="md"
                         fontWeight="medium"
-                        letterSpacing="-0.02em"
                         lineHeight="24px"
                       >
                         {feature}
@@ -472,7 +312,6 @@ export default function MainPage() {
             color="text"
             fontSize={{ base: "3xl", lg: "5xl" }}
             fontWeight="bold"
-            letterSpacing="-0.02em"
             lineHeight="1.4"
             textAlign="center"
           >
@@ -491,7 +330,6 @@ export default function MainPage() {
             color="text.secondary"
             fontSize={{ base: "lg", lg: "xl" }}
             fontWeight="medium"
-            letterSpacing="-0.02em"
             lineHeight="1.4"
             textAlign="center"
           >
