@@ -27,7 +27,7 @@ export default function MainPage() {
           justify="space-between"
           maxW="1200px"
           mx="auto"
-          px={{ base: 4, lg: 10 }}
+          px={{ base: 6, lg: 10 }}
           py={{ base: 16, md: 22, lg: 10 }}
           w="full"
         >
@@ -40,7 +40,11 @@ export default function MainPage() {
               py={2}
             >
               <SparklesIcon boxSize={5} color="seed" />
-              <Text color="text.secondary" fontSize="lg" fontWeight="medium">
+              <Text
+                color="text"
+                fontSize={{ base: "md", lg: "lg" }}
+                fontWeight="medium"
+              >
                 생산성 +50% 로켓 탑승하기
               </Text>
             </HStack>
