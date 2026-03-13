@@ -92,7 +92,14 @@ export default function MainPage() {
       />
       <ExecutionOnlySection isActivated={isSolutionSectionReady} />
       <Box bg="white" py={{ base: 16, md: 20, lg: 24 }} w="full">
-        <VStack align="stretch" gap={12} maxW={300} mx="auto" px={10} w="full">
+        <VStack
+          align="stretch"
+          gap={12}
+          maxW="1200px"
+          mx="auto"
+          px={10}
+          w="full"
+        >
           <VStack align="start" gap={3} maxW="780px" w="full">
             <Box
               as="h2"
@@ -237,7 +244,7 @@ export default function MainPage() {
               align="start"
               flex="1 1 0"
               gap={4}
-              maxW={{ base: "full", xl: 120 }}
+              maxW={{ base: "full", xl: "480px" }}
               minW={0}
               pt={{ base: 2, xl: 0 }}
               w="full"
@@ -270,7 +277,7 @@ export default function MainPage() {
                 fontSize={{ base: "md", lg: "lg" }}
                 fontWeight="regular"
                 lineHeight="1.625"
-                maxW={105}
+                maxW="420px"
               >
                 로드맵 각 단계에 꼭 맞는 최적의 프롬프트가 생성됩니다.
                 <br />

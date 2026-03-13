@@ -48,7 +48,6 @@ export const ChatMessage = ({
         fontSize="3xl"
         fontWeight="bold"
         justify="center"
-        letterSpacing="-0.02em"
         lineHeight="1.4"
         boxSize={12}
       >
@@ -58,9 +57,8 @@ export const ChatMessage = ({
         color="text"
         fontSize="lg"
         fontWeight="medium"
-        letterSpacing="-0.02em"
         lineHeight="1.4"
-        maxW={144}
+        maxW="full"
         pt={3}
         whiteSpace="pre-line"
       >
