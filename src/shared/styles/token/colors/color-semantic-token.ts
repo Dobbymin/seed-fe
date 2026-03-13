@@ -34,6 +34,6 @@ export const colorSemanticToken = {
   text: {
     DEFAULT: { value: "{colors.neutral.900}" },
     secondary: { value: "{colors.neutral.600}" },
-    placeholder: { value: "{colors.neutral.200}" },
+    placeholder: { value: "{colors.neutral.500}" },
   },
 };

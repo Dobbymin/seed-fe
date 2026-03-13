@@ -17,26 +17,32 @@ export default function MainPage() {
       <Box
         as="section"
         display="flex"
-        minH={{ base: "auto", lg: "calc(100dvh - {sizes.headerHeight})" }}
+        minH="calc(100dvh - {sizes.headerHeight})"
         w="full"
       >
         <Flex
           align={{ base: "stretch", lg: "center" }}
           direction={{ base: "column", lg: "row" }}
-          gap={{ base: 14, lg: 12 }}
-          justify="space-between"
+          gap={{ base: 6, lg: 12 }}
+          justify={{ base: "center", lg: "space-between" }}
           maxW="1200px"
           mx="auto"
           px={{ base: 6, lg: 10 }}
           py={{ base: 16, md: 22, lg: 10 }}
           w="full"
         >
-          <VStack align="flex-start" flex={1} gap={6} justify="center" minW={0}>
+          <VStack
+            align="flex-start"
+            flex={{ base: "none", lg: 1 }}
+            gap={{ base: 3, lg: 6 }}
+            justify="center"
+            minW={0}
+          >
             <HStack
-              bg="container.bg.card"
+              bg={{ base: "none", lg: "container.bg.card" }}
               borderRadius="full"
               gap={2}
-              px={4}
+              px={{ base: 0, lg: 4 }}
               py={2}
             >
               <SparklesIcon boxSize={5} color="seed" />
@@ -65,11 +71,16 @@ export default function MainPage() {
 
             <Text
               color="text.secondary"
-              fontSize="xl"
+              fontSize={{ base: "md", lg: "lg" }}
               fontWeight="medium"
               textAlign="left"
             >
-              PDF 업로드 한 번으로 과제 로드맵부터 최적화 프롬프트까지.
+              PDF 업로드 한 번으로
+              <Box as="br" display={{ base: "block", lg: "none" }} />
+              <Box as="span" display={{ base: "none", lg: "inline" }}>
+                {" "}
+              </Box>
+              과제 로드맵부터 최적화 프롬프트까지.
             </Text>
           </VStack>
 
