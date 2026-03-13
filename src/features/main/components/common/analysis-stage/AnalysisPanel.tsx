@@ -36,11 +36,11 @@ export const AnalysisPanel = ({
         >
           <VStack align="stretch" gap={1}>
             <Flex gap={2.5} px={2.5} py={2.5} w="full">
-              <Box bg="seed.900" h={7} w={"60px"} />
-              <Box bg="seed.500" h={7} w={"60px"} />
-              <Box bg="seed.500" h={7} w={"60px"} />
-              <Box bg="seed.600" h={7} w={"60px"} />
-              <Box bg="seed.400" h={7} w={"80px"} />
+              <Box bg="seed.900" h={7} w="60px" />
+              <Box bg="seed.500" h={7} w="60px" />
+              <Box bg="seed.500" h={7} w="60px" />
+              <Box bg="seed.600" h={7} w="60px" />
+              <Box bg="seed.400" h={7} w="80px" />
             </Flex>
           </VStack>
         </AnalysisPanelReveal>
@@ -74,7 +74,7 @@ export const AnalysisPanel = ({
                 <Box bg="seed.600" flex={1} h={7} />
                 <Box bg="seed.400" flex={1} h={7} />
               </Flex>
-              <Box bg="seed.300" h={"60px"} w="full" />
+              <Box bg="seed.300" h="60px" w="full" />
             </VStack>
           </VStack>
         </AnalysisPanelReveal>

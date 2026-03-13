@@ -72,7 +72,8 @@ export const AssignmentHelpSection = ({
                   lineHeight="1.4"
                   textAlign="center"
                   whiteSpace="normal"
-                  w={{ base: "358px", lg: "full" }}
+                  w="full"
+                  maxW={{ base: "358px", lg: "full" }}
                 >
                   {activeChatPhase.subtitle}
                 </Text>
@@ -126,7 +127,6 @@ export const AssignmentHelpSection = ({
                   color="text"
                   fontSize="5xl"
                   fontWeight="bold"
-                  letterSpacing="-0.02em"
                   lineHeight="1.4"
                   textAlign="center"
                   whiteSpace="nowrap"
