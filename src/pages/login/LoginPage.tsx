@@ -67,7 +67,7 @@ export default function LoginPage() {
           <VStack gap={3} w="full" mb={8}>
             <Button
               w="full"
-              h={{ base: 12, sm: 13 }}
+              h={12}
               bg="login.kakao.bg"
               color="login.kakao.foreground"
               fontSize={{ base: "sm", lg: "md" }}
@@ -88,7 +88,7 @@ export default function LoginPage() {
             </Button>
             <Button
               w="full"
-              h={{ base: 12, sm: 13 }}
+              h={12}
               bg="login.google.bg"
               color="login.google.foreground"
               border="1px solid"
