@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 import {
   ErrorPage,
+  LoginPage,
   MainPage,
   MyPage,
   UploadCompletePage,
@@ -18,6 +19,8 @@ export const Router = () => {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path={ROUTE_PATHS.MAIN} element={<MainPage />} />
+
+          <Route path={ROUTE_PATHS.LOGIN} element={<LoginPage />} />
           <Route path={ROUTE_PATHS.MYPAGE} element={<MyPage />} />
           <Route path={ROUTE_PATHS.FILE_UPLOAD} element={<UploadPage />} />
           <Route
