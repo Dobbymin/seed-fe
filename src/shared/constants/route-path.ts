@@ -2,6 +2,7 @@
 export const ROUTE_PATHS = {
   ROOT: "/",
   MAIN: "/",
+  LOGIN: "/login",
   MYPAGE: "/mypage",
   FILE_UPLOAD: "/upload",
 

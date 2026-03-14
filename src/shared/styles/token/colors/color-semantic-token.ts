@@ -1,4 +1,17 @@
 export const colorSemanticToken = {
+  login: {
+    kakao: {
+      bg: { value: "#FEE500" },
+      hover: { value: "#E5CE00" },
+      foreground: { value: "#000000" },
+    },
+    google: {
+      bg: { value: "{colors.neutral.0}" },
+      hover: { value: "{colors.neutral.50}" },
+      border: { value: "#E5E7EB" },
+      foreground: { value: "#374151" },
+    },
+  },
   seed: {
     DEFAULT: { value: "{colors.seed.400}" },
     hover: { value: "{colors.seed.500}" },
