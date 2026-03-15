@@ -43,7 +43,6 @@ export const PromptBox = ({ composer }: PromptBoxProps) => {
                 fontSize="lg"
                 fontWeight="medium"
                 left={0}
-                letterSpacing="-0.02em"
                 lineHeight="1.4"
                 opacity={1 - composer.valueReveal}
                 position="absolute"
@@ -58,7 +57,6 @@ export const PromptBox = ({ composer }: PromptBoxProps) => {
                 fontSize="lg"
                 fontWeight="medium"
                 left={0}
-                letterSpacing="-0.02em"
                 lineHeight="1.4"
                 opacity={composer.valueReveal}
                 position="absolute"

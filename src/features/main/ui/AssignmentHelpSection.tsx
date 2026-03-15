@@ -51,8 +51,7 @@ export const AssignmentHelpSection = ({
                   textAlign="center"
                   whiteSpace="nowrap"
                 >
-                  혹시 AI에게{" "}
-                  <Box as="br" display={{ base: "block", md: "none" }} />
+                  AI에게{" "}
                   <Box
                     as="span"
                     color="seed"
@@ -67,13 +66,14 @@ export const AssignmentHelpSection = ({
                   animation={ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION}
                   color="text.secondary"
                   fontSize={{ base: "xl", md: "2xl" }}
-                  fontWeight="semibold"
+                  fontWeight={{ base: "medium", lg: "semibold" }}
                   key={activeChatPhaseKey}
                   lineHeight="1.4"
                   textAlign="center"
                   whiteSpace="normal"
+                  wordBreak="keep-all"
                   w="full"
-                  maxW={{ base: "358px", lg: "full" }}
+                  maxW={{ base: "358px", md: "full" }}
                 >
                   {activeChatPhase.subtitle}
                 </Text>
@@ -87,7 +87,7 @@ export const AssignmentHelpSection = ({
                 assignmentHelpMotionState.flags.isChatVisible ? "auto" : "none"
               }
               position="absolute"
-              pt={60}
+              pt={"240px"}
               px={10}
               transform={`translateY(${assignmentHelpMotionState.chat.translateY})`}
               transition="opacity 220ms ease, transform 220ms ease"

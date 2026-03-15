@@ -109,7 +109,7 @@ export const deriveAssignmentHelpMotionState = (
   }
 
   let composerTopPercent = 50;
-  let composerTopOffsetPx = 154;
+  let composerTopOffsetPx = 180;
 
   if (hasChatStarted) {
     composerTopPercent = lerp(50, 100, chatDockProgress);
