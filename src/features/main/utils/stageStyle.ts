@@ -1,3 +1,4 @@
+//요소가 아래에서 위로 올라오면서 나타나는 fade-up 애니메이션, 데스크톱에서만 적용되는 스타일
 export const fadeUpStyleDesktopOnly = (progress: number, distance: number) => {
   return {
     opacity: { base: 1, xl: progress },
@@ -8,6 +9,7 @@ export const fadeUpStyleDesktopOnly = (progress: number, distance: number) => {
   };
 };
 
+//과제 참고 자료 패널의 스타일 스크롤을 하면서 ai 분석 패널이 올라오면서 과제 참고 자료 패널이 왼쪽으로 밀리는 애니메이션 스타일
 export const referencePanelStageStyle = (
   enterProgress: number,
   shiftProgress: number,
