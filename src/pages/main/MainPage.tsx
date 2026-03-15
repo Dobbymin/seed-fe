@@ -94,23 +94,40 @@ export default function MainPage() {
       <Box bg="white" py={{ base: 16, md: 20, lg: 24 }} w="full">
         <VStack
           align="stretch"
-          gap={12}
+          gap={{ base: 6, lg: 8 }}
           maxW="1200px"
           mx="auto"
-          px={10}
+          px={{ base: 4, lg: 10 }}
           w="full"
         >
-          <VStack align="start" gap={3} maxW="780px" w="full">
+          <VStack
+            align="start"
+            gap={3}
+            maxW="780px"
+            w="full"
+            px={{ base: 4, xl: 0 }}
+          >
             <Box
               as="h2"
               color="text"
-              fontSize={{ base: "4xl", lg: "5xl" }}
+              fontSize={{ base: "3xl", lg: "5xl" }}
               fontWeight="bold"
               lineHeight="1.4"
             >
-              프롬프트 창 앞에서 망설이지 마세요.
+              프롬프트 창 앞에서
+              <Box as="br" display={{ base: "block", md: "none" }} />
+              <Box as="span" color="seed" fontSize={{ base: "4xl", lg: "6xl" }}>
+                {" "}
+                망설이지 마세요.
+              </Box>
               <br />
-              정답은 이미 SEED에 있습니다.
+              정답은 이미
+              <Box as="br" display={{ base: "block", md: "none" }} />
+              <Box as="span" color="seed" fontSize={{ base: "4xl", lg: "6xl" }}>
+                {" "}
+                SEED{" "}
+              </Box>
+              에 있습니다.
             </Box>
             <Box
               as="p"
@@ -119,27 +136,30 @@ export default function MainPage() {
               fontWeight="medium"
               lineHeight="1.4"
             >
-              수만 개의 성공적인 프롬프트 데이터와 당신의 과제물의 분석을 통해
+              수만 개의 성공적인 프롬프트 데이터와
+              <Box as="br" display={{ base: "block", md: "none" }} /> 당신의
+              과제물의 분석을 통해
               <br />각 로드맵에 최적화된 프롬프트를 제공합니다.
             </Box>
           </VStack>
 
           <Flex
-            align={{ base: "stretch", xl: "center" }}
-            direction={{ base: "column", xl: "row" }}
-            gap={{ base: 10, xl: 16 }}
+            align={{ base: "stretch", md: "center" }}
+            justify="center"
+            direction={{ base: "column", md: "row" }}
+            gap={{ base: 4, lg: 16 }}
             px={{ base: 0, lg: 6 }}
             py={{ base: 0, lg: 6 }}
             w="full"
           >
-            <Box flex="1 1 0" minW={0}>
+            <Box flex="1 1 0">
               <Box
                 bg="container.bg"
                 border="1px solid"
                 borderColor="button.border.secondary"
                 borderRadius="4xl"
                 boxShadow="0px 20px 40px 0px rgba(0, 0, 0, 0.08)"
-                p={{ base: 6, lg: 8 }}
+                p={{ base: 4, lg: 8 }}
                 w="full"
               >
                 <VStack align="stretch" gap={6} w="full">
@@ -147,7 +167,7 @@ export default function MainPage() {
                     <HStack align="center" gap={3}>
                       <Flex
                         align="center"
-                        bg="container.bg.card"
+                        bg="seed.subtle"
                         borderRadius="full"
                         boxSize={10}
                         justify="center"
@@ -164,15 +184,15 @@ export default function MainPage() {
                           fontSize="xs"
                           fontWeight="regular"
                         >
-                          Professional Mode
+                          논문형
                         </Text>
                       </VStack>
                     </HStack>
 
                     <Button
-                      bg="neutral.900"
+                      bg="button.bg"
                       borderRadius="md"
-                      color="white"
+                      color="button.foreground"
                       fontSize="xs"
                       fontWeight="bold"
                       h={8}
@@ -180,7 +200,6 @@ export default function MainPage() {
                       px={3}
                       py={2}
                       type="button"
-                      _hover={{ bg: "#2A3038" }}
                     >
                       <HStack gap={1.5}>
                         <CopyIcon color="white" boxSize={4.5} />
@@ -196,7 +215,7 @@ export default function MainPage() {
                     border="1px solid"
                     borderColor="neutral.50"
                     borderRadius="xl"
-                    px={5}
+                    px={{ base: 2, lg: 5 }}
                     py={4}
                   >
                     <Text
@@ -228,38 +247,17 @@ export default function MainPage() {
                       <br />- Cite sources in APA format.
                     </Text>
                   </Box>
-
-                  <Box
-                    borderTop="1px solid"
-                    borderColor="neutral.50"
-                    minH={4}
-                    pt={5}
-                    w="full"
-                  />
                 </VStack>
               </Box>
             </Box>
             <VStack
               align="start"
-              flex="1 1 0"
               gap={4}
               maxW={{ base: "full", xl: "480px" }}
-              minW={0}
               pt={{ base: 2, xl: 0 }}
-              w="full"
+              px={{ base: 8, xl: 0 }}
+              w="auto"
             >
-              <Box
-                bg="container.bg"
-                borderRadius="lg"
-                color="seed"
-                px={3}
-                py={1}
-              >
-                <Text fontSize="sm" fontWeight="bold" lineHeight="20px">
-                  Actionable Output
-                </Text>
-              </Box>
-
               <Text
                 color="text"
                 fontSize={{ base: "3xl", lg: "4xl" }}
@@ -278,14 +276,16 @@ export default function MainPage() {
                 lineHeight="1.625"
                 maxW="420px"
               >
-                로드맵 각 단계에 꼭 맞는 최적의 프롬프트가 생성됩니다.
+                로드맵 각 단계에 꼭 맞는
+                <Box as="br" display={{ base: "block", lg: "none" }} />
+                최적의 프롬프트가 생성됩니다.
                 <br />
                 고민 없이 '복사' 버튼 하나면
                 <br />
                 전문적인 결과물로 이어질 수 있습니다.
               </Text>
 
-              <VStack align="start" gap={4} pt={4} w="full">
+              <VStack align="start" gap={4} pt={4}>
                 {[
                   "단계별 맞춤형 프롬프트 제공",
                   "원클릭 복사 및 재생성",

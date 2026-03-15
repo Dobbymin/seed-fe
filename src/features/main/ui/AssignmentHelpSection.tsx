@@ -132,17 +132,17 @@ export const AssignmentHelpSection = ({
                   textAlign="center"
                   whiteSpace="nowrap"
                 >
-                  직접 프롬프트를 짜느라{" "}
+                  직접 프롬프트를 짜느라
                   <Box as="br" display={{ base: "block", md: "none" }} />
                   <Box
                     as="span"
                     color="seed"
                     fontSize={{ base: "4xl", lg: "6xl" }}
                   >
-                    시간을 버리고
+                    {" "}
+                    시간을 버리고{" "}
                   </Box>
                   <Box as="span" color="text">
-                    {" "}
                     있진 않나요
                   </Box>
                   ?
