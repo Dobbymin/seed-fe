@@ -1,14 +1,16 @@
-import { Text, VStack } from "@chakra-ui/react";
+import { Skeleton, Text, VStack } from "@chakra-ui/react";
 
-type Props = {
-  name: string;
-};
+import { useUserInfoStore } from "@/entities";
 
-export const UserNameSection = ({ name }: Props) => {
+export const UserNameSection = () => {
+  const nickname = useUserInfoStore((state) => {
+    return state.userInfo?.nickname ?? state.persistedProfile?.nickname;
+  });
+
   return (
-    <VStack align="flex-start" gap={3} px={2} pb={12}>
+    <VStack align="flex-start" gap={3} px={2} pb={10}>
       <Text color="text" fontSize="4xl" fontWeight="bold">
-        반가워요, {name}님
+        반가워요, {nickname ? `${nickname}님` : <Skeleton h={9} w="120px" />}
       </Text>
       <Text color="text.secondary" fontSize="lg" fontWeight="medium">
         오늘도 새로운 아이디어를 실현해보세요.
