@@ -1,6 +1,6 @@
 import { API_ERROR_MESSAGES } from "../../constants";
-import { toaster } from "../../libs";
 import type { ApiResponse, ErrorResponse } from "../../types";
+import { toaster } from "../toaster";
 
 // 커스텀 API 에러 클래스
 export class ApiError extends Error {
