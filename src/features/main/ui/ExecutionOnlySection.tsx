@@ -36,7 +36,7 @@ export const ExecutionOnlySection = ({
               py={{ base: 14, lg: 20 }}
               w="full"
             >
-              <VStack align="center" gap={{ base: 10, lg: 14 }} w="full">
+              <VStack align="center" gap={{ base: 2, lg: 4 }} w="full">
                 <Text
                   color="text"
                   fontSize={{ base: "3xl", lg: "5xl" }}

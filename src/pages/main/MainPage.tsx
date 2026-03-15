@@ -21,8 +21,8 @@ export default function MainPage() {
         w="full"
       >
         <Flex
-          align={{ base: "stretch", lg: "center" }}
-          direction={{ base: "column", lg: "row" }}
+          align={{ base: "stretch", md: "center" }}
+          direction={{ base: "column", md: "row" }}
           gap={{ base: 6, lg: 12 }}
           justify={{ base: "center", lg: "space-between" }}
           maxW="1200px"
@@ -57,14 +57,18 @@ export default function MainPage() {
 
             <Text
               color="text"
-              fontSize={{ base: "4xl", md: "5xl", lg: "7xl" }}
+              fontSize={{ base: "3xl", md: "5xl", lg: "7xl" }}
               fontWeight="bold"
               lineHeight="1.2"
               textAlign="left"
             >
               오래 걸리는 과제,
               <br />
-              <Box as="span" color="seed">
+              <Box
+                as="span"
+                color="seed"
+                fontSize={{ base: "4xl", md: "6xl", lg: "7xl" }}
+              >
                 3단계로 압축하세요.
               </Box>
             </Text>
@@ -110,20 +114,28 @@ export default function MainPage() {
             <Box
               as="h2"
               color="text"
-              fontSize={{ base: "3xl", lg: "5xl" }}
+              fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
               fontWeight="bold"
               lineHeight="1.4"
             >
               프롬프트 창 앞에서
               <Box as="br" display={{ base: "block", md: "none" }} />
-              <Box as="span" color="seed" fontSize={{ base: "4xl", lg: "6xl" }}>
+              <Box
+                as="span"
+                color="seed"
+                fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+              >
                 {" "}
                 망설이지 마세요.
               </Box>
               <br />
               정답은 이미
               <Box as="br" display={{ base: "block", md: "none" }} />
-              <Box as="span" color="seed" fontSize={{ base: "4xl", lg: "6xl" }}>
+              <Box
+                as="span"
+                color="seed"
+                fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+              >
                 {" "}
                 SEED{" "}
               </Box>
@@ -260,7 +272,7 @@ export default function MainPage() {
             >
               <Text
                 color="text"
-                fontSize={{ base: "3xl", lg: "4xl" }}
+                fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
                 fontWeight="bold"
                 lineHeight="1.25"
               >
@@ -328,28 +340,36 @@ export default function MainPage() {
         py={11}
         w="full"
       >
-        <VStack align="center" gap={{ base: 4, lg: 5 }} px={4} w="full">
+        <VStack align="center" gap={{ base: 3, lg: 5 }} px={4} w="full">
           <Text
             color="text"
-            fontSize={{ base: "3xl", lg: "5xl" }}
+            fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
             fontWeight="bold"
             lineHeight="1.4"
             textAlign="center"
           >
             이제 과제는{" "}
-            <Box as="span" color="seed">
+            <Box
+              as="span"
+              color="seed"
+              fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+            >
               어떻게
             </Box>
             가 아니라
             <br />
-            <Box as="span" color="seed">
-              무엇을
+            <Box
+              as="span"
+              color="seed"
+              fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+            >
+              무엇을{" "}
             </Box>
-            할지만 고민하세요.
+            할 지만 고민하세요.
           </Text>
           <Text
             color="text.secondary"
-            fontSize={{ base: "lg", lg: "xl" }}
+            fontSize={{ base: "md", lg: "xl" }}
             fontWeight="medium"
             lineHeight="1.4"
             textAlign="center"

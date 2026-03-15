@@ -46,8 +46,8 @@ export const AnalysisStage = ({
             {...fadeUpStyleDesktopOnly(referenceReveal, 64)}
           >
             <Text
-              color="text"
-              fontSize={{ base: "2xl", lg: "4xl" }}
+              color="text.secondary"
+              fontSize={{ base: "lg", md: "2xl", lg: "4xl" }}
               fontWeight="bold"
               lineHeight="1.4"
               textAlign="center"

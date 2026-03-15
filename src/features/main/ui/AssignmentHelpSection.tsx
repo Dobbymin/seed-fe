@@ -45,7 +45,7 @@ export const AssignmentHelpSection = ({
               <VStack align="center" gap={3}>
                 <Text
                   color="text"
-                  fontSize={{ base: "3xl", lg: "5xl" }}
+                  fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
                   fontWeight="bold"
                   lineHeight="1.4"
                   textAlign="center"
@@ -55,7 +55,7 @@ export const AssignmentHelpSection = ({
                   <Box
                     as="span"
                     color="seed"
-                    fontSize={{ base: "4xl", lg: "6xl" }}
+                    fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
                   >
                     {" "}
                     '과제 도와줘'{" "}
@@ -66,7 +66,7 @@ export const AssignmentHelpSection = ({
                 <Text
                   animation={ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION}
                   color="text.secondary"
-                  fontSize={{ base: "xl", md: "2xl" }}
+                  fontSize={{ base: "lg", md: "2xl" }}
                   fontWeight={{ base: "medium", lg: "semibold" }}
                   key={activeChatPhaseKey}
                   lineHeight="1.4"
