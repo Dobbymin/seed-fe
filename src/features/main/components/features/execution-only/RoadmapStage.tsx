@@ -82,7 +82,7 @@ export const RoadmapStage = ({
           <Box
             {...fadeUpStyleDesktopOnly(roadmapCardsReveal, 12)}
             w="full"
-            mb={10}
+            mb={4}
           >
             <Flex
               gap={4}
@@ -111,7 +111,7 @@ export const RoadmapStage = ({
                 <Flex
                   animation={reduceMotion ? undefined : roadmapSwapInAnimation}
                   direction={{ base: "column", md: "row" }}
-                  gap={4}
+                  gap={{ base: 8, md: 4 }}
                   justify="center"
                   key={activeCard.id}
                   w="full"
