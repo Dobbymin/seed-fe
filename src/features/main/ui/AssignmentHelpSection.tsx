@@ -45,35 +45,36 @@ export const AssignmentHelpSection = ({
               <VStack align="center" gap={3}>
                 <Text
                   color="text"
-                  fontSize={{ base: "3xl", lg: "5xl" }}
+                  fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
                   fontWeight="bold"
                   lineHeight="1.4"
                   textAlign="center"
                   whiteSpace="nowrap"
                 >
-                  혹시 AI에게{" "}
-                  <Box as="br" display={{ base: "block", md: "none" }} />
+                  AI에게
                   <Box
                     as="span"
                     color="seed"
-                    fontSize={{ base: "4xl", lg: "6xl" }}
+                    fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
                   >
-                    '과제 도와줘'
-                  </Box>{" "}
+                    {" "}
+                    '과제 도와줘'{" "}
+                  </Box>
                   라고만 <Box as="br" display={{ base: "block", md: "none" }} />
                   질문하고 계신가요?
                 </Text>
                 <Text
                   animation={ASSIGNMENT_HELP_STAGE_SWAP_ANIMATION}
                   color="text.secondary"
-                  fontSize={{ base: "xl", md: "2xl" }}
-                  fontWeight="semibold"
+                  fontSize={{ base: "lg", md: "2xl" }}
+                  fontWeight={{ base: "medium", lg: "semibold" }}
                   key={activeChatPhaseKey}
                   lineHeight="1.4"
                   textAlign="center"
                   whiteSpace="normal"
+                  wordBreak="keep-all"
                   w="full"
-                  maxW={{ base: "358px", lg: "full" }}
+                  maxW={{ base: "358px", md: "full" }}
                 >
                   {activeChatPhase.subtitle}
                 </Text>
@@ -88,7 +89,7 @@ export const AssignmentHelpSection = ({
               }
               position="absolute"
               pt={60}
-              px={10}
+              px={{ base: 4, md: 10 }}
               transform={`translateY(${assignmentHelpMotionState.chat.translateY})`}
               transition="opacity 220ms ease, transform 220ms ease"
               zIndex={1}
@@ -125,18 +126,23 @@ export const AssignmentHelpSection = ({
               >
                 <Text
                   color="text"
-                  fontSize="5xl"
+                  fontSize={{ base: "3xl", lg: "5xl" }}
                   fontWeight="bold"
                   lineHeight="1.4"
                   textAlign="center"
                   whiteSpace="nowrap"
                 >
-                  직접 프롬프트를 짜느라{" "}
-                  <Box as="span" color="seed">
-                    시간을 버리고
+                  직접 프롬프트를 짜느라
+                  <Box as="br" display={{ base: "block", md: "none" }} />
+                  <Box
+                    as="span"
+                    color="seed"
+                    fontSize={{ base: "4xl", lg: "6xl" }}
+                  >
+                    {" "}
+                    시간을 버리고{" "}
                   </Box>
                   <Box as="span" color="text">
-                    {" "}
                     있진 않나요
                   </Box>
                   ?

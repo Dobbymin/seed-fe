@@ -1,6 +1,6 @@
 ﻿import { Box, Flex, Text } from "@chakra-ui/react";
 
-import { SendIcon } from "@/shared/_assets/icons";
+import { PlusIcon, SendIcon } from "@/shared/_assets/icons";
 
 import type { PromptBoxLayoutState } from "../../../types";
 
@@ -35,15 +35,26 @@ export const PromptBox = ({ composer }: PromptBoxProps) => {
         ].join(", ")}
         w="full"
       >
-        <Box opacity={composer.contentOpacity} transition="opacity 220ms ease">
-          <Flex align="center" h={7}>
-            <Box h={7} position="relative" w="full">
+        <Box
+          display="flex"
+          flexDirection={"column"}
+          opacity={composer.contentOpacity}
+          transition="opacity 220ms ease"
+          h="full"
+        >
+          <Flex align="center" flex={1} gap={4}>
+            <PlusIcon
+              boxSize={4}
+              color="neutral.900"
+              display={{ base: "block", md: "none" }}
+            />
+            {/* 박스 높이를 글자 크기에 맞춰줌 */}
+            <Box position="relative" w="full" h={"1.4em"}>
               <Text
                 color="text.secondary"
-                fontSize="lg"
+                fontSize={{ base: "md", md: "lg" }}
                 fontWeight="medium"
                 left={0}
-                letterSpacing="-0.02em"
                 lineHeight="1.4"
                 opacity={1 - composer.valueReveal}
                 position="absolute"
@@ -55,10 +66,9 @@ export const PromptBox = ({ composer }: PromptBoxProps) => {
               </Text>
               <Text
                 color="text"
-                fontSize="lg"
+                fontSize={{ base: "md", md: "lg" }}
                 fontWeight="medium"
                 left={0}
-                letterSpacing="-0.02em"
                 lineHeight="1.4"
                 opacity={composer.valueReveal}
                 position="absolute"
@@ -77,16 +87,19 @@ export const PromptBox = ({ composer }: PromptBoxProps) => {
                 {composer.value}
               </Text>
             </Box>
+            <SendIcon
+              boxSize={6}
+              color="neutral.900"
+              display={{ base: "block", md: "none" }}
+            />
           </Flex>
-          <Flex align="center" justify="space-between" mt={3}>
-            <Text
-              color="text"
-              fontSize="3xl"
-              fontWeight="regular"
-              lineHeight="1.4"
-            >
-              +
-            </Text>
+          <Flex
+            align="center"
+            justify="space-between"
+            display={{ base: "none", md: "flex" }}
+            mt={6}
+          >
+            <PlusIcon boxSize={4} color="neutral.900" />
             <SendIcon boxSize={6} color="neutral.900" />
           </Flex>
         </Box>

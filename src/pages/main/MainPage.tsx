@@ -21,8 +21,8 @@ export default function MainPage() {
         w="full"
       >
         <Flex
-          align={{ base: "stretch", lg: "center" }}
-          direction={{ base: "column", lg: "row" }}
+          align={{ base: "stretch", md: "center" }}
+          direction={{ base: "column", md: "row" }}
           gap={{ base: 6, lg: 12 }}
           justify={{ base: "center", lg: "space-between" }}
           maxW="1200px"
@@ -57,14 +57,18 @@ export default function MainPage() {
 
             <Text
               color="text"
-              fontSize={{ base: "4xl", md: "5xl", lg: "7xl" }}
+              fontSize={{ base: "3xl", md: "5xl", lg: "7xl" }}
               fontWeight="bold"
               lineHeight="1.2"
               textAlign="left"
             >
               오래 걸리는 과제,
               <br />
-              <Box as="span" color="seed">
+              <Box
+                as="span"
+                color="seed"
+                fontSize={{ base: "4xl", md: "6xl", lg: "7xl" }}
+              >
                 3단계로 압축하세요.
               </Box>
             </Text>
@@ -94,23 +98,48 @@ export default function MainPage() {
       <Box bg="white" py={{ base: 16, md: 20, lg: 24 }} w="full">
         <VStack
           align="stretch"
-          gap={12}
+          gap={{ base: 6, lg: 8 }}
           maxW="1200px"
           mx="auto"
-          px={10}
+          px={{ base: 4, lg: 10 }}
           w="full"
         >
-          <VStack align="start" gap={3} maxW="780px" w="full">
+          <VStack
+            align="start"
+            gap={3}
+            maxW="780px"
+            w="full"
+            px={{ base: 4, xl: 0 }}
+          >
             <Box
               as="h2"
               color="text"
-              fontSize={{ base: "4xl", lg: "5xl" }}
+              fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
               fontWeight="bold"
               lineHeight="1.4"
             >
-              프롬프트 창 앞에서 망설이지 마세요.
+              프롬프트 창 앞에서
+              <Box as="br" display={{ base: "block", md: "none" }} />
+              <Box
+                as="span"
+                color="seed"
+                fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+              >
+                {" "}
+                망설이지 마세요.
+              </Box>
               <br />
-              정답은 이미 SEED에 있습니다.
+              정답은 이미
+              <Box as="br" display={{ base: "block", md: "none" }} />
+              <Box
+                as="span"
+                color="seed"
+                fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+              >
+                {" "}
+                SEED{" "}
+              </Box>
+              에 있습니다.
             </Box>
             <Box
               as="p"
@@ -119,28 +148,30 @@ export default function MainPage() {
               fontWeight="medium"
               lineHeight="1.4"
             >
-              수만 개의 성공적인 프롬프트 데이터와 당신의 과제물의 분석을 통해
+              수만 개의 성공적인 프롬프트 데이터와
+              <Box as="br" display={{ base: "block", md: "none" }} /> 당신의
+              과제물의 분석을 통해
               <br />각 로드맵에 최적화된 프롬프트를 제공합니다.
             </Box>
           </VStack>
 
           <Flex
-            align={{ base: "stretch", xl: "center" }}
-            direction={{ base: "column", xl: "row" }}
-            gap={{ base: 10, xl: 16 }}
+            align={{ base: "stretch", md: "center" }}
+            justify="center"
+            direction={{ base: "column", md: "row" }}
+            gap={{ base: 4, lg: 16 }}
             px={{ base: 0, lg: 6 }}
             py={{ base: 0, lg: 6 }}
             w="full"
           >
-            <Box flex="1 1 0" minW={0}>
+            <Box flex="1 1 0">
               <Box
                 bg="container.bg"
                 border="1px solid"
                 borderColor="button.border.secondary"
                 borderRadius="4xl"
                 boxShadow="0px 20px 40px 0px rgba(0, 0, 0, 0.08)"
-                px={{ base: 6, lg: 8 }}
-                py={{ base: 6, lg: 8 }}
+                p={{ base: 4, lg: 8 }}
                 w="full"
               >
                 <VStack align="stretch" gap={6} w="full">
@@ -148,7 +179,7 @@ export default function MainPage() {
                     <HStack align="center" gap={3}>
                       <Flex
                         align="center"
-                        bg="container.bg.card"
+                        bg="seed.subtle"
                         borderRadius="full"
                         boxSize={10}
                         justify="center"
@@ -165,15 +196,15 @@ export default function MainPage() {
                           fontSize="xs"
                           fontWeight="regular"
                         >
-                          Professional Mode
+                          논문형
                         </Text>
                       </VStack>
                     </HStack>
 
                     <Button
-                      bg="neutral.900"
+                      bg="button.bg"
                       borderRadius="md"
-                      color="white"
+                      color="button.foreground"
                       fontSize="xs"
                       fontWeight="bold"
                       h={8}
@@ -181,7 +212,6 @@ export default function MainPage() {
                       px={3}
                       py={2}
                       type="button"
-                      _hover={{ bg: "#2A3038" }}
                     >
                       <HStack gap={1.5}>
                         <CopyIcon color="white" boxSize={4.5} />
@@ -197,7 +227,7 @@ export default function MainPage() {
                     border="1px solid"
                     borderColor="neutral.50"
                     borderRadius="xl"
-                    px={5}
+                    px={{ base: 2, lg: 5 }}
                     py={4}
                   >
                     <Text
@@ -229,41 +259,20 @@ export default function MainPage() {
                       <br />- Cite sources in APA format.
                     </Text>
                   </Box>
-
-                  <Box
-                    borderTop="1px solid"
-                    borderColor="neutral.50"
-                    minH={4}
-                    pt={5}
-                    w="full"
-                  />
                 </VStack>
               </Box>
             </Box>
             <VStack
               align="start"
-              flex="1 1 0"
               gap={4}
               maxW={{ base: "full", xl: "480px" }}
-              minW={0}
               pt={{ base: 2, xl: 0 }}
-              w="full"
+              px={{ base: 8, xl: 0 }}
+              w="auto"
             >
-              <Box
-                bg="container.bg"
-                borderRadius="lg"
-                color="seed"
-                px={3}
-                py={1}
-              >
-                <Text fontSize="sm" fontWeight="bold" lineHeight="20px">
-                  Actionable Output
-                </Text>
-              </Box>
-
               <Text
                 color="text"
-                fontSize={{ base: "3xl", lg: "4xl" }}
+                fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
                 fontWeight="bold"
                 lineHeight="1.25"
               >
@@ -279,14 +288,16 @@ export default function MainPage() {
                 lineHeight="1.625"
                 maxW="420px"
               >
-                로드맵 각 단계에 꼭 맞는 최적의 프롬프트가 생성됩니다.
+                로드맵 각 단계에 꼭 맞는
+                <Box as="br" display={{ base: "block", lg: "none" }} />
+                최적의 프롬프트가 생성됩니다.
                 <br />
                 고민 없이 '복사' 버튼 하나면
                 <br />
                 전문적인 결과물로 이어질 수 있습니다.
               </Text>
 
-              <VStack align="start" gap={4} pt={4} w="full">
+              <VStack align="start" gap={4} pt={4}>
                 {[
                   "단계별 맞춤형 프롬프트 제공",
                   "원클릭 복사 및 재생성",
@@ -324,33 +335,41 @@ export default function MainPage() {
         as="section"
         bg="white"
         display="flex"
-        h="100vh"
+        h="100dvh"
         justifyContent="center"
         py={11}
         w="full"
       >
-        <VStack align="center" gap={{ base: 4, lg: 5 }} px={4} w="full">
+        <VStack align="center" gap={{ base: 3, lg: 5 }} px={4} w="full">
           <Text
             color="text"
-            fontSize={{ base: "3xl", lg: "5xl" }}
+            fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
             fontWeight="bold"
             lineHeight="1.4"
             textAlign="center"
           >
             이제 과제는{" "}
-            <Box as="span" color="seed">
+            <Box
+              as="span"
+              color="seed"
+              fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+            >
               어떻게
             </Box>
             가 아니라
             <br />
-            <Box as="span" color="seed">
-              무엇을
+            <Box
+              as="span"
+              color="seed"
+              fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+            >
+              무엇을{" "}
             </Box>
-            할지만 고민하세요.
+            할 지만 고민하세요.
           </Text>
           <Text
             color="text.secondary"
-            fontSize={{ base: "lg", lg: "xl" }}
+            fontSize={{ base: "md", lg: "xl" }}
             fontWeight="medium"
             lineHeight="1.4"
             textAlign="center"

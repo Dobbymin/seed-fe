@@ -44,8 +44,8 @@ export const RoadmapStepCard = ({
         transform: "translateY(-2px)",
       }}
     >
-      <Flex justify="center" pb={6} w="full">
-        <Box boxSize={28} position="relative">
+      <Flex justify="center" pb={4} w="full">
+        <Box position="relative">
           <Flex
             align="center"
             bg="white"
@@ -56,7 +56,7 @@ export const RoadmapStepCard = ({
                 ? "0px 20px 40px 0px rgba(0, 0, 0, 0.08)"
                 : "0px 4px 24px 0px rgba(0, 0, 0, 0.04)"
             }
-            boxSize="112px"
+            boxSize={{ base: 20, lg: 28 }}
             justify="center"
             transition="border-color 220ms ease, box-shadow 220ms ease"
           >
@@ -64,7 +64,7 @@ export const RoadmapStepCard = ({
               align="center"
               bg={isHovering ? "seed" : "seed.subtle"}
               borderRadius="full"
-              boxSize={20}
+              boxSize={{ base: 14, lg: 20 }}
               justify="center"
               position="relative"
               transition="background-color 220ms ease"
@@ -88,13 +88,13 @@ export const RoadmapStepCard = ({
             border={`2px solid ${isHovering ? "seed" : "white"}`}
             borderRadius="full"
             color={isHovering ? "seed" : "white"}
-            fontSize="md"
+            fontSize={{ base: "sm", lg: "md" }}
             fontWeight="bold"
-            boxSize={8}
+            boxSize={{ base: 6, lg: 8 }}
             justify="center"
             position="absolute"
-            right={-1}
-            top={-1}
+            right={2}
+            top={2}
             transition="background-color 220ms ease, border-color 220ms ease, color 220ms ease"
           >
             {step.stepNumber}
@@ -114,15 +114,15 @@ export const RoadmapStepCard = ({
         }
         gap={0}
         h="full"
-        minH={50}
+        minH={52}
         overflow="hidden"
         position="relative"
         p={6}
         transition="border-color 220ms ease, box-shadow 220ms ease"
       >
         <Box
-          bg={isHovering ? "seed" : "transparent"}
-          h="6px"
+          bg={{ base: "seed", lg: isHovering ? "seed" : "transparent" }}
+          h={1.5}
           left={0}
           position="absolute"
           right={0}
@@ -130,13 +130,14 @@ export const RoadmapStepCard = ({
           transition="background-color 220ms ease"
         />
 
-        <VStack align="stretch" flex={1} gap={2.5}>
+        <VStack align="stretch" flex={1} gap={2}>
           <Text
             color="text"
             fontSize={{ base: "lg", lg: "xl" }}
             fontWeight="bold"
             lineHeight="1.4"
             textAlign="center"
+            wordBreak="keep-all"
           >
             {step.title}
           </Text>
@@ -146,6 +147,7 @@ export const RoadmapStepCard = ({
             fontWeight="medium"
             lineHeight="1.625"
             textAlign="center"
+            wordBreak="keep-all"
           >
             {step.description}
           </Text>
@@ -157,13 +159,15 @@ export const RoadmapStepCard = ({
           borderColor="neutral.50"
           gap={0}
           mt={4}
-          pt={4}
           transition="border-color 220ms ease"
           w="full"
         >
           <Flex
             align="center"
-            bg={isHovering ? "seed.subtle" : "neutral.100"}
+            bg={{
+              base: "seed.subtle",
+              lg: isHovering ? "seed.subtle" : "neutral.100",
+            }}
             borderRadius="lg"
             gap={1.5}
             px={3}
@@ -172,14 +176,18 @@ export const RoadmapStepCard = ({
           >
             <SparklesIcon
               boxSize={3}
-              color={isHovering ? "seed" : "neutral.400"}
+              color={{ base: "seed", lg: isHovering ? "seed" : "neutral.400" }}
             />
             <Text
-              color={isHovering ? "seed" : "text.secondary"}
+              color={{
+                base: "seed",
+                lg: isHovering ? "seed" : "text.secondary",
+              }}
               fontSize="xs"
               fontWeight="semibold"
               lineHeight="1.3"
               transition="color 220ms ease"
+              whiteSpace="nowrap"
             >
               {step.tagLabel}
             </Text>
